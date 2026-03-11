@@ -1,0 +1,280 @@
+/* ===== PERFIL ===== */
+.body-perfil {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #111;
+}
+
+.body-perfil::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('./MEDIA/fondo_acceso.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    transform: scale(1.1);
+    z-index: -1;
+}
+
+.perfil-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.perfil-box {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(15, 15, 15, 0.90);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Cabecera del perfil */
+.perfil-header {
+    background: linear-gradient(135deg, #1a0505 0%, #2a0808 100%);
+    border-bottom: 2px solid rgba(163, 1, 14, 0.4);
+    padding: 36px 40px 30px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.perfil-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--rojo-oscuro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.1);
+    letter-spacing: 1px;
+    user-select: none;
+}
+
+.perfil-header-info h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.perfil-header-info span {
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    letter-spacing: 0.3px;
+}
+
+/* Cuerpo con los campos */
+.perfil-body {
+    padding: 10px 0 30px;
+}
+
+.perfil-seccion-titulo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rojo);
+    padding: 24px 40px 10px;
+}
+
+/* Separador visual */
+.perfil-sep {
+    height: 1px;
+    background: rgba(255,255,255,0.05);
+    margin: 0 0 4px;
+}
+
+/* Fila de campo */
+.perfil-campo {
+    display: flex;
+    align-items: center;
+    padding: 18px 40px;
+    gap: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+}
+
+.perfil-campo:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+.perfil-campo-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.perfil-campo-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 5px;
+}
+
+.perfil-campo-valor {
+    font-size: 15px;
+    color: rgba(255,255,255,0.82);
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Input de edición */
+.perfil-campo-input {
+    display: none;
+    width: 100%;
+    padding: 9px 14px;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 2px solid var(--rojo);
+    background: rgba(255, 255, 255, 0.07);
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    font-family: inherit;
+}
+
+.perfil-campo-input:focus {
+    border-color: rgba(255,255,255,0.2);
+    border-bottom-color: var(--rojo);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.perfil-campo-input::placeholder {
+    color: rgba(255,255,255,0.3);
+}
+
+/* Input visible cuando está en modo edición */
+.perfil-campo.editando .perfil-campo-valor {
+    display: none;
+}
+
+.perfil-campo.editando .perfil-campo-input {
+    display: block;
+    animation: inputReveal 0.18s ease;
+}
+
+@keyframes inputReveal {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Botón editar / guardar */
+.btn-editar {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1.5px solid rgba(163, 1, 14, 0.5);
+    color: var(--rojo);
+    padding: 7px 18px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-editar:hover {
+    background: rgba(163, 1, 14, 0.15);
+    border-color: var(--rojo);
+}
+
+.btn-editar.guardar {
+    background: var(--rojo-oscuro);
+    border-color: var(--rojo-oscuro);
+    color: white;
+}
+
+.btn-editar.guardar:hover {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    transform: scale(1.03);
+}
+
+.btn-editar:active {
+    transform: scale(0.96);
+}
+
+/* Campo de contraseña — puntos en modo lectura */
+.perfil-campo-valor.pass-dots {
+    letter-spacing: 4px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+}
+
+/* Mensaje de confirmación */
+.perfil-guardado-msg {
+    display: none;
+    font-size: 11px;
+    color: #4caf50;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+    animation: fadeMsg 0.3s ease;
+}
+
+@keyframes fadeMsg {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Zona peligrosa */
+.perfil-zona-danger {
+    margin: 10px 40px 0;
+    padding: 18px 22px;
+    border: 1px solid rgba(200, 0, 0, 0.2);
+    border-radius: 10px;
+    background: rgba(163, 1, 14, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.perfil-zona-danger p {
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.perfil-zona-danger strong {
+    display: block;
+    color: rgba(255,255,255,0.7);
+    font-size: 13.5px;
+    margin-bottom: 2px;
+}
+
+.btn-danger {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1.5px solid rgba(200,0,0,0.4);
+    color: rgba(220,0,0,0.8);
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-danger:hover {
+    background: rgba(163, 1, 14, 0.2);
+    border-color: var(--rojo);
+    color: white;
+}

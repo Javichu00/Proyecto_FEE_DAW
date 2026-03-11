@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportXtreme</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesCuenta.css">
+</head>
+<body class="body-perfil">
+
+    <!--HEADER-->
+    <header id="inicio">
+        <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
+        <div>
+            <a href="./plantilla.html"> BOTON TEMPORAL A PLANTILLA </a>
+            <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
+            <a href="./acceso.html" class="btn-menu">Acceder</a>
+        </div>
+    </header>
+    
+    <!--NAVBAR-->
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="./indexAdmn.html">Panel de administracion</a></li> <!-- ESTO DEBEMOS OCULTARLO CUANDO EL USUARIO NO HA INICIADO SESION, O SU CUENTA NO ES ADMIN -->
+            <li><a href="./index.html">Inicio</a></li> <!---->
+            <li><a href="./show.html">Shows</a></li>
+            <li><a href="./actividad.html">Actividades</a></li>
+            <li><a href="./curso.html">Cursos</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PERFIL -->
+    <div class="perfil-wrapper">
+        <div class="perfil-box">
+
+            <!-- Cabecera con avatar -->
+            <div class="perfil-header">
+                <div class="perfil-avatar" id="avatarInicial">JG</div>
+                <div class="perfil-header-info">
+                    <h2 id="nombreMostrado">Juan García</h2>
+                    <span>Miembro desde enero 2025</span>
+                </div>
+            </div>
+
+            <!-- Campos -->
+            <div class="perfil-body">
+                <div class="perfil-seccion-titulo">Información personal</div>
+                <div class="perfil-sep"></div>
+
+                <!-- Nombre -->
+                <div class="perfil-campo" id="campo-nombre">
+                    <div class="perfil-campo-info">
+                        <div class="perfil-campo-label">Nombre</div>
+                        <div class="perfil-campo-valor" id="val-nombre">Juan</div>
+                        <input class="perfil-campo-input" id="inp-nombre" type="text" value="Juan" placeholder="Tu nombre">
+                        <div class="perfil-guardado-msg" id="msg-nombre">✓ Guardado</div>
+                    </div>
+                    <button class="btn-editar" onclick="toggleEdicion('nombre')">Editar</button>
+                </div>
+
+                <!-- Apellidos -->
+                <div class="perfil-campo" id="campo-apellidos">
+                    <div class="perfil-campo-info">
+                        <div class="perfil-campo-label">Apellidos</div>
+                        <div class="perfil-campo-valor" id="val-apellidos">García López</div>
+                        <input class="perfil-campo-input" id="inp-apellidos" type="text" value="García López" placeholder="Tus apellidos">
+                        <div class="perfil-guardado-msg" id="msg-apellidos">✓ Guardado</div>
+                    </div>
+                    <button class="btn-editar" onclick="toggleEdicion('apellidos')">Editar</button>
+                </div>
+
+                <!-- Email -->
+                <div class="perfil-campo" id="campo-email">
+                    <div class="perfil-campo-info">
+                        <div class="perfil-campo-label">Correo electrónico</div>
+                        <div class="perfil-campo-valor" id="val-email">juan.garcia@email.com</div>
+                        <input class="perfil-campo-input" id="inp-email" type="email" value="juan.garcia@email.com" placeholder="Tu correo">
+                        <div class="perfil-guardado-msg" id="msg-email">✓ Guardado</div>
+                    </div>
+                    <button class="btn-editar" onclick="toggleEdicion('email')">Editar</button>
+                </div>
+
+                <div class="perfil-seccion-titulo" style="margin-top: 8px;">Seguridad</div>
+                <div class="perfil-sep"></div>
+
+                <!-- Contraseña -->
+                <div class="perfil-campo" id="campo-contrasena">
+                    <div class="perfil-campo-info">
+                        <div class="perfil-campo-label">Contraseña</div>
+                        <div class="perfil-campo-valor pass-dots" id="val-contrasena">••••••••</div>
+                        <input class="perfil-campo-input" id="inp-contrasena" type="password" placeholder="Nueva contraseña">
+                        <div class="perfil-guardado-msg" id="msg-contrasena">✓ Contraseña actualizada</div>
+                    </div>
+                    <button class="btn-editar" onclick="toggleEdicion('contrasena')">Editar</button>
+                </div>
+
+                <!-- Zona peligrosa -->
+                <div style="padding: 20px 40px 0; ">
+                    <div class="perfil-sep"></div>
+                </div>
+                <div class="perfil-zona-danger">
+                    <div>
+                        <strong>Eliminar cuenta</strong>
+                        <p>Esta acción es permanente y no se puede deshacer.</p>
+                    </div>
+                    <button class="btn-danger">Eliminar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!--FOOTER--> 
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>#RadicalViejo</h3>
+                <p>
+                    En SportsXtreme vivimos la adrenalina al máximo. Descubre los mejores
+                    eventos de deportes extremos, participa en actividades llenas de
+                    emoción o inscríbete en cursos diseñados para llevar tus límites más
+                    lejos. Conecta con una comunidad apasionada por la aventura y
+                    experimenta nuevas formas de sentir la intensidad del deporte extremo.
+                </p>
+            </div>
+            
+            <div>
+                <h3>ENLACES RÁPIDOS</h3>
+                <ul>
+                    <li><a href="./index.html">Inicio</a></li>
+                    <li><a href="./show.html">Show</a></li>
+                    <li><a href="./actividad.html">Actividad</a></li>
+                    <li><a href="./curso.html">Curso</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3>CONTACTO</h3>
+                <ul>
+                    <li>+34 644 71 71 99</li>
+                    <li>fercho7649@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scriptCuenta.js"></script>
+
+</body>
+</html>
