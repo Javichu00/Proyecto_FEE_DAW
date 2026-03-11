@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actividades Extremas</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===================================================
+                      VARIABLES Y RESET
+    =================================================== */
+    :root {
+      --negro: #0a0a0a;
+      --rojo: #e8001d;
+      --rojo-dark: #a30014;
+      --naranja: #ff5e00;
+      --blanco: #f5f5f5;
+      --gris: #1a1a1a;
+      --gris-medio: #2e2e2e;
+      --gris-claro: #888;
+      --tierra: #c0832a;
+      --mar: #006bbd;
+      --aire: #7b2fff;
+      --font-titulo: 'Bebas Neue', sans-serif;
+      --font-sub: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--negro);
+      color: var(--blanco);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ===================================================
+       HERO DEL APARTADO DE ACTIVIDADES
+    =================================================== */
+    .actividades-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* 
+    ====================================================
+    📌 FONDO DEL HERO PRINCIPAL
+    Sustituye el degradado por tu imagen o vídeo:
+
+    OPCIÓN A — Imagen de fondo:
+    Añade dentro de .actividades-hero este elemento:
+      <img src="img/hero-actividades.jpg" class="hero-bg-img" alt="">
+    Y en CSS:
+      .hero-bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.45; z-index:0; }
+
+    OPCIÓN B — Vídeo de fondo:
+    Añade dentro de .actividades-hero:
+      <video autoplay muted loop playsinline class="hero-bg-video">
+        <source src="video/hero-actividades.mp4" type="video/mp4">
+      </video>
+    Y en CSS:
+      .hero-bg-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.4; z-index:0; }
+    ====================================================
+    */
+    .actividades-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 40%, #0a0a1a 100%);
+      z-index: 0;
+    }
+
+    .actividades-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(232,0,29,0.04) 80px, rgba(232,0,29,0.04) 81px),
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(232,0,29,0.04) 80px, rgba(232,0,29,0.04) 81px);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-sub);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+
+    .hero-titulo {
+      font-family: var(--font-titulo);
+      font-size: clamp(5rem, 12vw, 11rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--blanco);
+      text-shadow: 0 0 80px rgba(232,0,29,0.3);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+
+    .hero-titulo span {
+      color: var(--rojo);
+      -webkit-text-stroke: 0px;
+    }
+
+    .hero-subtitulo {
+      font-family: var(--font-sub);
+      font-weight: 300;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      letter-spacing: 0.15em;
+      color: var(--gris-claro);
+      margin-top: 20px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+
+    .hero-nav-categorias {
+      display: flex;
+      gap: 12px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.9s;
+    }
+
+    .cat-btn {
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .cat-btn.tierra {
+      background: var(--tierra);
+      color: #fff;
+    }
+    .cat-btn.tierra:hover {
+      background: transparent;
+      border-color: var(--tierra);
+      color: var(--tierra);
+    }
+
+    .cat-btn.mar {
+      background: var(--mar);
+      color: #fff;
+    }
+    .cat-btn.mar:hover {
+      background: transparent;
+      border-color: var(--mar);
+      color: var(--mar);
+    }
+
+    .cat-btn.aire {
+      background: var(--aire);
+      color: #fff;
+    }
+    .cat-btn.aire:hover {
+      background: transparent;
+      border-color: var(--aire);
+      color: var(--aire);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.2s;
+    }
+
+    .hero-scroll span {
+      font-family: var(--font-sub);
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gris-claro);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--rojo), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* ===================================================
+       SECCIÓN CATEGORÍA (TIERRA / MAR / AIRE)
+    =================================================== */
+    .categoria-section {
+      position: relative;
+      padding: 100px 0 80px;
+      overflow: hidden;
+    }
+
+    .categoria-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .categoria-section.tierra::before { background: var(--tierra); }
+    .categoria-section.mar::before    { background: var(--mar); }
+    .categoria-section.aire::before   { background: var(--aire); }
+
+    /* Texto de fondo gigante */
+    .categoria-bg-text {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-titulo);
+      font-size: clamp(6rem, 18vw, 18rem);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.03;
+      z-index: 0;
+    }
+
+    .tierra .categoria-bg-text  { color: var(--tierra); }
+    .mar .categoria-bg-text     { color: var(--mar); }
+    .aire .categoria-bg-text    { color: var(--aire); }
+
+    .contenedor {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .categoria-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .cat-icono {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .cat-info {}
+
+    .cat-label {
+      font-family: var(--font-sub);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .tierra .cat-label { color: var(--tierra); }
+    .mar .cat-label    { color: var(--mar); }
+    .aire .cat-label   { color: var(--aire); }
+
+    .cat-titulo {
+      font-family: var(--font-titulo);
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===================================================
+       GRID DE ACTIVIDADES
+    =================================================== */
+    .actividades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2px;
+    }
+
+    .actividad-card {
+      position: relative;
+      height: 480px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--gris);
+    }
+
+    /* 
+    ====================================================
+    📌 FONDOS DE CADA TARJETA DE ACTIVIDAD
+    Cada .actividad-card tiene un atributo data-bg.
+    Para añadir tu imagen:
+    1. Sube tu imagen a la carpeta img/actividades/
+    2. Busca la tarjeta por su data-bg o clase, y añade:
+       style="--card-bg: url('img/actividades/nombre.jpg')"
+    O bien, directamente en el HTML del card:
+       <div class="card-bg" style="background-image: url('img/actividades/nombre.jpg')"></div>
+    
+    ALTERNATIVA — Vídeo en tarjeta:
+    Dentro del .actividad-card añade:
+      <video autoplay muted loop playsinline class="card-video">
+        <source src="video/skate.mp4" type="video/mp4">
+      </video>
+    Y en CSS:
+      .card-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+    ====================================================
+    */
+    .card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 0;
+    }
+
+    /* Fondos placeholder con degradados únicos por actividad */
+    .card-bg.skate      { background-image: linear-gradient(135deg, #1a1a1a, #3d2800); }
+    .card-bg.escalada   { background-image: linear-gradient(135deg, #1a1a1a, #2d1500); }
+    .card-bg.mtb        { background-image: linear-gradient(135deg, #1a1a1a, #1a2d00); }
+    .card-bg.motocross  { background-image: linear-gradient(135deg, #1a1a1a, #2d1a00); }
+    .card-bg.paintball  { background-image: linear-gradient(135deg, #1a1a1a, #1a0000); }
+    .card-bg.tirolina   { background-image: linear-gradient(135deg, #1a1a1a, #2d2800); }
+
+    .card-bg.surf       { background-image: linear-gradient(135deg, #001a2d, #003d5c); }
+    .card-bg.kitesurf   { background-image: linear-gradient(135deg, #001a2d, #002d4a); }
+    .card-bg.kayak      { background-image: linear-gradient(135deg, #001a2d, #003320); }
+    .card-bg.buceo      { background-image: linear-gradient(135deg, #001a2d, #000d4a); }
+    .card-bg.wakeboard  { background-image: linear-gradient(135deg, #001a2d, #001a3d); }
+    .card-bg.rafting    { background-image: linear-gradient(135deg, #001a2d, #002d1a); }
+
+    .card-bg.paracaidas { background-image: linear-gradient(135deg, #100a2d, #2d005c); }
+    .card-bg.ala-delta  { background-image: linear-gradient(135deg, #100a2d, #1a002d); }
+    .card-bg.globo      { background-image: linear-gradient(135deg, #100a2d, #2d1a00); }
+    .card-bg.bungee     { background-image: linear-gradient(135deg, #100a2d, #2d0000); }
+    .card-bg.base-jump  { background-image: linear-gradient(135deg, #100a2d, #001a2d); }
+    .card-bg.wingsuit   { background-image: linear-gradient(135deg, #100a2d, #002d2d); }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+      z-index: 1;
+      transition: background 0.4s ease;
+    }
+
+    .actividad-card:hover .card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%);
+    }
+
+    .actividad-card:hover .card-bg {
+      transform: scale(1.08);
+    }
+
+    .card-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .tierra .card-tag { background: var(--tierra); }
+    .mar .card-tag    { background: var(--mar); }
+    .aire .card-tag   { background: var(--aire); }
+
+    .card-nombre {
+      font-family: var(--font-titulo);
+      font-size: 2.4rem;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .card-lugar {
+      font-family: var(--font-sub);
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--gris-claro);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-lugar::before {
+      content: '📍';
+      font-size: 0.8rem;
+    }
+
+    /* Info expandida al hacer hover */
+    .card-extra {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .actividad-card:hover .card-extra {
+      max-height: 200px;
+    }
+
+    .card-descripcion {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(245,245,245,0.75);
+      margin-bottom: 16px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-precio {
+      font-family: var(--font-titulo);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .card-precio span {
+      font-family: var(--font-sub);
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gris-claro);
+      display: block;
+      margin-top: -4px;
+    }
+
+    .card-cta {
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1.5px solid;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .tierra .card-cta { border-color: var(--tierra); color: var(--tierra); }
+    .tierra .card-cta:hover { background: var(--tierra); color: #fff; }
+    .mar .card-cta    { border-color: var(--mar); color: var(--mar); }
+    .mar .card-cta:hover    { background: var(--mar); color: #fff; }
+    .aire .card-cta   { border-color: var(--aire); color: var(--aire); }
+    .aire .card-cta:hover   { background: var(--aire); color: #fff; }
+
+    /* Badge dificultad */
+    .card-dificultad {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+      display: flex;
+      gap: 4px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+
+    .dot.activo { border-color: transparent; }
+
+    .tierra .dot.activo { background: var(--tierra); }
+    .mar .dot.activo    { background: var(--mar); }
+    .aire .dot.activo   { background: var(--aire); }
+
+    /* ===================================================
+       SEPARADOR ENTRE SECCIONES
+    =================================================== */
+    .separador {
+      position: relative;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .sep-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gris-medio), transparent);
+    }
+
+    .sep-icono {
+      position: absolute;
+      font-size: 1.5rem;
+      background: var(--negro);
+      padding: 0 20px;
+    }
+
+    /* ===================================================
+       CTA FINAL
+    =================================================== */
+    .cta-section {
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(232,0,29,0.12) 0%, transparent 70%);
+    }
+
+    .cta-titulo {
+      font-family: var(--font-titulo);
+      font-size: clamp(3rem, 7vw, 6rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .cta-subtitulo {
+      font-family: var(--font-sub);
+      font-weight: 300;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gris-claro);
+      text-transform: uppercase;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .cta-botones {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .btn-principal {
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 18px 50px;
+      background: var(--rojo);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: all 0.3s ease;
+    }
+
+    .btn-principal:hover { background: var(--rojo-dark); transform: translateY(-2px); }
+
+    .btn-secundario {
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 18px 50px;
+      background: transparent;
+      color: var(--blanco);
+      border: 2px solid var(--gris-medio);
+      cursor: pointer;
+      text-decoration: none;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: all 0.3s ease;
+    }
+
+    .btn-secundario:hover { border-color: var(--blanco); }
+
+    /* ===================================================
+       ANIMACIONES
+    =================================================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(0.8); }
+    }
+
+    /* Fade-in al hacer scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===================================================
+       RESPONSIVE
+    =================================================== */
+    @media (max-width: 768px) {
+      .contenedor { padding: 0 20px; }
+      .actividades-grid { grid-template-columns: 1fr; gap: 2px; }
+      .actividad-card { height: 380px; }
+      .categoria-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================
+       HERO PRINCIPAL ACTIVIDADES
+  =================================================== -->
+  <section class="actividades-hero" id="actividades">
+
+    <!--
+    📌 AQUÍ VA TU FONDO (imagen o vídeo del hero):
+    Descomenta y edita una de las dos opciones:
+
+    IMAGEN:
+    <img src="img/hero-actividades.jpg" class="hero-bg-img" alt="Deportes Extremos">
+
+    VÍDEO:
+    <video autoplay muted loop playsinline class="hero-bg-video">
+      <source src="video/hero-actividades.mp4" type="video/mp4">
+    </video>
+    -->
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Elige tu aventura</p>
+      <h1 class="hero-titulo">ACTIVI<span>DADES</span></h1>
+      <p class="hero-subtitulo">Tierra · Mar · Aire</p>
+
+      <nav class="hero-nav-categorias">
+        <a href="#tierra" class="cat-btn tierra">🏔 Tierra</a>
+        <a href="#mar"    class="cat-btn mar">🌊 Mar</a>
+        <a href="#aire"   class="cat-btn aire">🪂 Aire</a>
+      </nav>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+
+  <!-- ===================================================
+       SECCIÓN TIERRA
+  =================================================== -->
+  <section class="categoria-section tierra" id="tierra">
+    <span class="categoria-bg-text">TIERRA</span>
+
+    <div class="contenedor">
+      <div class="categoria-header reveal">
+        <div class="cat-icono">🏔</div>
+        <div class="cat-info">
+          <p class="cat-label">Categoría 01</p>
+          <h2 class="cat-titulo">TIERRA</h2>
+        </div>
+      </div>
+
+      <div class="actividades-grid">
+
+        <!-- ACTIVIDAD: SKATE PARK EXTREMO -->
+        <div class="actividad-card reveal">
+          <div class="card-bg skate">
+            <!--
+            📌 IMAGEN: <img src="img/actividades/skate.jpg" class="card-img-abs" alt="Skate">
+            📌 VÍDEO:  <video autoplay muted loop playsinline class="card-video"><source src="video/skate.mp4" type="video/mp4"></video>
+            -->
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Tierra</span>
+            <h3 class="card-nombre">SKATE PARK EXTREMO</h3>
+            <p class="card-lugar">Madrid, España</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Domina halfpipes, rampas de vértigo y bowls profesionales en el parque más completo de la capital. Sesiones libres y clases con campeones nacionales.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  25€ <span>/ sesión de 2h</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVIDAD: ESCALADA EN ROCA -->
+        <div class="actividad-card reveal">
+          <div class="card-bg escalada"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Tierra</span>
+            <h3 class="card-nombre">ESCALADA EN ROCA</h3>
+            <p class="card-lugar">Montserrat, Barcelona</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Afronta paredes de hasta 300 metros en uno de los macizos más espectaculares de Europa. Guías certificados UIAA. Todo el material incluido.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  85€ <span>/ jornada completa</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVIDAD: MOUNTAIN BIKE ENDURO -->
+        <div class="actividad-card reveal">
+          <div class="card-bg mtb"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Tierra</span>
+            <h3 class="card-nombre">MOUNTAIN BIKE ENDURO</h3>
+            <p class="card-lugar">Sierra Nevada, Granada</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Rutas técnicas con descensos de +1000m de desnivel. Trails, rock gardens y saltos naturales. Alquiler de bici enduro disponible.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  60€ <span>/ ruta con guía</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVIDAD: MOTOCROSS -->
+        <div class="actividad-card reveal">
+          <div class="card-bg motocross"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Tierra</span>
+            <h3 class="card-nombre">MOTOCROSS FREESTYLE</h3>
+            <p class="card-lugar">Zaragoza, Aragón</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Pista profesional de 3km con saltos, curvas peraltadas y whoops. Clases para principiantes y sesiones libres para expertos. Moto y equipación incluidos.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  120€ <span>/ sesión de 3h</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVIDAD: PAINTBALL TÁCTICO -->
+        <div class="actividad-card reveal">
+          <div class="card-bg paintball"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Tierra</span>
+            <h3 class="card-nombre">PAINTBALL TÁCTICO</h3>
+            <p class="card-lugar">Toledo, Castilla-La Mancha</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Escenarios militares de 5 hectáreas con bunkers, trincheras y zona boscosa. Partidas de hasta 40 jugadores. Ideal para grupos y empresas.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  35€ <span>/ persona (pack 200 bolas)</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVIDAD: TIROLINA EXTREMA -->
+        <div class="actividad-card reveal">
+          <div class="card-bg tirolina"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Tierra</span>
+            <h3 class="card-nombre">TIROLINA EXTREMA</h3>
+            <p class="card-lugar">Picos de Europa, Asturias</p>
+            <div class="card-extra">
+              <p class="card-descripcion">2.5km de cable a 150m de altura con velocidades de hasta 120 km/h. La tirolina más larga del norte de España con vistas espectaculares al macizo.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  45€ <span>/ por persona</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- fin grid tierra -->
+    </div>
+  </section>
+
+
+  <div class="separador"><div class="sep-line"></div><span class="sep-icono">〜</span></div>
+
+
+  <!-- ===================================================
+       SECCIÓN MAR
+  =================================================== -->
+  <section class="categoria-section mar" id="mar">
+    <span class="categoria-bg-text">MAR</span>
+
+    <div class="contenedor">
+      <div class="categoria-header reveal">
+        <div class="cat-icono">🌊</div>
+        <div class="cat-info">
+          <p class="cat-label">Categoría 02</p>
+          <h2 class="cat-titulo">MAR</h2>
+        </div>
+      </div>
+
+      <div class="actividades-grid">
+
+        <!-- SURF -->
+        <div class="actividad-card reveal">
+          <div class="card-bg surf">
+            <!--
+            📌 IMAGEN: <img src="img/actividades/surf.jpg" class="card-img-abs" alt="Surf">
+            -->
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Mar</span>
+            <h3 class="card-nombre">BIG WAVE SURF</h3>
+            <p class="card-lugar">Nazaré, Portugal</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Surfea las olas más grandes del mundo en la meca del big wave surf. Temporada octubre-marzo. Clases con instructores internacionales. Equipación completa incluida.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  110€ <span>/ clase de 3h</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KITESURF -->
+        <div class="actividad-card reveal">
+          <div class="card-bg kitesurf"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Mar</span>
+            <h3 class="card-nombre">KITESURF</h3>
+            <p class="card-lugar">Tarifa, Cádiz</p>
+            <div class="card-extra">
+              <p class="card-descripcion">El viento del Estrecho, el mejor del mundo para el kitesurf. Cursos de iniciación (IKO certificados) o sesiones libres con equipo top. Vientos constantes todo el año.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  75€ <span>/ clase de 2h</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KAYAK DE MAR -->
+        <div class="actividad-card reveal">
+          <div class="card-bg kayak"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Mar</span>
+            <h3 class="card-nombre">KAYAK DE MAR</h3>
+            <p class="card-lugar">Costa Brava, Girona</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Explora cuevas marinas, calas vírgenes y acantilados desde el agua. Rutas de 1 a 5 días con acampada en calas inaccesibles. Guías bilingüe incluido.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  55€ <span>/ ruta completa</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUCEO TÉCNICO -->
+        <div class="actividad-card reveal">
+          <div class="card-bg buceo"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Mar</span>
+            <h3 class="card-nombre">BUCEO TÉCNICO</h3>
+            <p class="card-lugar">Islas Canarias</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Inmersiones de hasta 60 metros en pecios históricos y túneles de lava volcánica. Certificación PADI TEC. Equipación trimix incluida. Grupos máx. 4 personas.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  195€ <span>/ inmersión técnica</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WAKEBOARD -->
+        <div class="actividad-card reveal">
+          <div class="card-bg wakeboard"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Mar</span>
+            <h3 class="card-nombre">WAKEBOARD & ESQUÍ</html>
+            <p class="card-lugar">Delta del Ebro, Tarragona</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Aguas calmadas perfectas para aprender wakeboard, esquí acuático y kneeboard. Cable park o detrás de lancha. Saltos y rails para avanzados.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  50€ <span>/ hora con instructor</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RAFTING -->
+        <div class="actividad-card reveal">
+          <div class="card-bg rafting"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Mar</span>
+            <h3 class="card-nombre">RAFTING GRADO IV</h3>
+            <p class="card-lugar">Río Noguera, Lleida</p>
+            <div class="card-extra">
+              <p class="card-descripcion">18km de rápidos de nivel IV con rápidos técnicos, remolinos y cascadas. Ruta de 4 horas con guías profesionales. Foto y vídeo de la experiencia incluidos.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  42€ <span>/ persona</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- fin grid mar -->
+    </div>
+  </section>
+
+
+  <div class="separador"><div class="sep-line"></div><span class="sep-icono">〜</span></div>
+
+
+  <!-- ===================================================
+       SECCIÓN AIRE
+  =================================================== -->
+  <section class="categoria-section aire" id="aire">
+    <span class="categoria-bg-text">AIRE</span>
+
+    <div class="contenedor">
+      <div class="categoria-header reveal">
+        <div class="cat-icono">🪂</div>
+        <div class="cat-info">
+          <p class="cat-label">Categoría 03</p>
+          <h2 class="cat-titulo">AIRE</h2>
+        </div>
+      </div>
+
+      <div class="actividades-grid">
+
+        <!-- PARACAIDISMO -->
+        <div class="actividad-card reveal">
+          <div class="card-bg paracaidas">
+            <!--
+            📌 IMAGEN: <img src="img/actividades/paracaidismo.jpg" class="card-img-abs" alt="Paracaidismo">
+            -->
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Aire</span>
+            <h3 class="card-nombre">PARACAIDISMO</h3>
+            <p class="card-lugar">Empuriabrava, Girona</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Salto en tándem desde 4.500m con 60 segundos de caída libre a 200 km/h. El mayor centro de paracaidismo de Europa. Vídeo y fotos profesionales incluidas.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  220€ <span>/ salto en tándem</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALA DELTA -->
+        <div class="actividad-card reveal">
+          <div class="card-bg ala-delta"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Aire</span>
+            <h3 class="card-nombre">ALA DELTA BIPLAZA</h3>
+            <p class="card-lugar">Ager, Lleida</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Vuela en termal sobre las gargantas del Pre-Pirineo. Vuelos de hasta 2 horas aprovechando las mejores térmicas de la Península. Certificado RFAE. Fotos en vuelo.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  150€ <span>/ vuelo biplaza</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GLOBO AEROSTÁTICO -->
+        <div class="actividad-card reveal">
+          <div class="card-bg globo"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Aire</span>
+            <h3 class="card-nombre">GLOBO AEROSTÁTICO</h3>
+            <p class="card-lugar">Segovia, Castilla y León</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Vuelo al amanecer sobre el acueducto y el castillo de Segovia. 1h de vuelo a 800m de altura. Desayuno tradicional y brindis con cava al aterrizar. Certif. AESA.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  180€ <span>/ persona</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUNGEE JUMPING -->
+        <div class="actividad-card reveal">
+          <div class="card-bg bungee"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Aire</span>
+            <h3 class="card-nombre">BUNGEE JUMPING</h3>
+            <p class="card-lugar">Puente de Bidarray, Navarra</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Salto desde el puente sobre el río Nive a 60m de altura. Sistema de seguridad certificado CE. Hasta 3 saltos por sesión. GoPro incluida. Peso 40-120 kg.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  80€ <span>/ salto individual</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BASE JUMP -->
+        <div class="actividad-card reveal">
+          <div class="card-bg base-jump"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Aire</span>
+            <h3 class="card-nombre">BASE JUMP</h3>
+            <p class="card-lugar">Cañón del Verdon, Francia</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Salto desde acantilado de 700m sobre el cañón más profundo de Europa. Solo para certificados. Curso de 5 días con primeros saltos incluido. Seguro de actividad obligatorio.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  890€ <span>/ curso completo</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WINGSUIT -->
+        <div class="actividad-card reveal">
+          <div class="card-bg wingsuit"></div>
+          <div class="card-overlay"></div>
+          <div class="card-dificultad">
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+            <div class="dot activo"></div>
+          </div>
+          <div class="card-content">
+            <span class="card-tag">Aire</span>
+            <h3 class="card-nombre">WINGSUIT PROXIMITY</h3>
+            <p class="card-lugar">Lauterbrunnen, Suiza</p>
+            <div class="card-extra">
+              <p class="card-descripcion">Vuela a 250 km/h a metros del suelo entre cascadas y paredes de roca. El deporte más extremo del planeta. Requiere 200 saltos de paracaidismo previos. Gestión completa incluida.</p>
+              <div class="card-footer">
+                <div class="card-precio">
+                  1.200€ <span>/ expedición 3 días</span>
+                </div>
+                <a href="#" class="card-cta">Reservar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- fin grid aire -->
+    </div>
+  </section>
+
+
+  <!-- ===================================================
+       CTA FINAL
+  =================================================== -->
+  <section class="cta-section">
+    <h2 class="cta-titulo reveal">¿LISTO PARA EL SALTO?</h2>
+    <p class="cta-subtitulo reveal">Elige tu actividad y reserva en menos de 2 minutos</p>
+    <div class="cta-botones reveal">
+      <a href="#actividades" class="btn-principal">Ver todas las actividades</a>
+      <a href="index.html"   class="btn-secundario">Volver al inicio</a>
+    </div>
+  </section>
+
+
+  <script src="script.js"></script>
+  <script>
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger delay para las cards del mismo grid
+          const delay = entry.target.closest('.actividades-grid')
+            ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100
+            : 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* =====================================================
+       SMOOTH SCROLL para los botones de categoría
+    ===================================================== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportXtreme - Acceso</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body-acceso">
+
+    <!--HEADER-->
+    <header id="inicio">
+        <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
+        <div>
+            <a href="./plantilla.html"> BOTON TEMPORAL A PLANTILLA </a>
+            <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
+            <a href="./acceso.html" class="btn-menu">Acceder</a>
+        </div>
+    </header>
+    
+    <!--NAVBAR-->
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="index.html">Inicio</a></li> <!---->
+            <li><a href="show.html">Shows</a></li>
+            <li><a href="actividad.html">Actividades</a></li>
+            <li><a href="curso.html">Cursos</a></li>
+        </ul>
+    </nav>
+
+    <!--CONTENIDO LOGIN-->
+    <div class="access-login">
+        <div class="login-box">
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('register', this)">Registrarse</button>
+                <button class="tab" onclick="showTab('login', this)">Iniciar Sesión</button>
+            </div>
+
+            <!-- REGISTER -->
+            <div id="register" class="tab-content">
+                <h2>Crear una cuenta</h2>
+                <input type="text" placeholder="Nombre completo">
+                <input type="email" placeholder="Correo electrónico">
+                <div class="input-pass">
+                    <input type="password" id="pass1" placeholder="Contraseña">
+                    <button type="button" class="toggle-pass" onclick="togglePass('pass1', this)">👁️</button>
+                </div>
+                <div class="input-pass">
+                    <input type="password" id="pass2" placeholder="Confirmar contraseña">
+                    <button type="button" class="toggle-pass" onclick="togglePass('pass2', this)">👁️</button>
+                </div>
+                <button class="btn-submit">Registrarse</button>
+            </div>
+
+            <!-- LOGIN -->
+            <div id="login" class="tab-content hidden">
+                <h2>Bienvenido de nuevo</h2>
+                <input type="email" placeholder="Correo electrónico">
+                <div class="input-pass">
+                    <input type="password" id="pass3" placeholder="Contraseña">
+                    <button type="button" class="toggle-pass" onclick="togglePass('pass3', this)">👁️</button>
+                </div>
+
+                <button class="btn-submit">Entrar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!--FOOTER-->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>#RadicalViejo</h3>
+                <p>En SportsXtreme vivimos la adrenalina al máximo. Descubre los mejores
+                eventos de deportes extremos, participa en actividades llenas de emoción
+                o inscríbete en cursos diseñados para llevar tus límites más lejos.</p>
+            </div>
+            <div>
+                <h3>ENLACES RÁPIDOS</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="show.html">Show</a></li>
+                    <li><a href="actividad.html">Actividad</a></li>
+                    <li><a href="curso.html">Curso</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>CONTACTO</h3>
+                <ul>
+                    <li>+34 644 71 71 99</li>
+                    <li>fercho7649@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scriptAcceso.js"></script>
+
+</body>
+</html>

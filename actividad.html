@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportXtreme</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesActividad.css">
+    
+</head>
+<body>
+
+    <!--HEADER-->
+    <header id="inicio">
+        <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
+        <div>
+            <a href="./plantilla.html"> BOTON TEMPORAL A PLANTILLA </a>
+            <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
+            <a href="./acceso.html" class="btn-menu">Acceder</a>
+        </div>
+    </header>
+    
+    <!--NAVBAR-->
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="index.html">Inicio</a></li> <!---->
+            <li><a href="show.html">Shows</a></li>
+            <li><a href="actividad.html">Actividades</a></li>
+            <li><a href="curso.html">Cursos</a></li>
+        </ul>
+    </nav>
+
+
+    <!--CONTENIDO-->
+    <div class="actividades-layout">
+
+        <!-- PANEL LATERAL FILTROS -->
+        <aside class="filtros-panel">
+            <h3>Filtros</h3>
+
+            <div class="filtro-grupo">
+                <label>Categoría</label>
+                <select>
+                    <option value="">Todas</option>
+                    <option>Aéreo</option>
+                    <option>Acuático</option>
+                    <option>Montaña</option>
+                    <option>Motor</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label>Dificultad</label>
+                <div class="filtro-checks">
+                    <label><input type="checkbox"> Fácil</label>
+                    <label><input type="checkbox"> Media</label>
+                    <label><input type="checkbox"> Difícil</label>
+                    <label><input type="checkbox"> Extremo</label>
+                </div>
+            </div>
+
+            <div class="filtro-grupo">
+                <label>Precio máximo: <span id="precio-val">200€</span></label>
+                <input type="range" min="0" max="500" value="200" oninput="document.getElementById('precio-val').textContent = this.value + '€'">
+            </div>
+
+            <div class="filtro-grupo">
+                <label>Duración</label>
+                <select>
+                    <option value="">Cualquiera</option>
+                    <option>Menos de 1h</option>
+                    <option>1 - 3h</option>
+                    <option>Medio día</option>
+                    <option>Día completo</option>
+                </select>
+            </div>
+
+            <button class="btn-filtrar">Aplicar filtros</button>
+            <button class="btn-reset">Limpiar</button>
+        </aside>
+
+        <!-- LISTA DE ACTIVIDADES -->
+        <main class="actividades-main">
+            <div class="actividades-header">
+                <h2>Actividades <span id="contador">(6)</span></h2>
+                <select class="orden-select">
+                    <option>Ordenar por: Relevancia</option>
+                    <option>Precio: menor a mayor</option>
+                    <option>Precio: mayor a menor</option>
+                    <option>Nombre A-Z</option>
+                </select>
+            </div>
+
+            <div class="actividades-grid">
+
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #2a2a2a;">
+                        <span class="actividad-categoria">Aéreo</span>
+                        <span class="actividad-dificultad dif-extremo">Extremo</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Salto en Paracaídas</h4>
+                        <p>Lánzate desde 4.000 metros de altitud y siente la adrenalina pura en caída libre.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 3h</span>
+                            <span>👥 1-4 personas</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">199€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #1a2a3a;">
+                        <span class="actividad-categoria">Acuático</span>
+                        <span class="actividad-dificultad dif-media">Media</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Rafting en Aguas Bravas</h4>
+                        <p>Navega por rápidos de nivel III-IV acompañado de un guía experto.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 2h</span>
+                            <span>👥 6-8 personas</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">75€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #2a1a1a;">
+                        <span class="actividad-categoria">Motor</span>
+                        <span class="actividad-dificultad dif-dificil">Difícil</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Motocross Off-Road</h4>
+                        <p>Conduce una moto de cross por circuitos de tierra con saltos y curvas cerradas.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 1.5h</span>
+                            <span>👥 1-2 personas</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">120€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #1a2a1a;">
+                        <span class="actividad-categoria">Montaña</span>
+                        <span class="actividad-dificultad dif-facil">Fácil</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Tirolina Panorámica</h4>
+                        <p>Deslízate por encima del valle a 80 km/h con vistas espectaculares.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 45min</span>
+                            <span>👥 1-6 personas</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">45€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #2a2a1a;">
+                        <span class="actividad-categoria">Aéreo</span>
+                        <span class="actividad-dificultad dif-media">Media</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Vuelo en Ala Delta</h4>
+                        <p>Planea sobre el paisaje durante 30 minutos con instructor certificado.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 1h</span>
+                            <span>👥 1 persona</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">150€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #1a1a2a;">
+                        <span class="actividad-categoria">Montaña</span>
+                        <span class="actividad-dificultad dif-dificil">Difícil</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Escalada en Roca</h4>
+                        <p>Escala paredes naturales de hasta 30 metros con equipo completo incluido.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 4h</span>
+                            <span>👥 2-4 personas</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">90€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    
+    <!--FOOTER--> 
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>#RadicalViejo</h3>
+                <p>
+                    En SportsXtreme vivimos la adrenalina al máximo. Descubre los mejores
+                    eventos de deportes extremos, participa en actividades llenas de
+                    emoción o inscríbete en cursos diseñados para llevar tus límites más
+                    lejos. Conecta con una comunidad apasionada por la aventura y
+                    experimenta nuevas formas de sentir la intensidad del deporte extremo.
+                </p>
+            </div>
+            
+            <div>
+                <h3>ENLACES RÁPIDOS</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="show.html">Show</a></li>
+                    <li><a href="actividad.html">Actividad</a></li>
+                    <li><a href="curso.html">Curso</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3>CONTACTO</h3>
+                <ul>
+                    <li>+34 644 71 71 99</li>
+                    <li>fercho7649@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
