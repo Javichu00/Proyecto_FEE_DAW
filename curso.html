@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportXtreme</title>
+    <title>SportXtreme - Cursos</title>
     <link rel="stylesheet" href="styles.css">
-    
+    <link rel="stylesheet" href="stylesActividad.css">
 </head>
 <body>
 
@@ -18,22 +18,212 @@
             <a href="./acceso.html" class="btn-menu">Acceder</a>
         </div>
     </header>
-    
+
     <!--NAVBAR-->
     <nav class="main-nav">
         <ul class="nav-list">
-            <li><a href="index.html">Inicio</a></li> <!---->
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="show.html">Shows</a></li>
             <li><a href="actividad.html">Actividades</a></li>
-            <li><a href="curso.html">Cursos</a></li>
+            <li><a href="curso.html" class="active">Cursos</a></li>
         </ul>
     </nav>
 
-    <div class="content" style="font-size: 300px;">
-        CONTENIDO
+    <!--CONTENIDO-->
+    <div class="actividades-layout">
+
+        <!-- PANEL LATERAL FILTROS -->
+        <aside class="filtros-panel">
+            <h3>Filtros</h3>
+
+            <div class="filtro-grupo">
+                <label>Categoría</label>
+                <select>
+                    <option value="">Todas</option>
+                    <option>Aéreo</option>
+                    <option>Acuático</option>
+                    <option>Montaña</option>
+                    <option>Motor</option>
+                    <option>Urbano</option>
+                    <option>Nieve</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label>Nivel</label>
+                <div class="filtro-checks">
+                    <label><input type="checkbox"> Iniciación</label>
+                    <label><input type="checkbox"> Media</label>
+                    <label><input type="checkbox"> Avanzado</label>
+                    <label><input type="checkbox"> Profesional</label>
+                </div>
+            </div>
+
+            <div class="filtro-grupo">
+                <label>Precio máximo: <span id="precio-val">500€</span></label>
+                <input type="range" min="0" max="1500" value="500" oninput="document.getElementById('precio-val').textContent = this.value + '€'">
+            </div>
+
+            <div class="filtro-grupo">
+                <label>Duración del curso</label>
+                <select>
+                    <option value="">Cualquiera</option>
+                    <option>1 día</option>
+                    <option>Fin de semana</option>
+                    <option>1 semana</option>
+                    <option>+1 mes</option>
+                </select>
+            </div>
+
+            <button class="btn-filtrar">Aplicar filtros</button>
+            <button class="btn-reset">Limpiar</button>
+        </aside>
+
+        <!-- LISTA DE CURSOS -->
+        <main class="actividades-main">
+            <div class="actividades-header">
+                <h2>Cursos <span id="contador">(6)</span></h2>
+                <select class="orden-select">
+                    <option>Ordenar por: Relevancia</option>
+                    <option>Precio: menor a mayor</option>
+                    <option>Precio: mayor a menor</option>
+                    <option>Nombre A-Z</option>
+                </select>
+            </div>
+
+            <div class="actividades-grid">
+
+                <!-- CURSO 1 -->
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #1a2a3a;">
+                        <!-- ESPACIO PARA FOTO O VÍDEO -->
+                        <span class="actividad-categoria">Aéreo</span>
+                        <span class="actividad-dificultad dif-extremo">Avanzado</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Piloto de Parapente</h4>
+                        <p>Aprende a volar desde cero hasta obtener tu licencia oficial de piloto. Vuelos biplaza y solos supervisados incluidos.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 3 semanas</span>
+                            <span>👥 Máx. 4 alumnos</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">890€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CURSO 2 -->
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #0d2a3a;">
+                        <!-- ESPACIO PARA FOTO O VÍDEO -->
+                        <span class="actividad-categoria">Acuático</span>
+                        <span class="actividad-dificultad dif-media">Media</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Buceo Open Water</h4>
+                        <p>Curso oficial PADI Open Water Diver. De la piscina al mar abierto con certificación internacional incluida.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 5 días</span>
+                            <span>👥 Máx. 6 alumnos</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">350€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CURSO 3 -->
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #2a1a0a;">
+                        <!-- ESPACIO PARA FOTO O VÍDEO -->
+                        <span class="actividad-categoria">Motor</span>
+                        <span class="actividad-dificultad dif-dificil">Difícil</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Piloto de Karting</h4>
+                        <p>Domina la técnica de pilotaje en circuito real: frenada, ápice y trazada. Instructores ex-pilotos de competición.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 4 fines de semana</span>
+                            <span>👥 Máx. 3 alumnos</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">620€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CURSO 4 -->
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #1a2a1a;">
+                        <!-- ESPACIO PARA FOTO O VÍDEO -->
+                        <span class="actividad-categoria">Montaña</span>
+                        <span class="actividad-dificultad dif-facil">Iniciación</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Escalada en Roca</h4>
+                        <p>Desde los nudos básicos hasta tu primera vía de varios largos en roca natural. Material de calidad incluido.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 2 semanas</span>
+                            <span>👥 Máx. 5 alumnos</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">290€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CURSO 5 -->
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #1a1a1a;">
+                        <!-- ESPACIO PARA FOTO O VÍDEO -->
+                        <span class="actividad-categoria">Urbano</span>
+                        <span class="actividad-dificultad dif-media">Media</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Parkour Urbano</h4>
+                        <p>Aprende saltos de precisión, vaults y wall-runs en entornos urbanos reales con seguimiento en vídeo incluido.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 3 semanas</span>
+                            <span>👥 Máx. 8 alumnos</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">195€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CURSO 6 -->
+                <div class="actividad-card">
+                    <div class="actividad-img" style="background: #0a1520;">
+                        <!-- ESPACIO PARA FOTO O VÍDEO -->
+                        <span class="actividad-categoria">Nieve</span>
+                        <span class="actividad-dificultad dif-extremo">Extremo</span>
+                    </div>
+                    <div class="actividad-info">
+                        <h4>Esquí Freeride</h4>
+                        <p>Domina la nieve virgen y el off-piste extremo. Seguridad en avalanchas y técnica avanzada con monitores FIS.</p>
+                        <div class="actividad-meta">
+                            <span>⏱ 1 semana</span>
+                            <span>👥 Máx. 4 alumnos</span>
+                        </div>
+                        <div class="actividad-footer">
+                            <span class="actividad-precio">1.250€</span>
+                            <a href="#" class="btn-reservar">Reservar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
     </div>
-    
-    <!--FOOTER--> 
+
+    <!--FOOTER-->
     <footer class="footer">
         <div class="footer-content">
             <div>
@@ -46,17 +236,17 @@
                     experimenta nuevas formas de sentir la intensidad del deporte extremo.
                 </p>
             </div>
-            
+
             <div>
                 <h3>ENLACES RÁPIDOS</h3>
                 <ul>
-                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="index.html">Inicio</a></li>
                     <li><a href="show.html">Show</a></li>
                     <li><a href="actividad.html">Actividad</a></li>
                     <li><a href="curso.html">Curso</a></li>
                 </ul>
             </div>
-            
+
             <div>
                 <h3>CONTACTO</h3>
                 <ul>
@@ -65,7 +255,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
         </div>
