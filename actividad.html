@@ -37,58 +37,69 @@
         <!-- PANEL LATERAL FILTROS -->
         <aside class="filtros-panel">
             <h3>Filtros</h3>
-
+        
             <div class="filtro-grupo">
                 <label>Categoría</label>
-                <select>
-                    <option value="">Todas</option>
-                    <option>Aéreo</option>
-                    <option>Acuático</option>
-                    <option>Montaña</option>
-                    <option>Motor</option>
-                </select>
-            </div>
-
-            <div class="filtro-grupo">
-                <label>Dificultad</label>
-                <div class="filtro-checks">
-                    <label><input type="checkbox"> Fácil</label>
-                    <label><input type="checkbox"> Media</label>
-                    <label><input type="checkbox"> Difícil</label>
-                    <label><input type="checkbox"> Extremo</label>
+                <div class="filtro-checks" id="checks-categoria">
+                    <label><input type="checkbox" value="AIRE"> Aire</label>
+                    <label><input type="checkbox" value="MAR"> Mar</label>
+                    <label><input type="checkbox" value="TIERRA"> Tierra</label>
                 </div>
             </div>
-
+        
             <div class="filtro-grupo">
-                <label>Precio máximo: <span id="precio-val">200€</span></label>
-                <input type="range" min="0" max="500" value="200" oninput="document.getElementById('precio-val').textContent = this.value + '€'">
+                <label>Dificultad</label>
+                <div class="filtro-checks" id="checks-dificultad">
+                    <label><input type="checkbox" value="SUAVE"> Fácil</label>
+                    <label><input type="checkbox" value="MEDIO"> Media</label>
+                    <label><input type="checkbox" value="DURO"> Difícil</label>
+                    <label><input type="checkbox" value="EXTREMO"> Extremo</label>
+                </div>
             </div>
-
+        
             <div class="filtro-grupo">
-                <label>Duración</label>
-                <select>
-                    <option value="">Cualquiera</option>
-                    <option>Menos de 1h</option>
-                    <option>1 - 3h</option>
-                    <option>Medio día</option>
-                    <option>Día completo</option>
-                </select>
+                <label>Precio: <span id="precio-min-val">0</span>€ — <span id="precio-max-val">1000</span>€</label>
+                <input type="range" id="filtro-precio-min" min="0" max="1000" value="0"
+                       oninput="document.getElementById('precio-min-val').textContent = this.value">
+                <input type="range" id="filtro-precio-max" min="0" max="1000" value="1000"
+                       oninput="document.getElementById('precio-max-val').textContent = this.value">
             </div>
-
-            <button class="btn-filtrar">Aplicar filtros</button>
+        
+            <div class="filtro-grupo">
+                <label>Fecha inicio desde</label>
+                <input type="date" id="filtro-fecha-min" style="background:#2a2a2a;border:1px solid #3a3a3a;color:white;border-radius:6px;padding:8px;width:100%;">
+            </div>
+        
+            <div class="filtro-grupo">
+                <label>Fecha fin hasta</label>
+                <input type="date" id="filtro-fecha-max" style="background:#2a2a2a;border:1px solid #3a3a3a;color:white;border-radius:6px;padding:8px;width:100%;">
+            </div>
+        
+            <div class="filtro-grupo">
+                <label>Aforo mínimo: <span id="aforo-val">1</span> personas</label>
+                <input type="range" id="filtro-aforo" min="1" max="50" value="1"
+                       oninput="document.getElementById('aforo-val').textContent = this.value">
+            </div>
+        
             <button class="btn-reset">Limpiar</button>
         </aside>
 
         <!-- LISTA DE ACTIVIDADES -->
         <main class="actividades-main">
             <div class="actividades-header">
-                <h2>Actividades <span id="contador">(6)</span></h2>
-                <select class="orden-select">
-                    <option>Ordenar por: Relevancia</option>
-                    <option>Precio: menor a mayor</option>
-                    <option>Precio: mayor a menor</option>
-                    <option>Nombre A-Z</option>
-                </select>
+                <h2>Actividades <span id="contador"></span></h2>
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <input type="text" id="buscador" placeholder="🔍 Buscar por nombre..."
+                           style="background:#2a2a2a;border:1px solid #3a3a3a;color:white;border-radius:6px;padding:8px 12px;font-size:13px;outline:none;width:220px;">
+                    <select class="orden-select" id="orden-select">
+                        <option value="">Ordenar por: Relevancia</option>
+                        <option value="precio-asc">Precio: menor a mayor</option>
+                        <option value="precio-desc">Precio: mayor a menor</option>
+                        <option value="fecha-asc">Fecha: más próxima</option>
+                        <option value="fecha-desc">Fecha: más lejana</option>
+                        <option value="nombre-asc">Nombre A-Z</option>
+                    </select>
+                </div>
             </div>
 
             <div class="actividades-grid" id="actividadesGrid">

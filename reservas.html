@@ -1,257 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportXtreme - Mis Reservas</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --red:      #e02020;
-            --bg:       #0a0a0a;
-            --surface:  #111111;
-            --card:     #161616;
-            --border:   #222;
-            --border2:  #2a2a2a;
-            --text:     #f0f0f0;
-            --muted:    #666;
-            --muted2:   #999;
-            --green:    #00c853;
-            --amber:    #ffab00;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Barlow', sans-serif;
-            min-height: 100vh;
-        }
-
-        .reservas-page {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 48px 32px 80px;
-        }
-
-        /* HERO */
-        .page-hero {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-        }
-        .page-hero::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; left: 0;
-            width: 80px; height: 2px;
-            background: var(--red);
-        }
-        .hero-text h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 56px;
-            letter-spacing: 4px;
-            line-height: 1;
-        }
-        .hero-text p { font-size: 15px; color: var(--muted2); margin-top: 6px; font-weight: 300; }
-        .hero-stats { display: flex; gap: 40px; }
-        .stat-item { text-align: right; }
-        .stat-num {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 36px;
-            letter-spacing: 2px;
-            display: block;
-        }
-        .stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-
-        /* TABS */
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 32px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 4px;
-            width: fit-content;
-        }
-        .tab {
-            padding: 10px 24px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 14px; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: var(--muted2); cursor: pointer;
-            border: none; background: transparent;
-            transition: all 0.2s;
-        }
-        .tab.active { background: var(--red); color: #fff; }
-        .tab:hover:not(.active) { color: var(--text); }
-
-        /* LISTA */
-        .reservas-list { display: flex; flex-direction: column; gap: 16px; }
-
-        /* TIMELINE LABEL */
-        .timeline-label {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 11px; font-weight: 700;
-            letter-spacing: 3px; text-transform: uppercase;
-            color: var(--muted);
-            margin: 28px 0 12px;
-            display: flex; align-items: center; gap: 12px;
-        }
-        .timeline-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-        /* CARD */
-        .reserva-card {
-            background: var(--card);
-            border: 1px solid var(--border2);
-            display: grid;
-            grid-template-columns: 180px 1fr auto;
-            overflow: hidden;
-            position: relative;
-            transition: border-color 0.2s, transform 0.2s;
-            animation: slideIn 0.4s ease both;
-        }
-        .reserva-card:hover { border-color: #333; transform: translateX(4px); }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .reserva-card:nth-child(2) { animation-delay: 0.05s; }
-        .reserva-card:nth-child(3) { animation-delay: 0.1s; }
-        .reserva-card:nth-child(5) { animation-delay: 0.15s; }
-        .reserva-card:nth-child(7) { animation-delay: 0.2s; }
-
-        /* franja color lateral */
-        .reserva-card::before {
-            content: ''; position: absolute;
-            left: 0; top: 0; bottom: 0; width: 3px;
-        }
-        .estado-confirmada::before { background: var(--green); }
-        .estado-pendiente::before  { background: var(--amber); }
-        .estado-completada::before { background: var(--muted); }
-        .estado-cancelada::before  { background: var(--red); }
-
-        /* imagen */
-        .reserva-img {
-            min-height: 140px;
-            position: relative;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 44px;
-            opacity: 0.5;
-            /* REEMPLAZAR contenido por <img> o <video> */
-        }
-        .tipo-badge {
-            position: absolute; top: 10px; left: 10px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 10px; font-weight: 700;
-            letter-spacing: 2px; text-transform: uppercase;
-            padding: 3px 8px;
-            background: rgba(0,0,0,0.75);
-            border: 1px solid rgba(255,255,255,0.15);
-            color: var(--text);
-        }
-
-        /* body */
-        .reserva-body {
-            padding: 20px 24px;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .reserva-top {
-            display: flex; align-items: flex-start;
-            justify-content: space-between; gap: 16px; margin-bottom: 10px;
-        }
-        .reserva-nombre {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 22px; font-weight: 700; letter-spacing: 1px; line-height: 1.2;
-        }
-        .estado-pill {
-            flex-shrink: 0;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 11px; font-weight: 700;
-            letter-spacing: 2px; text-transform: uppercase;
-            padding: 4px 12px; border-radius: 2px;
-        }
-        .estado-confirmada .estado-pill { background: rgba(0,200,83,0.12); color: var(--green); border: 1px solid rgba(0,200,83,0.3); }
-        .estado-pendiente  .estado-pill { background: rgba(255,171,0,0.12); color: var(--amber); border: 1px solid rgba(255,171,0,0.3); }
-        .estado-completada .estado-pill { background: rgba(150,150,150,0.12); color: var(--muted2); border: 1px solid rgba(150,150,150,0.3); }
-        .estado-cancelada  .estado-pill { background: rgba(224,32,32,0.12); color: var(--red); border: 1px solid rgba(224,32,32,0.3); }
-
-        .reserva-desc { font-size: 13.5px; color: var(--muted2); line-height: 1.5; margin-bottom: 16px; font-weight: 300; }
-
-        .reserva-meta { display: flex; gap: 20px; flex-wrap: wrap; }
-        .meta-chip {
-            display: flex; align-items: center; gap: 6px;
-            font-size: 13px; color: var(--muted2);
-            font-family: 'Barlow Condensed', sans-serif; font-weight: 500; letter-spacing: 0.5px;
-        }
-
-        /* aside */
-        .reserva-aside {
-            padding: 20px 24px;
-            border-left: 1px solid var(--border);
-            display: flex; flex-direction: column;
-            align-items: flex-end; justify-content: space-between;
-            min-width: 160px;
-        }
-        .reserva-precio {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 32px; letter-spacing: 1px; text-align: right;
-        }
-        .reserva-precio small {
-            display: block; font-family: 'Barlow', sans-serif;
-            font-size: 11px; color: var(--muted); font-weight: 400;
-            letter-spacing: 1px; text-transform: uppercase; margin-top: -4px;
-        }
-        .reserva-id { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; font-family: 'Barlow Condensed', sans-serif; text-align: right; }
-
-        .reserva-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-        .btn-accion {
-            width: 100%; padding: 9px 16px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 13px; font-weight: 700;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            border: none; cursor: pointer;
-            text-align: center; text-decoration: none; display: block;
-            transition: opacity 0.2s, background 0.2s;
-        }
-        .btn-accion:hover { opacity: 0.85; }
-        .btn-primary   { background: var(--red); color: #fff; }
-        .btn-secondary { background: transparent; color: var(--muted2); border: 1px solid var(--border2); }
-        .btn-secondary:hover { color: var(--text); border-color: #444; }
-
-        /* PROMO BANNER */
-        .promo-banner {
-            margin-top: 48px;
-            background: linear-gradient(135deg, #1a0505 0%, #2a0808 50%, #1a0505 100%);
-            border: 1px solid rgba(224,32,32,0.25);
-            padding: 28px 36px;
-            display: flex; align-items: center;
-            justify-content: space-between; gap: 24px;
-            position: relative; overflow: hidden;
-        }
-        .promo-banner::before {
-            content: ''; position: absolute;
-            top: -40px; right: -40px; width: 200px; height: 200px;
-            background: radial-gradient(circle, rgba(224,32,32,0.15) 0%, transparent 70%);
-        }
-        .promo-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px; margin-bottom: 4px; }
-        .promo-text p  { font-size: 14px; color: var(--muted2); font-weight: 300; }
-        .btn-promo {
-            flex-shrink: 0; background: var(--red); color: #fff;
-            padding: 12px 28px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-            text-decoration: none; border: none; cursor: pointer; white-space: nowrap;
-            transition: background 0.2s;
-        }
-        .btn-promo:hover { background: #b01818; }
-    </style>
 </head>
 <body>
 
@@ -264,17 +17,17 @@
             <a href="./acceso.html" class="btn-menu">Acceder</a>
         </div>
     </header>
-
+    
     <!--NAVBAR-->
     <nav class="main-nav">
         <ul class="nav-list">
-            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html">Inicio</a></li> <!---->
             <li><a href="show.html">Shows</a></li>
             <li><a href="actividad.html">Actividades</a></li>
             <li><a href="curso.html">Cursos</a></li>
         </ul>
     </nav>
-
+    
     <!--CONTENIDO-->
     <div class="reservas-page">
 
@@ -301,7 +54,6 @@
                     <div>
                         <div class="reserva-top">
                             <span class="reserva-nombre">Salto en Paracaídas</span>
-                            <span class="estado-pill">Confirmada</span>
                         </div>
                         <p class="reserva-desc">Lánzate desde 4.000 metros de altitud con instructor certificado. Caída libre de 60 segundos y planeo de 5 minutos.</p>
                     </div>
