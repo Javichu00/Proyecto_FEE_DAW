@@ -1,0 +1,662 @@
+/* ============================================
+   RESERVAS — SportsXtreme
+   stylesReservas.css
+   ============================================ */
+
+   :root {
+    --rojo:       #e8000d;
+    --rojo-dark:  #b8000a;
+    --rojo-glow:  rgba(232, 0, 13, 0.25);
+    --negro:      #0a0a0a;
+    --negro-2:    #111111;
+    --negro-3:    #1a1a1a;
+    --negro-4:    #222222;
+    --negro-5:    #2e2e2e;
+    --gris:       #888888;
+    --gris-light: #bbbbbb;
+    --blanco:     #f5f5f5;
+    --verde:      #22c55e;
+    --amarillo:   #f59e0b;
+    --azul:       #3b82f6;
+
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body:    'Barlow', sans-serif;
+
+    --radio: 8px;
+    --radio-lg: 14px;
+    --sombra: 0 4px 24px rgba(0,0,0,0.5);
+    --sombra-roja: 0 4px 20px var(--rojo-glow);
+    --trans: all 0.22s cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: var(--font-body);
+    min-height: 100vh;
+}
+
+/* ── HERO ─────────────────────────────────── */
+.reservas-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+
+.reservas-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 40px 0 28px;
+    border-bottom: 2px solid var(--negro-5);
+    flex-wrap: wrap;
+}
+
+.reservas-titulo {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--blanco);
+    text-transform: uppercase;
+    position: relative;
+}
+
+.reservas-titulo::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--rojo);
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+.reservas-subtitulo {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--gris);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+.reservas-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: var(--negro-3);
+    border: 1px solid var(--negro-5);
+    border-radius: var(--radio-lg);
+    padding: 14px 22px;
+    text-align: center;
+    min-width: 90px;
+    transition: var(--trans);
+}
+
+.stat-item:hover {
+    border-color: var(--rojo);
+    box-shadow: var(--sombra-roja);
+}
+
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--rojo);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--gris);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+
+/* ── TABS ─────────────────────────────────── */
+.reservas-tabs {
+    display: flex;
+    gap: 6px;
+    margin: 28px 0 24px;
+    border-bottom: 2px solid var(--negro-4);
+    padding-bottom: 0;
+}
+
+.tab-btn {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gris);
+    background: transparent;
+    border: none;
+    padding: 12px 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    transition: var(--trans);
+    border-radius: var(--radio) var(--radio) 0 0;
+}
+
+.tab-btn:hover {
+    color: var(--blanco);
+    background: var(--negro-3);
+}
+
+.tab-btn.active {
+    color: var(--blanco);
+    background: var(--negro-3);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--rojo);
+    border-radius: 2px 2px 0 0;
+}
+
+.tab-badge {
+    background: var(--rojo);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 900;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    line-height: 1;
+}
+
+.tab-badge.pendiente { background: var(--amarillo); color: #000; }
+.tab-badge.historial  { background: var(--negro-5); color: var(--gris-light); }
+
+/* ── PANELS ───────────────────────────────── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── LISTA DE RESERVAS ────────────────────── */
+.reservas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── TARJETA ──────────────────────────────── */
+.reserva-card {
+    background: var(--negro-2);
+    border: 1px solid var(--negro-5);
+    border-radius: var(--radio-lg);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 6px 1fr;
+    transition: var(--trans);
+    animation: slideIn 0.3s ease both;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.reserva-card:hover {
+    border-color: var(--negro-5);
+    box-shadow: var(--sombra);
+    transform: translateY(-2px);
+}
+
+/* Franja lateral de color según tipo */
+.reserva-card .card-stripe { grid-column: 1; }
+.reserva-card .card-stripe.actividad { background: var(--rojo); }
+.reserva-card .card-stripe.curso     { background: var(--azul); }
+.reserva-card .card-stripe.show      { background: var(--amarillo); }
+
+.reserva-card .card-body {
+    grid-column: 2;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Cabecera tarjeta */
+.card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.card-tipo-badge {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: var(--negro-4);
+    color: var(--gris-light);
+    flex-shrink: 0;
+}
+
+.card-tipo-badge.actividad { background: rgba(232,0,13,0.15); color: var(--rojo); }
+.card-tipo-badge.curso     { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.card-tipo-badge.show      { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+.card-estado-badge {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+
+.card-estado-badge.confirmada   { background: rgba(34,197,94,0.15);  color: var(--verde); }
+.card-estado-badge.pendiente    { background: rgba(245,158,11,0.15); color: var(--amarillo); }
+.card-estado-badge.completada   { background: var(--negro-4);        color: var(--gris); }
+
+.card-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.card-nombre {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--blanco);
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+}
+
+/* Meta fila */
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+}
+
+.card-meta-item {
+    font-size: 0.82rem;
+    color: var(--gris-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-meta-item .meta-icon {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Precio */
+.card-precio-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    border-top: 1px solid var(--negro-4);
+}
+
+.card-precio-total {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--blanco);
+    letter-spacing: 0.02em;
+}
+
+.card-precio-total span {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--gris);
+    margin-left: 3px;
+}
+
+.card-precio-desglose {
+    font-size: 0.78rem;
+    color: var(--gris);
+}
+
+.card-ref {
+    margin-left: auto;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    color: var(--gris);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+/* Expiración pago pendiente */
+.card-expira {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 0.78rem;
+    color: var(--amarillo);
+    font-weight: 600;
+}
+
+/* Acciones */
+.card-acciones {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 4px;
+}
+
+.btn-accion {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    border-radius: var(--radio);
+    cursor: pointer;
+    border: none;
+    transition: var(--trans);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-accion.primario {
+    background: var(--rojo);
+    color: white;
+}
+.btn-accion.primario:hover {
+    background: var(--rojo-dark);
+    box-shadow: var(--sombra-roja);
+    transform: translateY(-1px);
+}
+
+.btn-accion.secundario {
+    background: transparent;
+    color: var(--gris-light);
+    border: 1px solid var(--negro-5);
+}
+.btn-accion.secundario:hover {
+    border-color: var(--gris);
+    color: var(--blanco);
+    background: var(--negro-4);
+}
+
+.btn-accion.peligro {
+    background: transparent;
+    color: #ff6b6b;
+    border: 1px solid rgba(255,107,107,0.3);
+}
+.btn-accion.peligro:hover {
+    background: rgba(255,107,107,0.1);
+    border-color: #ff6b6b;
+}
+
+.btn-accion.verde {
+    background: transparent;
+    color: var(--verde);
+    border: 1px solid rgba(34,197,94,0.3);
+}
+.btn-accion.verde:hover {
+    background: rgba(34,197,94,0.1);
+    border-color: var(--verde);
+}
+
+/* Valoración guardada */
+.card-valoracion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--gris);
+}
+
+.card-valoracion .estrellas-val { color: #fbbf24; letter-spacing: 2px; }
+
+/* ── EMPTY STATE ──────────────────────────── */
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--gris);
+}
+
+.empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 24px;
+}
+
+.btn-explorar {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    background: var(--rojo);
+    color: white;
+    border-radius: var(--radio);
+    text-decoration: none;
+    transition: var(--trans);
+}
+.btn-explorar:hover {
+    background: var(--rojo-dark);
+    box-shadow: var(--sombra-roja);
+    transform: translateY(-2px);
+}
+
+/* ── MODAL ────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.hidden { display: none; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-box {
+    background: var(--negro-3);
+    border: 1px solid var(--negro-5);
+    border-radius: var(--radio-lg);
+    padding: 36px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    animation: popIn 0.25s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.modal-icon { font-size: 2.5rem; margin-bottom: 16px; }
+
+.modal-box h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+    color: var(--blanco);
+}
+
+.modal-box p {
+    font-size: 0.9rem;
+    color: var(--gris-light);
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.modal-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.btn-modal-cancelar {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 11px 26px;
+    background: transparent;
+    color: var(--gris-light);
+    border: 1px solid var(--negro-5);
+    border-radius: var(--radio);
+    cursor: pointer;
+    transition: var(--trans);
+}
+.btn-modal-cancelar:hover { background: var(--negro-4); color: var(--blanco); }
+
+.btn-modal-confirmar {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 11px 26px;
+    background: var(--rojo);
+    color: white;
+    border: none;
+    border-radius: var(--radio);
+    cursor: pointer;
+    transition: var(--trans);
+}
+.btn-modal-confirmar:hover {
+    background: var(--rojo-dark);
+    box-shadow: var(--sombra-roja);
+}
+
+/* ── MODAL VALORAR ────────────────────────── */
+.estrellas {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 2.2rem;
+    color: var(--negro-5);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.estrella { transition: color 0.15s, transform 0.15s; }
+.estrella.activa, .estrella:hover { color: #fbbf24; transform: scale(1.15); }
+
+#comentarioValoracion {
+    width: 100%;
+    background: var(--negro-4);
+    border: 1px solid var(--negro-5);
+    color: var(--blanco);
+    border-radius: var(--radio);
+    padding: 12px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    resize: vertical;
+    outline: none;
+    margin-bottom: 24px;
+    transition: border-color 0.2s;
+}
+#comentarioValoracion:focus { border-color: var(--rojo); }
+
+/* ── TOAST ────────────────────────────────── */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    background: var(--negro-3);
+    border: 1px solid var(--negro-5);
+    border-left: 4px solid var(--rojo);
+    color: var(--blanco);
+    padding: 14px 24px;
+    border-radius: var(--radio);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    z-index: 9998;
+    box-shadow: var(--sombra);
+    transition: opacity 0.3s, transform 0.3s;
+    white-space: nowrap;
+}
+
+.toast.hidden {
+    display: none;
+}
+
+.toast.verde { border-left-color: var(--verde); }
+.toast.amarillo { border-left-color: var(--amarillo); }
+
+/* ── RESPONSIVE ───────────────────────────── */
+@media (max-width: 640px) {
+    .reservas-hero { flex-direction: column; align-items: flex-start; }
+
+    .reservas-stats { width: 100%; justify-content: flex-start; }
+
+    .reservas-tabs { overflow-x: auto; padding-bottom: 0; gap: 2px; }
+    .tab-btn { padding: 10px 14px; font-size: 0.8rem; white-space: nowrap; }
+
+    .card-head { flex-direction: column; gap: 8px; }
+    .card-ref { margin-left: 0; }
+
+    .card-precio-row { flex-direction: column; align-items: flex-start; }
+
+    .card-acciones { flex-direction: column; }
+    .btn-accion { justify-content: center; }
+
+    .reserva-card { grid-template-columns: 4px 1fr; }
+    .card-body { padding: 16px; }
+}

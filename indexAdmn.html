@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportXtreme</title>
+    <title>SportXtreme - Admin</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="stylesAdmn.css">
 </head>
@@ -13,112 +13,92 @@
     <header id="inicio">
         <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
         <div>
-            <a href="./plantilla.html"> BOTON TEMPORAL A PLANTILLA </a>
             <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
-            <a href="./acceso.html" class="btn-menu">Acceder</a>
+            <a href="./acceso.html" class="btn-menu btn-acceder">Acceder</a>
         </div>
     </header>
-    
-    
+
     <main class="dashboard-container">
-        
-        <section class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-content">
-                    <span class="stat-title">Usuarios Totales</span>
-                    <span class="stat-value">2,548</span>
-                </div>
-                <div class="stat-footer">gestionar</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-content">
-                    <span class="stat-title">Reservas Activas <small class="badge-tag">pendiente de pago</small></span>
-                    <span class="stat-value">189</span>
-                </div>
-                <div class="stat-footer">gestionar</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-content">
-                    <span class="stat-title">Nuevos Cursos <small class="badge-tag red">alta demanda</small></span>
-                    <span class="stat-value">12</span>
-                </div>
-                <div class="stat-footer">gestionar</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-content">
-                    <span class="stat-title">Nuevos Shows <small class="badge-tag green">próximos</small></span>
-                    <span class="stat-value">5</span>
-                </div>
-                <div class="stat-footer">gestionar</div>
-            </div>
-        </section>
 
-        <div class="main-layout">
-            
-            <section class="table-section">
-                <div class="table-header">
-                    <h2>Tabla de Gestión Rápida</h2>
-                    <button class="btn-add">+ CREAR NUEVO EVENTO</button>
-                </div>
-
-                <div class="filters-bar">
-                    <input type="text" placeholder="Buscar..." class="search-input">
-                    <select class="filter-select"><option>Eventos (All)</option></select>
-                    <select class="filter-select"><option>Tipo</option></select>
-                    <select class="filter-select"><option>Estado</option></select>
-                </div>
-
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox"></th>
-                            <th>ID</th>
-                            <th>Tipo</th>
-                            <th>Nombre del Evento</th>
-                            <th>Fecha</th>
-                            <th>Participantes</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>6</td>
-                            <td><span class="icon-tag curso">🎓 Curso</span></td>
-                            <td>Nombre del Evento 1</td>
-                            <td>25/12/2026</td>
-                            <td>189</td>
-                            <td><span class="status-pill public">Publicado</span></td>
-                            <td><button class="btn-dots">⋮</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>10</td>
-                            <td><span class="icon-tag show">🎬 Show</span></td>
-                            <td>Nombre del Evento - Especial</td>
-                            <td>28/09/2026</td>
-                            <td>216</td>
-                            <td><span class="status-pill public">Publicado</span></td>
-                            <td><button class="btn-dots">⋮</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>33</td>
-                            <td><span class="icon-tag actividad">🧗 Actividad</span></td>
-                            <td>Nombre del Evento 3</td>
-                            <td>19/09/2026</td>
-                            <td>116</td>
-                            <td><span class="status-pill draft">Borrador</span></td>
-                            <td><button class="btn-dots">⋮</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+        <!-- TABS -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="cambiarTabla('eventos')">Eventos</button>
+            <button class="admin-tab" onclick="cambiarTabla('usuarios')">Usuarios</button>
+            <button class="admin-tab" onclick="cambiarTabla('reservas')">Reservas</button>
         </div>
+
+        <!-- BUSCADOR -->
+        <div class="filters-bar">
+            <input type="text" id="admin-buscador" placeholder="Buscar..." class="search-input"
+                   oninput="filtrarTabla()">
+        </div>
+
+        <!-- TABLA EVENTOS -->
+        <div id="tabla-eventos" class="admin-tabla-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Tipo</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>F. Inicio</th>
+                        <th>F. Fin</th>
+                        <th>Localización</th>
+                        <th>Aforo</th>
+                        <th>Estado</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Extremidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-eventos"></tbody>
+            </table>
+        </div>
+
+        <!-- TABLA USUARIOS -->
+        <div id="tabla-usuarios" class="admin-tabla-wrapper hidden">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Enabled</th>
+                        <th>Fecha Registro</th>
+                        <th>Perfil</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-usuarios"></tbody>
+            </table>
+        </div>
+
+        <!-- TABLA RESERVAS -->
+        <div id="tabla-reservas" class="admin-tabla-wrapper hidden">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Evento</th>
+                        <th>Precio Venta</th>
+                        <th>Cantidad</th>
+                        <th>Observaciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-reservas"></tbody>
+            </table>
+        </div>
+
     </main>
 
+    <script src="scriptAPI_IP.js"></script>
     <script src="script.js"></script>
-    
+    <script src="scriptAdmn.js"></script>
 </body>
 </html>

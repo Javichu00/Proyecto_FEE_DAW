@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportXtreme - Mis Reservas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesmisreservas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -13,177 +15,85 @@
         <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
         <div>
             <a href="./plantilla.html"> BOTON TEMPORAL A PLANTILLA </a>
-            <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
+            <a href="./reservas.html" class="btn-menu btn-reservas active">Mis Reservas</a>
             <a href="./acceso.html" class="btn-menu">Acceder</a>
         </div>
     </header>
-    
+
     <!--NAVBAR-->
     <nav class="main-nav">
         <ul class="nav-list">
-            <li><a href="index.html">Inicio</a></li> <!---->
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="show.html">Shows</a></li>
             <li><a href="actividad.html">Actividades</a></li>
             <li><a href="curso.html">Cursos</a></li>
         </ul>
     </nav>
+
+    <div class="reservas-wrapper">
+
+        <!-- HERO STRIP -->
+        <div class="reservas-hero">
+            <div class="reservas-hero-inner">
+                <h1 class="reservas-titulo">MIS RESERVAS</h1>
+                <p class="reservas-subtitulo">Gestiona tus aventuras</p>
+            </div>
+            <div class="reservas-stats" id="reservasStats"></div>
+        </div>
     
-    <!--CONTENIDO-->
-    <div class="reservas-page">
+        <div class="reservas-lista" id="lista-reservas">
 
-        <!-- HERO -->
-        <div class="page-hero">
-            <div class="hero-text">
-                <h1>Mis Reservas</h1>
+            <div class="reserva-card">
+                <div class="reserva-img">
+                    <img src="MEDIA/para.jpg" alt="Salto en Tándem">
+                </div>
+                <div class="reserva-info">
+                    <h3 class="reserva-nombre">Salto en Tándem</h3>
+                    <p class="reserva-descripcion">Salta desde 4.000 metros junto a un instructor certificado. Una experiencia que cambia la vida.</p>
+                    <div class="reserva-detalles">
+                        <span>🎟️ 2 boletos</span>
+                        <span>📅 Inicio: 20/04/2026</span>
+                        <span>🏁 Fin: 20/04/2026</span>
+                        <span>💶 180€ / persona</span>
+                    </div>
+                </div>
+                <div class="reserva-acciones">
+                    <span class="reserva-total">Total: 360€</span>
+                    <button class="btn-cancelar-reserva">Cancelar reserva</button>
+                </div>
             </div>
+        
         </div>
 
-        <!-- RESERVAS -->
-        <div class="reservas-list" id="lista">
-
-            <div class="timeline-label" data-group="proximas">Próximas</div>
-
-            <!-- 1 -->
-            <div class="reserva-card estado-confirmada" data-estado="confirmada" data-group="proximas">
-                <div class="reserva-img" style="background:linear-gradient(135deg,#0d1b2a,#1a3050);">
-                    
-                    <!-- ESPACIO PARA FOTO O VÍDEO -->
-                    <span class="tipo-badge">Actividad</span>
-                </div>
-                <div class="reserva-body">
-                    <div>
-                        <div class="reserva-top">
-                            <span class="reserva-nombre">Salto en Paracaídas</span>
-                        </div>
-                        <p class="reserva-desc">Lánzate desde 4.000 metros de altitud con instructor certificado. Caída libre de 60 segundos y planeo de 5 minutos.</p>
-                    </div>
-                    <div class="reserva-meta">
-                        <span class="meta-chip"> 22 Mar 2026 · 09:00h</span>
-                        <span class="meta-chip"> Aeródromo de Ocaña</span>
-                        <span class="meta-chip"> 2 personas</span>
-                        <span class="meta-chip"> REF #SX-00412</span>
-                    </div>
-                </div>
-                <div class="reserva-aside">
-                    <div>
-                        <div class="reserva-precio">398€<small>total pagado</small></div>
-                        <div class="reserva-id">2 × 199€</div>
-                    </div>
-                    <div class="reserva-actions">
-                        <a href="#" class="btn-accion btn-primary">Ver detalles</a>
-                        <a href="#" class="btn-accion btn-secondary">Cancelar</a>
-                    </div>
-                </div>
+    <!--FOOTER-->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>#RadicalViejo</h3>
+                <p>En SportsXtreme vivimos la adrenalina al máximo. Descubre los mejores eventos de deportes extremos, participa en actividades llenas de emoción o inscríbete en cursos diseñados para llevar tus límites más lejos.</p>
             </div>
-
-            <!-- 2 -->
-            <div class="reserva-card estado-pendiente" data-estado="pendiente" data-group="proximas">
-                <div class="reserva-img" style="background:linear-gradient(135deg,#0d2a3a,#0a3d5e);">
-                    
-                    <!-- ESPACIO PARA FOTO O VÍDEO -->
-                    <span class="tipo-badge">Curso</span>
-                </div>
-                <div class="reserva-body">
-                    <div>
-                        <div class="reserva-top">
-                            <span class="reserva-nombre">Buceo Open Water</span>
-                            <span class="estado-pill">Pago pendiente</span>
-                        </div>
-                        <p class="reserva-desc">Curso oficial PADI Open Water Diver. De la piscina al mar abierto. Certificación internacional incluida. 5 días intensivos.</p>
-                    </div>
-                    <div class="reserva-meta">
-                        <span class="meta-chip"> 5 Abr 2026 · 08:30h</span>
-                        <span class="meta-chip"> Puerto de Alicante</span>
-                        <span class="meta-chip"> 1 persona</span>
-                        <span class="meta-chip"> Expira en 48h</span>
-                    </div>
-                </div>
-                <div class="reserva-aside">
-                    <div>
-                        <div class="reserva-precio">350€<small>pendiente pago</small></div>
-                        <div class="reserva-id">REF #SX-00438</div>
-                    </div>
-                    <div class="reserva-actions">
-                        <a href="#" class="btn-accion btn-primary">Pagar ahora</a>
-                        <a href="#" class="btn-accion btn-secondary">Cancelar</a>
-                    </div>
-                </div>
+            <div>
+                <h3>ENLACES RÁPIDOS</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="show.html">Show</a></li>
+                    <li><a href="actividad.html">Actividad</a></li>
+                    <li><a href="curso.html">Curso</a></li>
+                </ul>
             </div>
-
-            <div class="timeline-label" data-group="mes">Este mes</div>
-
-            <!-- 3 -->
-            <div class="reserva-card estado-confirmada" data-estado="confirmada" data-group="mes">
-                <div class="reserva-img" style="background:linear-gradient(135deg,#1a0a00,#3d1a00);">
-                    
-                    <!-- ESPACIO PARA FOTO O VÍDEO -->
-                    <span class="tipo-badge">Show</span>
-                </div>
-                <div class="reserva-body">
-                    <div>
-                        <div class="reserva-top">
-                            <span class="reserva-nombre">Monster Trucks Night Show</span>
-                            <span class="estado-pill">Confirmada</span>
-                        </div>
-                        <p class="reserva-desc">Espectáculo nocturno de monster trucks con saltos, pirotecnia y música en directo. Uno de los shows más brutales del año.</p>
-                    </div>
-                    <div class="reserva-meta">
-                        <span class="meta-chip"> 15 Mar 2026 · 21:00h</span>
-                        <span class="meta-chip"> Recinto Ferial IFEMA</span>
-                        <span class="meta-chip"> 3 personas</span>
-                        <span class="meta-chip"> REF #SX-00391</span>
-                    </div>
-                </div>
-                <div class="reserva-aside">
-                    <div>
-                        <div class="reserva-precio">135€<small>total pagado</small></div>
-                        <div class="reserva-id">3 entradas · 45€/ud</div>
-                    </div>
-                    <div class="reserva-actions">
-                        <a href="#" class="btn-accion btn-primary">Ver entradas</a>
-                        <a href="#" class="btn-accion btn-secondary">Cancelar</a>
-                    </div>
-                </div>
+            <div>
+                <h3>CONTACTO</h3>
+                <ul>
+                    <li>+34 644 71 71 99</li>
+                    <li>fercho7649@gmail.com</li>
+                </ul>
             </div>
-
-            <div class="timeline-label" data-group="historial">Historial</div>
-
-            <!-- 4 -->
-            <div class="reserva-card estado-completada" data-estado="completada" data-group="historial">
-                <div class="reserva-img" style="background:linear-gradient(135deg,#0a1a2e,#0d3b5e);">
-                    
-                    <!-- ESPACIO PARA FOTO O VÍDEO -->
-                    <span class="tipo-badge">Actividad</span>
-                </div>
-                <div class="reserva-body">
-                    <div>
-                        <div class="reserva-top">
-                            <span class="reserva-nombre">Rafting en Aguas Bravas</span>
-                            <span class="estado-pill">Completada</span>
-                        </div>
-                        <p class="reserva-desc">Navegaste por rápidos de nivel III-IV con guía experto en el río Noguera Pallaresa. ¡Una experiencia que no olvidarás!</p>
-                    </div>
-                    <div class="reserva-meta">
-                        <span class="meta-chip"> 1 Feb 2026</span>
-                        <span class="meta-chip"> Noguera Pallaresa, Lleida</span>
-                        <span class="meta-chip"> 4 personas</span>
-                        <span class="meta-chip"> Sin valorar aún</span>
-                    </div>
-                </div>
-                <div class="reserva-aside">
-                    <div>
-                        <div class="reserva-precio">300€<small>total pagado</small></div>
-                        <div class="reserva-id">REF #SX-00348</div>
-                    </div>
-                    <div class="reserva-actions">
-                        <a href="#" class="btn-accion btn-primary">Valorar</a>
-                        <a href="actividad.html" class="btn-accion btn-secondary">Repetir</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    <script src="script.js"></script>
+        <div class="footer-bottom">
+            <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
+    <script src="scriptReservas.js"></script>
 </body>
 </html>

@@ -162,3 +162,69 @@ body {
     padding-bottom: 10px;
 }
  
+.admin-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.admin-tab {
+    background: #2a2a2a;
+    color: #ccc;
+    border: 1px solid #3a3a3a;
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.admin-tab.active {
+    background: var(--rojo-oscuro);
+    color: white;
+    border-color: var(--rojo-oscuro);
+}
+
+.admin-tabla-wrapper {
+    overflow-x: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.input-celda {
+    background: #2a2a2a;
+    border: 1px solid var(--rojo-oscuro);
+    color: white;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 12px;
+    width: 100%;
+}
+
+.btn-editar-fila {
+    background: #2a2a2a;
+    color: #ccc;
+    border: 1px solid #3a3a3a;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.btn-editar-fila:hover {
+    border-color: var(--rojo-oscuro);
+    color: white;
+}
+
+.btn-editar-fila.guardar {
+    background: var(--rojo-oscuro);
+    color: white;
+    border-color: var(--rojo-oscuro);
+}
+
+tr.editando {
+    background: #1a1a2a;
+}   

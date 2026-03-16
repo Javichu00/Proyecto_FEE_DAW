@@ -29,13 +29,16 @@ async function login() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
-
         if (response.ok) {
             const usuario = await response.json();
-            // Guardamos el usuario en sessionStorage
             sessionStorage.setItem('usuario', JSON.stringify(usuario));
-            // Redirigimos a la página principal
-            window.location.href = 'index.html';
+            
+            // Si es admin (perfil id=1) va al panel, si no al index
+            if (usuario.perfil.idPerfil === 1) {
+                window.location.href = 'indexAdmn.html';
+            } else {
+                window.location.href = 'index.html';
+            }
         } else if (response.status === 401) {
             alert('Email o contraseña incorrectos');
         } else {

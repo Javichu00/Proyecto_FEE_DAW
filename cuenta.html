@@ -15,7 +15,7 @@
         <div>
             <a href="./plantilla.html"> BOTON TEMPORAL A PLANTILLA </a>
             <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
-            <a href="./acceso.html" class="btn-menu">Acceder</a>
+            <a href="./acceso.html" class="btn-menu btn-acceder">Acceder</a>
         </div>
     </header>
     
@@ -36,10 +36,10 @@
 
             <!-- Cabecera con avatar -->
             <div class="perfil-header">
-                <div class="perfil-avatar" id="avatarInicial">JG</div>
+                <div class="perfil-avatar" id="avatarInicial"></div>
                 <div class="perfil-header-info">
-                    <h2 id="nombreMostrado">Juan García</h2>
-                    <span>Miembro desde enero 2025</span>
+                    <h2 id="nombreMostrado"></h2>
+                    <span id="miembroDesde"></span>
                 </div>
             </div>
 
@@ -48,34 +48,23 @@
                 <div class="perfil-seccion-titulo">Información personal</div>
                 <div class="perfil-sep"></div>
 
-                <!-- Nombre -->
-                <div class="perfil-campo" id="campo-nombre">
+                <!-- Nombre completo -->
+                <div class="perfil-campo" id="campo-nombreCompleto">
                     <div class="perfil-campo-info">
-                        <div class="perfil-campo-label">Nombre</div>
-                        <div class="perfil-campo-valor" id="val-nombre">Juan</div>
-                        <input class="perfil-campo-input" id="inp-nombre" type="text" value="Juan" placeholder="Tu nombre">
-                        <div class="perfil-guardado-msg" id="msg-nombre">✓ Guardado</div>
+                        <div class="perfil-campo-label">Nombre completo</div>
+                        <div class="perfil-campo-valor" id="val-nombreCompleto"></div>
+                        <input class="perfil-campo-input" id="inp-nombreCompleto" type="text" placeholder="Tu nombre completo">
+                        <div class="perfil-guardado-msg" id="msg-nombreCompleto">✓ Guardado</div>
                     </div>
-                    <button class="btn-editar" onclick="toggleEdicion('nombre')">Editar</button>
-                </div>
-
-                <!-- Apellidos -->
-                <div class="perfil-campo" id="campo-apellidos">
-                    <div class="perfil-campo-info">
-                        <div class="perfil-campo-label">Apellidos</div>
-                        <div class="perfil-campo-valor" id="val-apellidos">García López</div>
-                        <input class="perfil-campo-input" id="inp-apellidos" type="text" value="García López" placeholder="Tus apellidos">
-                        <div class="perfil-guardado-msg" id="msg-apellidos">✓ Guardado</div>
-                    </div>
-                    <button class="btn-editar" onclick="toggleEdicion('apellidos')">Editar</button>
+                    <button class="btn-editar" onclick="toggleEdicion('nombreCompleto')">Editar</button>
                 </div>
 
                 <!-- Email -->
                 <div class="perfil-campo" id="campo-email">
                     <div class="perfil-campo-info">
                         <div class="perfil-campo-label">Correo electrónico</div>
-                        <div class="perfil-campo-valor" id="val-email">juan.garcia@email.com</div>
-                        <input class="perfil-campo-input" id="inp-email" type="email" value="juan.garcia@email.com" placeholder="Tu correo">
+                        <div class="perfil-campo-valor" id="val-email"></div>
+                        <input class="perfil-campo-input" id="inp-email" type="email" placeholder="Tu correo">
                         <div class="perfil-guardado-msg" id="msg-email">✓ Guardado</div>
                     </div>
                     <button class="btn-editar" onclick="toggleEdicion('email')">Editar</button>
@@ -95,18 +84,17 @@
                     <button class="btn-editar" onclick="toggleEdicion('contrasena')">Editar</button>
                 </div>
 
-                <!-- Zona peligrosa -->
-                <div style="padding: 20px 40px 0; ">
+                <!-- Cerrar sesión -->
+                <div style="padding: 20px 40px 0;">
                     <div class="perfil-sep"></div>
                 </div>
                 <div class="perfil-zona-danger">
                     <div>
-                        <strong>Eliminar cuenta</strong>
-                        <p>Esta acción es permanente y no se puede deshacer.</p>
+                        <strong>Cerrar sesión</strong>
+                        <p>Salir de tu cuenta en este dispositivo.</p>
                     </div>
-                    <button class="btn-danger">Eliminar</button>
+                    <button class="btn-danger" onclick="cerrarSesion()">Cerrar sesión</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -148,8 +136,11 @@
             <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
         </div>
     </footer>
+    
     <script src="script.js"></script>
+    <script src="scriptAPI_IP.js"></script>
     <script src="scriptCuenta.js"></script>
+    
 
 </body>
 </html>
