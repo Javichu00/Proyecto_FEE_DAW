@@ -1,4 +1,3 @@
-const API = 'http://192.168.128.178:8084';
 const grid = document.getElementById('actividadesGrid');
 const contador = document.getElementById('contador');
 
@@ -78,7 +77,7 @@ async function cargarActividades(filtros = {}) {
         const response = await fetch(`${API}/eventos/filtrar`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idTipo: 2, ...filtros })
+            body: JSON.stringify({ idTipo: 1, ...filtros })
         });
 
         if (response.status === 204) {

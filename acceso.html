@@ -41,8 +41,8 @@
             <!-- REGISTER -->
             <div id="register" class="tab-content">
                 <h2>Crear una cuenta</h2>
-                <input type="text" placeholder="Nombre completo">
-                <input type="email" placeholder="Correo electrónico">
+                <input type="text" id="reg-nombre" placeholder="Nombre completo">
+                <input type="email" id="reg-email" placeholder="Correo electrónico">
                 <div class="input-pass">
                     <input type="password" id="pass1" placeholder="Contraseña">
                     <button type="button" class="toggle-pass" onclick="togglePass('pass1', this)">👁️</button>
@@ -50,8 +50,8 @@
                 <div class="input-pass">
                     <input type="password" id="pass2" placeholder="Confirmar contraseña">
                     <button type="button" class="toggle-pass" onclick="togglePass('pass2', this)">👁️</button>
-                </div>
-                <button class="btn-submit">Registrarse</button>
+                </div>  
+                <button onclick="register()" class="btn-submit">Registrarse</button>
             </div>
 
             <!-- LOGIN -->
@@ -59,18 +59,19 @@
                 <br>
                 <br>   
                 <h2>Bienvenido de nuevo</h2>
-                <input type="email" placeholder="Correo electrónico">
+                <input type="email" id="login-email" placeholder="Correo electrónico">
                 <div class="input-pass">
                     <input type="password" id="pass3" placeholder="Contraseña">
                     <button type="button" class="toggle-pass" onclick="togglePass('pass3', this)">👁️</button>
                 </div>
 
-                <button class="btn-submit">Entrar</button>
+                <button onclick="login()" class="btn-submit">Entrar</button>
             </div>
 
         </div>
     </div>
-
+    <script src="script.js"></script>
+    <script src="scriptAPI_IP.js"></script>
     <script src="scriptAcceso.js"></script>
 
 </body>

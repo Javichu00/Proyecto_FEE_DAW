@@ -32,192 +32,72 @@
     <!--CONTENIDO-->
     <div class="actividades-layout">
 
-        <!-- PANEL LATERAL FILTROS -->
         <aside class="filtros-panel">
             <h3>Filtros</h3>
-
+        
             <div class="filtro-grupo">
                 <label>Categoría</label>
-                <select>
-                    <option value="">Todas</option>
-                    <option>Aéreo</option>
-                    <option>Acuático</option>
-                    <option>Motor</option>
-                    <option>Montaña</option>
-                    <option>Urbano</option>
-                </select>
-            </div>
-
-            <div class="filtro-grupo">
-                <label>Tipo de show</label>
-                <div class="filtro-checks">
-                    <label><input type="checkbox"> Competición</label>
-                    <label><input type="checkbox"> Exhibición</label>
-                    <label><input type="checkbox"> Festival</label>
-                    <label><input type="checkbox"> Récord</label>
+                <div class="filtro-checks" id="checks-categoria">
+                    <label><input type="checkbox" value="AIRE"> Aire</label>
+                    <label><input type="checkbox" value="MAR"> Mar</label>
+                    <label><input type="checkbox" value="TIERRA"> Tierra</label>
                 </div>
             </div>
-
+        
             <div class="filtro-grupo">
-                <label>Precio máximo: <span id="precio-val">100€</span></label>
-                <input type="range" min="0" max="300" value="100" oninput="document.getElementById('precio-val').textContent = this.value + '€'">
+                <label>Dificultad</label>
+                <div class="filtro-checks" id="checks-dificultad">
+                    <label><input type="checkbox" value="SUAVE"> Fácil</label>
+                    <label><input type="checkbox" value="MEDIO"> Media</label>
+                    <label><input type="checkbox" value="DURO"> Difícil</label>
+                    <label><input type="checkbox" value="EXTREMO"> Extremo</label>
+                </div>
             </div>
-
+        
             <div class="filtro-grupo">
-                <label>Fecha</label>
-                <select>
-                    <option value="">Cualquiera</option>
-                    <option>Esta semana</option>
-                    <option>Este mes</option>
-                    <option>Próximos 3 meses</option>
-                </select>
+                <label>Precio: <span id="precio-min-val">0</span>€ — <span id="precio-max-val">1000</span>€</label>
+                <input type="range" id="filtro-precio-min" min="0" max="1000" value="0"
+                       oninput="document.getElementById('precio-min-val').textContent = this.value">
+                <input type="range" id="filtro-precio-max" min="0" max="1000" value="1000"
+                       oninput="document.getElementById('precio-max-val').textContent = this.value">
             </div>
-
-            <button class="btn-filtrar">Aplicar filtros</button>
+        
+            <div class="filtro-grupo">
+                <label>Fecha inicio desde</label>
+                <input type="date" id="filtro-fecha-min" style="background:#2a2a2a;border:1px solid #3a3a3a;color:white;border-radius:6px;padding:8px;width:100%;">
+            </div>
+        
+            <div class="filtro-grupo">
+                <label>Fecha fin hasta</label>
+                <input type="date" id="filtro-fecha-max" style="background:#2a2a2a;border:1px solid #3a3a3a;color:white;border-radius:6px;padding:8px;width:100%;">
+            </div>
+        
+            <div class="filtro-grupo">
+                <label>Aforo mínimo: <span id="aforo-val">1</span> personas</label>
+                <input type="range" id="filtro-aforo" min="1" max="50" value="1"
+                       oninput="document.getElementById('aforo-val').textContent = this.value">
+            </div>
+        
             <button class="btn-reset">Limpiar</button>
         </aside>
-
-        <!-- LISTA DE SHOWS -->
+        
         <main class="actividades-main">
             <div class="actividades-header">
-                <h2>Shows <span id="contador">(6)</span></h2>
-                <select class="orden-select">
-                    <option>Ordenar por: Relevancia</option>
-                    <option>Precio: menor a mayor</option>
-                    <option>Precio: mayor a menor</option>
-                    <option>Fecha: más próximos</option>
-                </select>
+                <h2>Shows <span id="contador"></span></h2>
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <input type="text" id="buscador" placeholder="Buscar por nombre..."
+                           style="background:#2a2a2a;border:1px solid #3a3a3a;color:white;border-radius:6px;padding:8px 12px;font-size:13px;outline:none;width:220px;">
+                    <select class="orden-select" id="orden-select">
+                        <option value="">Ordenar por: Relevancia</option>
+                        <option value="precio-asc">Precio: menor a mayor</option>
+                        <option value="precio-desc">Precio: mayor a menor</option>
+                        <option value="fecha-asc">Fecha: más próxima</option>
+                        <option value="fecha-desc">Fecha: más lejana</option>
+                        <option value="nombre-asc">Nombre A-Z</option>
+                    </select>
+                </div>
             </div>
-
-            <div class="actividades-grid">
-
-                <!-- SHOW 1 -->
-                <div class="actividad-card">
-                    <div class="actividad-img" style="background: #1a0a2a;">
-                        <!-- ESPACIO PARA FOTO O VÍDEO -->
-                        <span class="actividad-categoria">Aéreo</span>
-                        <span class="actividad-dificultad dif-extremo">Exhibición</span>
-                    </div>
-                    <div class="actividad-info">
-                        <h4>Acrobacia Aérea en Biplano</h4>
-                        <p>Espectáculo de vuelo acrobático con maniobras extremas a baja altitud. Loops, tirabuzones y figuras imposibles en el aire.</p>
-                        <div class="actividad-meta">
-                            <span> 1h 30min</span>
-                            <span> Aforo: 500 personas</span>
-                        </div>
-                        <div class="actividad-footer">
-                            <span class="actividad-precio">35€</span>
-                            <a href="#" class="btn-reservar">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SHOW 2 -->
-                <div class="actividad-card">
-                    <div class="actividad-img" style="background: #0a1a2a;">
-                        <!-- ESPACIO PARA FOTO O VÍDEO -->
-                        <span class="actividad-categoria">Acuático</span>
-                        <span class="actividad-dificultad dif-media">Competición</span>
-                    </div>
-                    <div class="actividad-info">
-                        <h4>Campeonato de Surf Extremo</h4>
-                        <p>Los mejores surfistas del mundo se enfrentan a olas de más de 10 metros. Evento puntuable para el circuito mundial WSL.</p>
-                        <div class="actividad-meta">
-                            <span> Todo el día</span>
-                            <span> Aforo: 2.000 personas</span>
-                        </div>
-                        <div class="actividad-footer">
-                            <span class="actividad-precio">20€</span>
-                            <a href="#" class="btn-reservar">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SHOW 3 -->
-                <div class="actividad-card">
-                    <div class="actividad-img" style="background: #2a1a0a;">
-                        <!-- ESPACIO PARA FOTO O VÍDEO -->
-                        <span class="actividad-categoria">Motor</span>
-                        <span class="actividad-dificultad dif-extremo">Récord</span>
-                    </div>
-                    <div class="actividad-info">
-                        <h4>Monster Trucks Night Show</h4>
-                        <p>Gigantescos camiones de competición aplastando coches y saltando rampas en un espectáculo nocturno lleno de fuego y adrenalina.</p>
-                        <div class="actividad-meta">
-                            <span> 2h</span>
-                            <span> Aforo: 3.000 personas</span>
-                        </div>
-                        <div class="actividad-footer">
-                            <span class="actividad-precio">45€</span>
-                            <a href="#" class="btn-reservar">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SHOW 4 -->
-                <div class="actividad-card">
-                    <div class="actividad-img" style="background: #1a2a1a;">
-                        <!-- ESPACIO PARA FOTO O VÍDEO -->
-                        <span class="actividad-categoria">Montaña</span>
-                        <span class="actividad-dificultad dif-dificil">Competición</span>
-                    </div>
-                    <div class="actividad-info">
-                        <h4>Red Bull Cliff Diving</h4>
-                        <p>Los mejores clavadistas del mundo se lanzan desde 27 metros de altura. Coreografías en el aire de una precisión sobrehumana.</p>
-                        <div class="actividad-meta">
-                            <span> 2h</span>
-                            <span> Aforo: 800 personas</span>
-                        </div>
-                        <div class="actividad-footer">
-                            <span class="actividad-precio">30€</span>
-                            <a href="#" class="btn-reservar">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SHOW 5 -->
-                <div class="actividad-card">
-                    <div class="actividad-img" style="background: #2a2a0a;">
-                        <!-- ESPACIO PARA FOTO O VÍDEO -->
-                        <span class="actividad-categoria">Urbano</span>
-                        <span class="actividad-dificultad dif-media">Festival</span>
-                    </div>
-                    <div class="actividad-info">
-                        <h4>Festival de Skateboarding</h4>
-                        <p>Jam session abierta y competición pro en un mega-skatepark urbano. Riders internacionales, música en directo y zona de fans.</p>
-                        <div class="actividad-meta">
-                            <span> Todo el día</span>
-                            <span> Aforo: 1.500 personas</span>
-                        </div>
-                        <div class="actividad-footer">
-                            <span class="actividad-precio">15€</span>
-                            <a href="#" class="btn-reservar">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SHOW 6 -->
-                <div class="actividad-card">
-                    <div class="actividad-img" style="background: #0a1a2a;">
-                        <!-- ESPACIO PARA FOTO O VÍDEO -->
-                        <span class="actividad-categoria">Aéreo</span>
-                        <span class="actividad-dificultad dif-facil">Exhibición</span>
-                    </div>
-                    <div class="actividad-info">
-                        <h4>Wingsuit World Tour</h4>
-                        <p>Los pilotos de wingsuit más rápidos del planeta surcan valles a 250 km/h rozando el terreno en un show de precisión absoluta.</p>
-                        <div class="actividad-meta">
-                            <span> 1h</span>
-                            <span> Aforo: 1.000 personas</span>
-                        </div>
-                        <div class="actividad-footer">
-                            <span class="actividad-precio">25€</span>
-                            <a href="#" class="btn-reservar">Reservar</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <div class="actividades-grid" id="actividadesGrid"></div>
         </main>
     </div>
 
@@ -258,6 +138,8 @@
             <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
         </div>
     </footer>
-
+    <script src="script.js"></script>
+    <script src="scriptAPI_IP.js"></script>
+    <script src="scriptShow.js"></script>
 </body>
 </html>

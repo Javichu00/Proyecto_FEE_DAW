@@ -183,28 +183,7 @@
             </div>
 
         </div>
-
-    <script>
-        function filtrar(estado, btn) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            btn.classList.add('active');
-
-            document.querySelectorAll('.reserva-card').forEach(card => {
-                card.style.display = (estado === 'todas' || card.dataset.estado === estado) ? 'grid' : 'none';
-            });
-
-            // Ocultar labels de grupo si no tienen cards visibles debajo
-            document.querySelectorAll('.timeline-label').forEach(label => {
-                let next = label.nextElementSibling;
-                let visible = false;
-                while (next && !next.classList.contains('timeline-label')) {
-                    if (next.classList.contains('reserva-card') && next.style.display !== 'none') visible = true;
-                    next = next.nextElementSibling;
-                }
-                label.style.display = visible ? 'flex' : 'none';
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
