@@ -21,6 +21,26 @@ if (usuario.fechaRegistro) {
         'Miembro desde ' + fecha.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
 }
 
+// Mostrar panel admin solo si es admin
+const liAdmin = document.getElementById('li-admin');
+if (liAdmin) {
+    if (usuario.perfil?.idPerfil === 1) {
+        // Es admin — quita el navbar entero
+        document.querySelector('.main-nav').style.display = 'none';
+    
+        // Cambia el botón "Mis Reservas" por "Dashboard"
+        const btnReservas = document.querySelector('.btn-reservas');
+        if (btnReservas) {
+            btnReservas.textContent = 'Dashboard';
+            btnReservas.href = './indexAdmn.html';
+        }
+    
+        // Quita el enlace "Panel de administración" del nav si existe
+        const liAdmin = document.getElementById('li-admin');
+        if (liAdmin) liAdmin.style.display = 'none';
+    }
+}
+
 // Toggle edición
 function toggleEdicion(campo) {
     const fila    = document.getElementById('campo-' + campo);

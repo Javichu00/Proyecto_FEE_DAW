@@ -1,0 +1,116 @@
+// Lee el ID de la URL
+const params = new URLSearchParams(window.location.search);
+const idEvento = params.get('id');
+
+if (!idEvento) {
+    alert('No se ha especificado ningún evento');
+    window.location.href = 'index.html';
+}
+
+// Carga el evento de la API
+async function cargarEvento() {
+    try {
+        const res = await fetch(`${API}/eventos/${idEvento}`);
+        if (!res.ok) {
+            alert('Evento no encontrado');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        const e = await res.json();
+
+        // Rellena el hero
+        document.getElementById('heroNombre').textContent = e.nombre;
+
+        // Rellena la ficha
+        document.getElementById('eventoNombre').textContent = e.nombre;
+        document.getElementById('eventoDesc').textContent = e.descripcion;
+        document.getElementById('eventoCat').textContent = e.categoria;
+        document.getElementById('eventoNivel').textContent = e.extremidad;
+
+        // Foto
+        const foto = document.querySelector('.reserva-hero-img');
+        const fotoFicha = document.querySelector('.evento-foto');
+        if (foto) foto.src = e.rutaFoto;
+        if (fotoFicha) fotoFicha.src = e.rutaFoto;
+
+        // Detalles
+        document.getElementById('fechaInicio').textContent = e.fechaInicio
+            ? new Date(e.fechaInicio).toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' }).toUpperCase()
+            : '—';
+        document.getElementById('fechaFin').textContent = e.fechaFin
+            ? new Date(e.fechaFin).toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' }).toUpperCase()
+            : '—';
+        document.getElementById('eventoUbicacion').textContent = e.localizacion || '—';
+
+        // Precio
+        const precioEvento = e.precio;
+        const formatEur = n => n.toFixed(2).replace('.', ',') + '€';
+        document.getElementById('eventoPrecioDisplay').textContent = formatEur(precioEvento);
+        document.getElementById('formPrecio').textContent = formatEur(precioEvento);
+
+        // Control de asistentes
+        let asistentes = 1;
+        const maxPersonas = e.aforoMaximo || 10;
+
+        function actualizarResumen() {
+            const total = precioEvento * asistentes;
+            document.getElementById('numAsistentes').textContent = asistentes;
+            document.getElementById('resumenLinea').textContent =
+                asistentes + ' persona' + (asistentes > 1 ? 's' : '') + ' × ' + formatEur(precioEvento);
+            document.getElementById('resumenParcial').textContent = formatEur(total);
+            document.getElementById('totalPrecio').textContent = formatEur(total);
+        }
+
+        actualizarResumen();
+
+        document.getElementById('btnMenos').addEventListener('click', () => {
+            if (asistentes > 1) { asistentes--; actualizarResumen(); }
+        });
+
+        document.getElementById('btnMas').addEventListener('click', () => {
+            if (asistentes < maxPersonas) { asistentes++; actualizarResumen(); }
+        });
+
+        // Confirmar reserva
+        document.getElementById('btnConfirmar').addEventListener('click', async () => {
+            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+            if (!usuario) {
+                alert('Debes iniciar sesión para reservar');
+                window.location.href = 'acceso.html';
+                return;
+            }
+
+            const precioVenta = precioEvento * asistentes;
+
+            try {
+                const res = await fetch(`${API}/reservas`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        usuario:  { idUsuario: usuario.idUsuario },
+                        evento:   { idEvento: parseInt(idEvento) },
+                        cantidad: asistentes,
+                        precioVenta
+                    })
+                });
+
+                if (res.status === 201) {
+                    alert('¡Reserva confirmada!');
+                    window.location.href = 'reservas.html';
+                } else {
+                    alert('Error al confirmar la reserva');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('No se puede conectar con el servidor');
+            }
+        });
+
+    } catch (err) {
+        console.error(err);
+        alert('Error cargando el evento');
+    }
+}
+
+cargarEvento();

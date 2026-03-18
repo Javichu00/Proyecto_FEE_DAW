@@ -3,24 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportXtreme - Mis Reservas</title>
+    <title>Mis Reservas — SportsXtreme</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="stylesmisreservas.css">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
+    <style>
+        /* ===== MIS RESERVAS ===== */
 
-    <!--HEADER-->
+        .reservas-body {
+            background: var(--negro);
+            min-height: 100vh;
+        }
+
+        .reservas-page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 60px 80px;
+        }
+
+        .reservas-page-header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 28px;
+        }
+
+        .reservas-etiqueta {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--rojo-oscuro);
+            margin-bottom: 10px;
+        }
+
+        .reservas-titulo {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .reservas-titulo span {
+            color: var(--rojo);
+        }
+
+        .reservas-subtitulo {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 10px;
+        }
+
+
+        /* ===== LISTA DE RESERVAS ===== */
+
+        .reservas-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .reserva-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            align-items: center;
+            gap: 28px;
+            background: var(--negro3);
+            padding: 24px 28px;
+            border-left: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .reserva-item:hover {
+            background: var(--gris1);
+            border-left-color: var(--rojo-oscuro);
+        }
+
+        /* Estado de la reserva cambia el color del borde */
+        .reserva-item.confirmada  { border-left-color: var(--rojo-oscuro); }
+        .reserva-item.pendiente   { border-left-color: #b8860b; }
+        .reserva-item.cancelada   { border-left-color: rgba(255,255,255,0.1); }
+
+
+        /* Foto */
+        .reserva-foto {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 3px;
+            display: block;
+            background: var(--gris1);
+        }
+
+        .reserva-foto-placeholder {
+            width: 120px;
+            height: 80px;
+            border-radius: 3px;
+            background: linear-gradient(135deg, #150000, #2a0505);
+        }
+
+
+        /* Info central */
+        .reserva-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .reserva-nombre {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .reserva-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .reserva-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .reserva-meta-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--rojo-oscuro);
+        }
+
+        .reserva-meta-valor {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+
+        /* Columna derecha: estado + precio */
+        .reserva-derecha {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .reserva-precio {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .reserva-estado {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 2px;
+        }
+
+        .reserva-estado.confirmada {
+            background: rgba(167,1,14,0.2);
+            color: #ff6b6b;
+        }
+
+        .reserva-estado.pendiente {
+            background: rgba(184,134,11,0.2);
+            color: #f0c040;
+        }
+
+        .reserva-estado.cancelada {
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.25);
+        }
+
+        .reserva-personas {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.25);
+        }
+
+
+        /* ===== ESTADO VACÍO ===== */
+
+        .reservas-vacio {
+            display: none; /* JS lo muestra si no hay reservas */
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .reservas-vacio-icono {
+            font-size: 3rem;
+            opacity: 0.15;
+            margin-bottom: 20px;
+        }
+
+        .reservas-vacio h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 10px;
+        }
+
+        .reservas-vacio p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.15);
+        }
+
+        .reservas-vacio a {
+            display: inline-block;
+            margin-top: 24px;
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 10px 28px;
+            border: 2px solid var(--rojo-oscuro);
+            color: rgba(255,255,255,0.5);
+            transition: 0.2s;
+        }
+
+        .reservas-vacio a:hover {
+            background: var(--rojo-oscuro);
+            color: white;
+        }
+    </style>
+</head>
+<body class="reservas-body">
+
+    <!-- HEADER -->
     <header id="inicio">
         <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
         <div>
-            <a href="./plantilla.html"> BOTON TEMPORAL A PLANTILLA </a>
-            <a href="./reservas.html" class="btn-menu btn-reservas active">Mis Reservas</a>
-            <a href="./acceso.html" class="btn-menu">Acceder</a>
+            <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
+            <a href="./acceso.html" class="btn-menu btn-acceder">Acceder</a>
         </div>
     </header>
 
-    <!--NAVBAR-->
+    <!-- NAVBAR -->
     <nav class="main-nav">
         <ul class="nav-list">
             <li><a href="index.html">Inicio</a></li>
@@ -30,52 +251,141 @@
         </ul>
     </nav>
 
-    <div class="reservas-wrapper">
+    <!-- CONTENIDO -->
+    <div class="reservas-page">
 
-        <!-- HERO STRIP -->
-        <div class="reservas-hero">
-            <div class="reservas-hero-inner">
-                <h1 class="reservas-titulo">MIS RESERVAS</h1>
-                <p class="reservas-subtitulo">Gestiona tus aventuras</p>
-            </div>
-            <div class="reservas-stats" id="reservasStats"></div>
+        <div class="reservas-page-header">
+            <span class="reservas-etiqueta">Tu cuenta</span>
+            <h1 class="reservas-titulo">Mis <span>Reservas</span></h1>
+            <!-- PHP: <p class="reservas-subtitulo"><?= count($reservas) ?> reserva(s) registradas</p> -->
+            <p class="reservas-subtitulo" id="contadorReservas">3 reservas registradas</p>
         </div>
-    
-        <div class="reservas-lista" id="lista-reservas">
 
-            <div class="reserva-card">
-                <div class="reserva-img">
-                    <img src="MEDIA/para.jpg" alt="Salto en Tándem">
-                </div>
+        <!-- LISTA -->
+        <!-- PHP: <?php foreach ($reservas as $r): ?> -->
+        <div class="reservas-lista" id="listaReservas">
+
+            <!-- RESERVA 1 — ejemplo: confirmada -->
+            <!-- PHP: class="reserva-item <?= $r['estado'] ?>" -->
+            <div class="reserva-item confirmada">
+                <!-- PHP: <img class="reserva-foto" src="<?= $r['imagen'] ?>" alt="<?= $r['nombre'] ?>"> -->
+                <img class="reserva-foto" src="MEDIA/REDBULL-RAMPAGE.webp" alt="Evento">
+
                 <div class="reserva-info">
-                    <h3 class="reserva-nombre">Salto en Tándem</h3>
-                    <p class="reserva-descripcion">Salta desde 4.000 metros junto a un instructor certificado. Una experiencia que cambia la vida.</p>
-                    <div class="reserva-detalles">
-                        <span>🎟️ 2 boletos</span>
-                        <span>📅 Inicio: 20/04/2026</span>
-                        <span>🏁 Fin: 20/04/2026</span>
-                        <span>💶 180€ / persona</span>
+                    <!-- PHP: <?= $r['nombre'] ?> -->
+                    <div class="reserva-nombre">Red Bull Rampage</div>
+                    <div class="reserva-meta">
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Fecha</span>
+                            <!-- PHP: <?= date('d M Y', strtotime($r['fecha_inicio'])) ?> -->
+                            <span class="reserva-meta-valor">12 ABR 2026</span>
+                        </div>
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Ubicación</span>
+                            <!-- PHP: <?= $r['ubicacion'] ?> -->
+                            <span class="reserva-meta-valor">Virgin, Utah</span>
+                        </div>
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Referencia</span>
+                            <!-- PHP: <?= $r['codigo_reserva'] ?> -->
+                            <span class="reserva-meta-valor">#SX-00412</span>
+                        </div>
                     </div>
                 </div>
-                <div class="reserva-acciones">
-                    <span class="reserva-total">Total: 360€</span>
-                    <button class="btn-cancelar-reserva">Cancelar reserva</button>
+
+                <div class="reserva-derecha">
+                    <!-- PHP: <?= number_format($r['precio_total'], 2) ?>€ -->
+                    <div class="reserva-precio">178,00€</div>
+                    <!-- PHP: <span class="reserva-estado <?= $r['estado'] ?>"><?= ucfirst($r['estado']) ?></span> -->
+                    <span class="reserva-estado confirmada">Confirmada</span>
+                    <!-- PHP: <?= $r['num_asistentes'] ?> persona(s) -->
+                    <span class="reserva-personas">2 personas</span>
                 </div>
             </div>
-        
-        </div>
 
-    <!--FOOTER-->
+            <!-- RESERVA 2 — ejemplo: pendiente -->
+            <div class="reserva-item pendiente">
+                <div class="reserva-foto-placeholder"></div>
+
+                <div class="reserva-info">
+                    <div class="reserva-nombre">Salto en Paracaídas — Empuriabrava</div>
+                    <div class="reserva-meta">
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Fecha</span>
+                            <span class="reserva-meta-valor">28 MAY 2026</span>
+                        </div>
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Ubicación</span>
+                            <span class="reserva-meta-valor">Girona, España</span>
+                        </div>
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Referencia</span>
+                            <span class="reserva-meta-valor">#SX-00387</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reserva-derecha">
+                    <div class="reserva-precio">299,00€</div>
+                    <span class="reserva-estado pendiente">Pendiente</span>
+                    <span class="reserva-personas">1 persona</span>
+                </div>
+            </div>
+
+            <!-- RESERVA 3 — ejemplo: cancelada -->
+            <div class="reserva-item cancelada">
+                <div class="reserva-foto-placeholder"></div>
+
+                <div class="reserva-info">
+                    <div class="reserva-nombre">Curso de Surf Avanzado</div>
+                    <div class="reserva-meta">
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Fecha</span>
+                            <span class="reserva-meta-valor">05 MAR 2026</span>
+                        </div>
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Ubicación</span>
+                            <span class="reserva-meta-valor">Mundaka, España</span>
+                        </div>
+                        <div class="reserva-meta-item">
+                            <span class="reserva-meta-label">Referencia</span>
+                            <span class="reserva-meta-valor">#SX-00301</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reserva-derecha">
+                    <div class="reserva-precio">120,00€</div>
+                    <span class="reserva-estado cancelada">Cancelada</span>
+                    <span class="reserva-personas">1 persona</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- PHP: <?php endforeach; ?> -->
+
+        <!-- ESTADO VACÍO — PHP: <?php if (empty($reservas)): ?> -->
+        <div class="reservas-vacio" id="reservasVacio">
+            <div class="reservas-vacio-icono">◈</div>
+            <h3>Sin reservas todavía</h3>
+            <p>Aún no has reservado ningún evento, actividad o curso.</p>
+            <a href="index.html">Explorar eventos →</a>
+        </div>
+        <!-- PHP: <?php endif; ?> -->
+
+    </div>
+
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
             <div>
                 <h3>#RadicalViejo</h3>
-                <p>En SportsXtreme vivimos la adrenalina al máximo. Descubre los mejores eventos de deportes extremos, participa en actividades llenas de emoción o inscríbete en cursos diseñados para llevar tus límites más lejos.</p>
+                <p>Descubre los mejores eventos, participa en actividades llenas de emoción o inscríbete en cursos diseñados para llevar tus límites más lejos.</p>
             </div>
             <div>
                 <h3>ENLACES RÁPIDOS</h3>
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html#inicio">Inicio</a></li>
                     <li><a href="show.html">Show</a></li>
                     <li><a href="actividad.html">Actividad</a></li>
                     <li><a href="curso.html">Curso</a></li>
@@ -90,10 +400,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
+            <p>&copy; 2026 SportsXtreme. Todos los derechos reservados.</p>
         </div>
     </footer>
 
+    <script src="scriptAPI_IP.js"></script>
+    <script src="script.js"></script>
     <script src="scriptReservas.js"></script>
 </body>
 </html>

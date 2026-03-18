@@ -62,7 +62,7 @@ function renderLista(lista) {
                     </div>
                     <div class="actividad-footer">
                         <span class="actividad-precio">${a.precio}€</span>
-                        <a href="#" class="btn-reservar" data-id="${a.idEvento}">Reservar</a>
+                        <a href="reservarEvento.html?id=${a.idEvento}" class="btn-reservar">Reservar</a>
                     </div>
                 </div>
             </div>
