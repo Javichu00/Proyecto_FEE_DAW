@@ -1,283 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportXtreme</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="MEDIA/logo-cuadrado.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SportsXtreme — La plataforma de referencia en deportes extremos en España. Shows, actividades y cursos.">
+  <title>SportsXtreme</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!--HEADER-->
-    <header id="inicio">
-        <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
-        <div>
-            <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
-            <a href="./acceso.html" class="btn-menu btn-acceder">Acceder</a>
-        </div>
-    </header>
-    
-    <!--NAVBAR-->
-    <nav class="main-nav">
-        <ul class="nav-list">
-            <li><a href="index.html">Inicio</a></li> <!---->
-            <li><a href="show.html">Shows</a></li>
-            <li><a href="actividad.html">Actividades</a></li>
-            <li><a href="curso.html">Cursos</a></li>
-        </ul>
-    </nav>
-
-    <!--Carrusel-->
-    <div class="carrusel-contenedor">
-        <div class="carrusel" id="carruselTrack">
-            <!--Slide 1: Shows-->
-            <div class="carrusel-slide">
-                <a class="carrusel-link" href="show.html" aria-label="Ver shows">
-                    <img class="carrusel-imagen" src="MEDIA/MEDIA FK1-398_0.jpg.webp" alt="Shows">
-                    <video class="carrusel-video" src="MEDIA/2.mp4" muted loop playsinline></video>
-                    <div class="carrusel-overlay">
-                        <span class="video-title">Shows</span>
-                    </div>
-                    <div class="carrusel-desc">
-                        <span class="video-desc">Vive la emoción en primera fila. Espectáculos de deportes extremos que te dejarán sin aliento.</span>
-                    </div>
-                </a>
-            </div>
-            <!--Slide 2: Actividades-->
-            <div class="carrusel-slide">
-                <a class="carrusel-link" href="show.html" aria-label="Ver actividades">
-                    <img class="carrusel-imagen" src="MEDIA/REDBULL-RAMPAGE.webp" alt="Actividades">
-                    <video class="carrusel-video" src="MEDIA/1.mp4" muted loop playsinline></video>
-                    <div class="carrusel-overlay">
-                        <span class="video-title">Actividades</span>
-                    </div>
-                    <div class="carrusel-desc">
-                        <span class="video-desc">Súmate a la acción. Experiencias extremas para sentir la adrenalina en tu propia piel.</span>
-                    </div>
-                </a>
-            </div>
-            <!--Slide 3: Cursos-->
-            <div class="carrusel-slide">
-                <a class="carrusel-link" href="show.html" aria-label="Ver cursos">
-                    <img class="carrusel-imagen" src="MEDIA/para.jpg" alt="Cursos">
-                    <video class="carrusel-video" src="MEDIA/3.mp4" muted loop playsinline></video>
-                    <div class="carrusel-overlay">
-                        <span class="video-title">Cursos</span>
-                    </div>
-                    <div class="carrusel-desc">
-                        <span class="video-desc">Aprende de los mejores. Fórmate y lleva tus habilidades al siguiente nivel.</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <!--Controles del carrusel-->
-        <button class="carrusel-btn carrusel-btn--prev" id="carruselPrev" aria-label="Slide anterior">&#8249;</button>
-        <button class="carrusel-btn carrusel-btn--next" id="carruselNext" aria-label="Siguiente slide">&#8250;</button>
+  <header id="inicio">
+    <a href="index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
+    <div>
+      <a href="reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
+      <a href="acceso.html" class="btn-menu btn-acceder">Acceder</a>
     </div>
-      
-          
-    <!-- Estadísticas -->
-    <div class="info-stats-bar">
-      <div class="info-stats-flex">
+  </header>
 
-        <div class="info-stat reveal">
-          <div class="info-stat-n">15+</div>
-          <div class="info-stat-etiq">Compañías asociadas</div>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <ul class="nav-list">
+      <li><a href="index.html" aria-current="page">Inicio</a></li>
+      <li><a href="show.html">Shows</a></li>
+      <li><a href="actividad.html">Actividades</a></li>
+      <li><a href="curso.html">Cursos</a></li>
+    </ul>
+  </nav>
+
+  <!-- Carrusel -->
+  <section class="carrusel-contenedor" aria-label="Carrusel de categorías">
+    <div class="carrusel" id="carruselTrack">
+
+      <div class="carrusel-slide">
+        <a class="carrusel-link" href="show.html" aria-label="Ver shows">
+          <img class="carrusel-imagen" src="MEDIA/MEDIA FK1-398_0.jpg.webp" alt="Shows de deportes extremos" width="1920" height="650">
+          <video class="carrusel-video" src="MEDIA/2.mp4" muted loop playsinline preload="none"></video>
+          <div class="carrusel-overlay"><span class="video-title">Shows</span></div>
+          <div class="carrusel-desc">
+            <span class="video-desc">Vive la emoción en primera fila. Espectáculos de deportes extremos que te dejarán sin aliento.</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="carrusel-slide">
+        <a class="carrusel-link" href="actividad.html" aria-label="Ver actividades">
+          <img class="carrusel-imagen" src="MEDIA/REDBULL-RAMPAGE.webp" alt="Actividades extremas" loading="lazy" width="1920" height="650">
+          <video class="carrusel-video" src="MEDIA/1.mp4" muted loop playsinline preload="none"></video>
+          <div class="carrusel-overlay"><span class="video-title">Actividades</span></div>
+          <div class="carrusel-desc">
+            <span class="video-desc">Súmate a la acción. Experiencias extremas para sentir la adrenalina en tu propia piel.</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="carrusel-slide">
+        <a class="carrusel-link" href="curso.html" aria-label="Ver cursos">
+          <img class="carrusel-imagen" src="MEDIA/para.jpg" alt="Cursos de deportes extremos" loading="lazy" width="1920" height="650">
+          <video class="carrusel-video" src="MEDIA/3.mp4" muted loop playsinline preload="none"></video>
+          <div class="carrusel-overlay"><span class="video-title">Cursos</span></div>
+          <div class="carrusel-desc">
+            <span class="video-desc">Aprende de los mejores. Fórmate y lleva tus habilidades al siguiente nivel.</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+    <button class="carrusel-btn carrusel-btn--prev" id="carruselPrev" aria-label="Slide anterior">&#8249;</button>
+    <button class="carrusel-btn carrusel-btn--next" id="carruselNext" aria-label="Siguiente slide">&#8250;</button>
+  </section>
+
+  <!-- Estadísticas -->
+  <div class="info-stats-bar" role="region" aria-label="Estadísticas">
+    <div class="info-stats-flex">
+      <div class="info-stat reveal"><div class="info-stat-n">15+</div><div class="info-stat-etiq">Compañías asociadas</div></div>
+      <div class="info-stat reveal"><div class="info-stat-n">50K+</div><div class="info-stat-etiq">Aventureros al año</div></div>
+      <div class="info-stat reveal"><div class="info-stat-n">120+</div><div class="info-stat-etiq">Actividades distintas</div></div>
+      <div class="info-stat reveal"><div class="info-stat-n">99%</div><div class="info-stat-etiq">Satisfacción de clientes</div></div>
+      <div class="info-stat reveal"><div class="info-stat-n">1</div><div class="info-stat-etiq">Sede en España</div></div>
+    </div>
+  </div>
+
+  <!-- Quiénes somos -->
+  <section class="info-seccion" style="background-color:#666666;" aria-labelledby="titulo-quienes">
+    <div class="info-contenedor">
+      <div class="info-quienes-grid">
+        <div class="reveal-l">
+          <p class="info-etiqueta">Nuestra empresa</p>
+          <h2 class="info-titulo-sec" id="titulo-quienes"><span>Somos SportsXtreme</span></h2>
+          <div class="info-texto">
+            <p>SportsXtreme nació en 2009 cuando un grupo de apasionados del deporte extremo decidió que la adrenalina no debía ser un privilegio de pocos. Con ganas de cambiar las cosas, conectamos a los primeros aventureros con instructores locales y experiencias que marcaron la diferencia.</p>
+            <p>Hoy somos la plataforma digital de referencia en deportes extremos en España. Reunimos a los mejores organizadores, atletas e instructores certificados del país en un solo lugar, accesible para cualquiera desde cualquier parte.</p>
+            <p>Lo que realmente nos define no son los números: es el momento en que alguien prueba su primera actividad con nosotros y entiende que los límites están para superarlos.</p>
+          </div>
+          <blockquote class="info-cita">
+            "El riesgo calculado no es locura. Es la forma más honesta de sentirse vivo."
+            <cite>— Fundadores de SportsXtreme</cite>
+          </blockquote>
         </div>
-
-        <div class="info-stat reveal">
-          <div class="info-stat-n">50K+</div>
-          <div class="info-stat-etiq">Aventureros al año</div>
+        <div class="info-empresa-img reveal-r" style="transition-delay:.2s">
+          <img src="MEDIA/LOGO.png" alt="Logo SportsXtreme" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+          <div class="info-img-tag"><span>solo vives una vez</span></div>
         </div>
-
-        <div class="info-stat reveal">
-          <div class="info-stat-n">120+</div>
-          <div class="info-stat-etiq">Actividades distintas</div>
-        </div>
-
-        <div class="info-stat reveal">
-          <div class="info-stat-n">7</div>
-          <div class="info-stat-etiq">Incidentes graves — récord nacional</div>
-        </div>
-
-        <div class="info-stat reveal">
-          <div class="info-stat-n">1</div>
-          <div class="info-stat-etiq">Sedes en España</div>
-        </div>
-
       </div>
     </div>
-      
-      <!--Quienes somos-->
-      <section class="info-seccion" style="background-color: #666666;">
-        <div class="info-contenedor">
-          <div class="info-quienes-grid">
-      
-            <div class="reveal-l">
-              <p class="info-etiqueta">Nuestra empresa</p>
-              <h2 class="info-titulo-sec"><span>Somos SportsXtreme</span></h2>
-              <div class="info-texto">
-                <p>SportsXtreme nació en 2009 cuando un grupo de apasionados del deporte extremo decidió que la adrenalina no debía ser un privilegio de pocos. Con ganas de cambiar las cosas, conectamos a los primeros aventureros con instructores locales y experiencias que marcaron la diferencia.</p>
-                <p>Hoy somos la plataforma digital de referencia en deportes extremos en España. Reunimos a los mejores organizadores, atletas e instructores certificados del país en un solo lugar, accesible para cualquiera desde cualquier parte.</p>
-                <p>Lo que realmente nos define no son los números: es el momento en que alguien prueba su primera actividad con nosotros y entiende que los límites están para superarlos.</p>
-              </div>
-              <blockquote class="info-cita">
-                "El riesgo calculado no es locura. Es la forma más honesta de sentirse vivo."
-                <cite>— Alvarito Alvarito, extremista accidentado
-              </blockquote>
-            </div>
-      
-            <div class="info-empresa-img reveal-r" style="transition-delay:.2s">
-              <img src="MEDIA/LOGO.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
-              <div class="info-img-tag"><span>solo vives una vez</span></div>
-            </div>
-      
-          </div>
-        </div>
-      </section>
-      
-      <div class="info-sep"></div>     
+  </section>
 
-      
-      <!--Servicios-->
-      <section class="info-seccion" id="servicios" style="background-color:#1a1a1a">
-        <div class="info-contenedor">
-      
-          <div class="info-sec-header reveal">
-            <p class="info-etiqueta">Todo lo que hacemos</p>
-            <h2 class="info-titulo-sec">Nuestros <span>Servicios</span></h2>
-          </div>
-      
-          <div class="info-servicios-grid">
-      
-            <div class="info-serv-card reveal">
-              <h3 class="info-serv-titulo">Shows Extremos</h3>
-              <p class="info-serv-texto">Descubre espectáculos de deportes extremos en vivo cerca de ti. Conectamos a los mejores atletas del país con el público que vive para la adrenalina.</p>
-              <a href="show.html" class="info-btn-serv">Ver Shows →</a>
-            </div>
-      
-            <div class="info-serv-card reveal">
-              <h3 class="info-serv-titulo">Actividades</h3>
-              <p class="info-serv-texto">Experiencias de tierra, mar y aire disponibles en toda España. Encuentra la tuya, reserva online y vívela con instructores certificados a tu lado.</p>
-              <a href="actividad.html" class="info-btn-serv">Ver Actividades →</a>
-            </div>
-      
-            <div class="info-serv-card reveal">
-              <h3 class="info-serv-titulo">Cursos y Formación</h3>
-              <p class="info-serv-texto">Fórmate con los mejores desde donde estés. Cursos homologados por federaciones nacionales, desde iniciación hasta certificación profesional.</p>
-              <a href="curso.html" class="info-btn-serv">Ver Cursos →</a>
-            </div>
-      
-          </div>
-        </div>
-      </section>
-      
-      <div class="info-sep"></div>
-      
-      
-      <!--Equipo-->
-      <section class="info-seccion" id="equipo" style="background-color:#666666">
-        <div class="info-contenedor">
-      
-          <div class="info-sec-header reveal">
-            <h2 class="info-titulo-sec">Nuestro <span>Equipo</span></h2>
-          </div>
-      
-          <div class="info-equipo-grid">
-      
-            <div class="info-miembro reveal" style="transition-delay:0s">
-              <div class="info-m-foto">
-                <div class="info-m-placeholder"></div>
-                <img src="MEDIA/Alvaro.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
-              </div>
-              <div class="info-m-info">
-                <div class="info-m-nombre">Álvaro Pasamontes</div>
-                <div class="info-m-rol">Director de Contenido &amp; Cofundador</div>
-                <div class="info-m-bio">Responsable de toda la identidad visual multimedia. Capturó y seleccionó cada imagen y vídeo que da vida a la plataforma.</div>
-              </div>
-            </div>
-      
-            <div class="info-miembro reveal" style="transition-delay:.1s">
-              <div class="info-m-foto">
-                <div class="info-m-placeholder"></div>
-                <img src="MEDIA/Marcelo.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
-              </div>
-              <div class="info-m-info">
-                <div class="info-m-nombre">Marcelo Grillo</div>
-                <div class="info-m-rol">Director de Diseño &amp; Cofundador</div>
-                <div class="info-m-bio">Arquitecto de la experiencia visual. Diseñó y desarrolló toda la interfaz de usuario, desde la identidad gráfica hasta cada detalle interactivo.</div>
-              </div>
-            </div>
-      
-            <div class="info-miembro reveal" style="transition-delay:.2s">
-              <div class="info-m-foto">
-                <div class="info-m-placeholder"></div>
-                <img src="MEDIA/Javier.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
-              </div>
-              <div class="info-m-info">
-                <div class="info-m-nombre">Javier Quintanilla</div>
-                <div class="info-m-rol">Director Técnico &amp; Cofundador</div>
-                <div class="info-m-bio">DEBELOPER</div>
-              </div>
-            </div>
-      
-            <div class="info-miembro reveal" style="transition-delay:.3s">
-              <div class="info-m-foto">
-                <div class="info-m-placeholder"></div>
-                <img src="MEDIA/Tomas.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
-                <div class="info-m-hover">
-                  <div class="info-m-redes"><a href="#">IG</a><a href="#">YT</a></div>
-                </div>
-              </div>
-              <div class="info-m-info">
-                <div class="info-m-nombre">Tomas Tomasin</div>
-                <div class="info-m-rol">Apoyo Moral &amp; Espíritu del Equipo</div>
-                <div class="info-m-bio">El pilar emocional del proyecto. Sin su fe incondicional en el equipo, nada de esto habría sido posible.</div>
-              </div>
-            </div>
-      
-          </div>
-        </div>
-      </section>
-      
+  <div class="info-sep"></div>
 
-    <!--FOOTER-->
-    <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <h3>#RadicalViejo</h3>
-                <p>
-                    Descubre los mejores eventos, participa en actividades llenas de emoción o inscríbete en cursos diseñados para llevar tus límites más lejos. 
-                    Conecta con una comunidad apasionada por la aventura y experimenta nuevas formas de sentir la intensidad del deporte extremo.
-                </p>
-            </div>
-            
-            <div>
-                <h3>ENLACES RÁPIDOS</h3>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="show.html">Show</a></li>
-                    <li><a href="actividad.html">Actividad</a></li>
-                    <li><a href="curso.html">Curso</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3>CONTACTO</h3>
-                <ul>
-                    <li>+34 644 71 71 99</li>
-                    <li>fercho7649@gmail.com</li>
-                </ul>
-            </div>
+  <!-- Servicios -->
+  <section class="info-seccion" id="servicios" style="background-color:#1a1a1a" aria-labelledby="titulo-servicios">
+    <div class="info-contenedor">
+      <div class="info-sec-header reveal">
+        <p class="info-etiqueta">Todo lo que hacemos</p>
+        <h2 class="info-titulo-sec" id="titulo-servicios">Nuestros <span>Servicios</span></h2>
+      </div>
+      <div class="info-servicios-grid">
+        <div class="info-serv-card reveal">
+          <h3 class="info-serv-titulo">Shows Extremos</h3>
+          <p class="info-serv-texto">Descubre espectáculos de deportes extremos en vivo cerca de ti. Conectamos a los mejores atletas del país con el público que vive para la adrenalina.</p>
+          <a href="show.html" class="info-btn-serv">Ver Shows →</a>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2026 SportsXtreme. Todos los derechos reservados.</p>
+        <div class="info-serv-card reveal">
+          <h3 class="info-serv-titulo">Actividades</h3>
+          <p class="info-serv-texto">Experiencias de tierra, mar y aire disponibles en toda España. Encuentra la tuya, reserva online y vívela con instructores certificados a tu lado.</p>
+          <a href="actividad.html" class="info-btn-serv">Ver Actividades →</a>
         </div>
-    </footer>
-    <script src="script.js"></script>
-    <script src="scriptIndex.js"></script>
-    <script src="scriptInfo.js"></script>
+        <div class="info-serv-card reveal">
+          <h3 class="info-serv-titulo">Cursos y Formación</h3>
+          <p class="info-serv-texto">Fórmate con los mejores desde donde estés. Cursos homologados por federaciones nacionales, desde iniciación hasta certificación profesional.</p>
+          <a href="curso.html" class="info-btn-serv">Ver Cursos →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="info-sep"></div>
+
+  <!-- Equipo -->
+  <section class="info-seccion" id="equipo" style="background-color:#666666" aria-labelledby="titulo-equipo">
+    <div class="info-contenedor">
+      <div class="info-sec-header reveal">
+        <h2 class="info-titulo-sec" id="titulo-equipo">Nuestro <span>Equipo</span></h2>
+      </div>
+      <div class="info-equipo-grid">
+        <article class="info-miembro reveal">
+          <div class="info-m-foto">
+            <div class="info-m-placeholder"></div>
+            <img src="MEDIA/Alvaro.png" alt="Álvaro Pasamontes" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+          </div>
+          <div class="info-m-info">
+            <div class="info-m-nombre">Álvaro Pasamontes</div>
+            <div class="info-m-rol">Director de Contenido &amp; Cofundador</div>
+            <div class="info-m-bio">Responsable de toda la identidad visual multimedia. Capturó y seleccionó cada imagen y vídeo que da vida a la plataforma.</div>
+          </div>
+        </article>
+        <article class="info-miembro reveal" style="transition-delay:.1s">
+          <div class="info-m-foto">
+            <div class="info-m-placeholder"></div>
+            <img src="MEDIA/Marcelo.png" alt="Marcelo Grillo" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+          </div>
+          <div class="info-m-info">
+            <div class="info-m-nombre">Marcelo Grillo</div>
+            <div class="info-m-rol">Director de Diseño &amp; Cofundador</div>
+            <div class="info-m-bio">Arquitecto de la experiencia visual. Diseñó y desarrolló toda la interfaz de usuario, desde la identidad gráfica hasta cada detalle interactivo.</div>
+          </div>
+        </article>
+        <article class="info-miembro reveal" style="transition-delay:.2s">
+          <div class="info-m-foto">
+            <div class="info-m-placeholder"></div>
+            <img src="MEDIA/Javier.png" alt="Javier Quintanilla" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+          </div>
+          <div class="info-m-info">
+            <div class="info-m-nombre">Javier Quintanilla</div>
+            <div class="info-m-rol">Director Técnico &amp; Cofundador</div>
+            <div class="info-m-bio">Responsable del desarrollo backend y la integración de todos los sistemas de la plataforma.</div>
+          </div>
+        </article>
+        <article class="info-miembro reveal" style="transition-delay:.3s">
+          <div class="info-m-foto">
+            <div class="info-m-placeholder"></div>
+            <img src="MEDIA/Tomas.png" alt="Tomas" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+            <div class="info-m-hover">
+              <div class="info-m-redes"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="YouTube">YT</a></div>
+            </div>
+          </div>
+          <div class="info-m-info">
+            <div class="info-m-nombre">Tomas</div>
+            <div class="info-m-rol">Apoyo Moral &amp; Espíritu del Equipo</div>
+            <div class="info-m-bio">El pilar emocional del proyecto. Sin su fe incondicional en el equipo, nada de esto habría sido posible.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h3>#RadicalViejo</h3>
+        <p>Descubre los mejores eventos, participa en actividades llenas de emoción o inscríbete en cursos diseñados para llevar tus límites más lejos. Conecta con una comunidad apasionada por la aventura.</p>
+      </div>
+      <div>
+        <h3>ENLACES RÁPIDOS</h3>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="show.html">Shows</a></li>
+          <li><a href="actividad.html">Actividades</a></li>
+          <li><a href="curso.html">Cursos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>CONTACTO</h3>
+        <ul>
+          <li>+34 644 71 71 99</li>
+          <li><a href="mailto:info@sportsxtreme.es">info@sportsxtreme.es</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SportsXtreme. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="scriptIndex.js" defer></script>
+  <script src="scriptInfo.js" defer></script>
 </body>
 </html>
