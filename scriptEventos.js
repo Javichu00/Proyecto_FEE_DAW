@@ -6,7 +6,7 @@ const idTipoMap = {
 
 const pagina = window.location.pathname.split('/').pop();
 const idTipo = idTipoMap[pagina];
-const grid = document.getElementById('actividadesGrid');
+const grid    = document.getElementById('actividadesGrid');
 const contador = document.getElementById('contador');
 
 const difMap = {
@@ -22,6 +22,7 @@ const catMap = {
     TIERRA: 'Tierra'
 };
 
+/* ── Ordenar ──────────────────────────────────────── */
 function ordenarLista(lista) {
     const orden = document.getElementById('orden-select').value;
     const copia = [...lista];
@@ -35,6 +36,7 @@ function ordenarLista(lista) {
     }
 }
 
+/* ── Render tarjetas ──────────────────────────────── */
 function renderLista(lista) {
     contador.textContent = `(${lista.length})`;
     grid.innerHTML = '';
@@ -45,8 +47,8 @@ function renderLista(lista) {
     }
 
     ordenarLista(lista).forEach(a => {
-        const dif = difMap[a.extremidad] || { clase: '', texto: a.extremidad };
-        const cat = catMap[a.categoria] || a.categoria;
+        const dif   = difMap[a.extremidad] || { clase: '', texto: a.extremidad };
+        const cat   = catMap[a.categoria]  || a.categoria;
         const fecha = a.fechaInicio ? new Date(a.fechaInicio).toLocaleDateString('es-ES') : '';
 
         grid.innerHTML += `
@@ -80,6 +82,7 @@ function renderLista(lista) {
 
 let listaActual = [];
 
+/* ── Cargar actividades ───────────────────────────── */
 async function cargarActividades(filtros = {}) {
     try {
         const response = await fetch(`${API}/eventos/filtrar`, {
@@ -107,6 +110,7 @@ async function cargarActividades(filtros = {}) {
     }
 }
 
+/* ── Actualizar sliders con datos reales ─────────── */
 function actualizarSliders(lista) {
     const maxPrecio = Math.ceil(Math.max(...lista.map(a => a.precio)));
     const maxAforo  = Math.max(...lista.map(a => a.aforoMaximo));
@@ -123,15 +127,14 @@ function actualizarSliders(lista) {
     window._maxAforo  = maxAforo;
 }
 
+/* ── Aplicar filtros ──────────────────────────────── */
 function aplicarFiltros() {
     const filtros = {};
 
-    const categorias = [...document.querySelectorAll('#checks-categoria input:checked')]
-        .map(cb => cb.value);
+    const categorias = [...document.querySelectorAll('#checks-categoria input:checked')].map(cb => cb.value);
     if (categorias.length > 0) filtros.categorias = categorias;
 
-    const extremidades = [...document.querySelectorAll('#checks-dificultad input:checked')]
-        .map(cb => cb.value);
+    const extremidades = [...document.querySelectorAll('#checks-dificultad input:checked')].map(cb => cb.value);
     if (extremidades.length > 0) filtros.extremidades = extremidades;
 
     const precioMin = parseInt(document.getElementById('filtro-precio-min').value);
@@ -153,21 +156,8 @@ function aplicarFiltros() {
     cargarActividades(filtros);
 }
 
-document.querySelectorAll('.filtro-checks input').forEach(cb => {
-    cb.addEventListener('change', aplicarFiltros);
-});
-document.getElementById('filtro-precio-min').addEventListener('input', aplicarFiltros);
-document.getElementById('filtro-precio-max').addEventListener('input', aplicarFiltros);
-document.getElementById('filtro-fecha-min').addEventListener('change', aplicarFiltros);
-document.getElementById('filtro-fecha-max').addEventListener('change', aplicarFiltros);
-document.getElementById('filtro-aforo').addEventListener('input', aplicarFiltros);
-document.getElementById('buscador').addEventListener('input', aplicarFiltros);
-
-document.getElementById('orden-select').addEventListener('change', () => {
-    renderLista(listaActual);
-});
-
-document.querySelector('.btn-reset').addEventListener('click', () => {
+/* ── Limpiar filtros ──────────────────────────────── */
+function limpiarFiltros() {
     document.querySelectorAll('.filtro-checks input').forEach(cb => cb.checked = false);
     document.getElementById('filtro-precio-min').value = 0;
     document.getElementById('filtro-precio-max').value = window._maxPrecio || 1000;
@@ -179,10 +169,23 @@ document.querySelector('.btn-reset').addEventListener('click', () => {
     document.getElementById('aforo-val').textContent = '1';
     document.getElementById('buscador').value = '';
     cargarActividades();
+}
+
+/* ── Listeners de filtros ─────────────────────────── */
+document.querySelectorAll('.filtro-checks input').forEach(cb => cb.addEventListener('change', aplicarFiltros));
+document.getElementById('filtro-precio-min').addEventListener('input', aplicarFiltros);
+document.getElementById('filtro-precio-max').addEventListener('input', aplicarFiltros);
+document.getElementById('filtro-fecha-min').addEventListener('change', aplicarFiltros);
+document.getElementById('filtro-fecha-max').addEventListener('change', aplicarFiltros);
+document.getElementById('filtro-aforo').addEventListener('input', aplicarFiltros);
+document.getElementById('buscador').addEventListener('input', aplicarFiltros);
+document.getElementById('orden-select').addEventListener('change', () => renderLista(listaActual));
+document.querySelector('.btn-reset').addEventListener('click', function() {
+    limpiarFiltros();
+    cerrarPanel();
 });
 
-cargarActividades();
-
+/* ── Cargar destacados ────────────────────────────── */
 async function cargarDestacados() {
     try {
         const response = await fetch(`${API}/eventos/filtrar`, {
@@ -203,7 +206,6 @@ async function cargarDestacados() {
         contenedor.style.display = 'block';
 
         lista.forEach((a, i) => {
-            // Slide
             track.innerHTML += `
                 <div class="destacado-slide">
                     <img src="${a.rutaFoto}" onerror="this.style.display='none'">
@@ -219,11 +221,9 @@ async function cargarDestacados() {
                     </div>
                 </div>
             `;
-            // Dot
             dots.innerHTML += `<span class="destacado-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`;
         });
 
-        // Lógica del carrusel
         let actual = 0;
 
         function irA(index) {
@@ -240,9 +240,7 @@ async function cargarDestacados() {
             d.addEventListener('click', () => irA(parseInt(d.dataset.index)));
         });
 
-        // Autoplay
         let autoplay = setInterval(() => irA(actual + 1), 3000);
-
         contenedor.addEventListener('mouseenter', () => clearInterval(autoplay));
         contenedor.addEventListener('mouseleave', () => {
             autoplay = setInterval(() => irA(actual + 1), 3000);
@@ -253,4 +251,30 @@ async function cargarDestacados() {
     }
 }
 
+/* ── Panel de filtros móvil ───────────────────────── */
+var btnAbrir   = document.getElementById('btnAbrirFiltros');
+var btnCerrar  = document.getElementById('btnCerrarFiltros');
+var overlay    = document.getElementById('filtrosOverlay');
+var panel      = document.getElementById('filtrosPanel');
+
+function abrirPanel() {
+    if (!panel || !overlay) return;
+    panel.classList.add('abierto');
+    overlay.classList.add('activo');
+    document.body.style.overflow = 'hidden'; // evita scroll del fondo
+}
+
+function cerrarPanel() {
+    if (!panel || !overlay) return;
+    panel.classList.remove('abierto');
+    overlay.classList.remove('activo');
+    document.body.style.overflow = ''; // restaura scroll
+}
+
+if (btnAbrir)  btnAbrir.addEventListener('click', abrirPanel);
+if (btnCerrar) btnCerrar.addEventListener('click', cerrarPanel);
+if (overlay)   overlay.addEventListener('click', cerrarPanel);
+
+/* ── Init ─────────────────────────────────────────── */
+cargarActividades();
 cargarDestacados();

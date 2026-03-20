@@ -26,26 +26,14 @@
     --trans-slow:   0.8s ease;
   }
   
-  html { overflow-y: scroll; }
-
-/* ── SCROLLBAR PERSONALIZADA ────────────── */
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--negro2);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--rojo-oscuro);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--rojo);
-}
+  html {
+    overflow-y: scroll;
+    overflow-x: hidden; /* evita scroll horizontal en toda la página */
+  }
+  
+  body {
+    overflow-x: hidden; /* doble seguro para el scroll horizontal */
+  }
   
   body {
     display: flex;
@@ -496,10 +484,12 @@
   .info-m-hover {
     position: absolute;
     inset: 0;
+    background: rgba(167,1,14,0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
+    transition: opacity 0.35s;
   }
   
   .info-miembro:hover .info-m-hover { opacity: 1; }
@@ -713,7 +703,6 @@
   
   .actividades-layout {
     display: flex;
-    align-items: flex-start; /* ← CAMBIADO: necesario para que sticky funcione */
     min-height: calc(100vh - 120px);
     background: var(--negro);
   }
@@ -724,10 +713,6 @@
     background: var(--negro3);
     padding: 30px 20px;
     border-right: 1px solid rgba(255,255,255,0.07);
-    position: sticky;        /* ← AÑADIDO: el filtro se queda fijo al hacer scroll */
-    top: 0;                  /* ← AÑADIDO: pegado al top de la pantalla */
-    height: 100vh;           /* ← AÑADIDO: ocupa toda la altura visible */
-    overflow-y: auto;        /* ← AÑADIDO: scroll interno si el filtro es muy largo */
   }
   
   .filtros-panel h3 {
@@ -850,3 +835,234 @@
   }
   
   .orden-select:hover { border-color: var(--rojo-oscuro); }
+  
+  /* Controles del header (buscador + ordenar) */
+  .actividades-controles {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .actividades-controles input { width: 220px; }
+  
+  /* Header del panel de filtros */
+  .filtros-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .filtros-panel-header h3 { margin-bottom: 0; }
+  
+  .btn-cerrar-filtros {
+    display: none;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    transition: color var(--trans-base);
+  }
+  
+  .btn-cerrar-filtros:hover { color: var(--blanco); }
+  
+  /* Oculto por defecto — solo visible en movil */
+  .btn-abrir-filtros { display: none; }
+  .filtros-overlay   { display: none; }
+  
+  
+  /* ============================================================
+     RESPONSIVE — Móvil estándar (max-width: 768px)
+     ============================================================ */
+  
+  /* ── TABLET (hasta 768px) ───────────────── */
+  @media (max-width: 768px) {
+  
+    /* Header */
+    .img-logo { height: 55px; padding-left: 20px; }
+  
+    header div { padding: 12px 16px; gap: 10px; }
+  
+    .btn-menu,
+    .btn-reservas { padding: 6px 12px; font-size: 12px; }
+  
+    /* Navbar */
+    nav ul { gap: 0; padding: 10px 0; flex-wrap: wrap; justify-content: center; }
+    nav li { margin: 2px 4px; }
+    nav a  { font-size: 13px; padding: 7px 12px; }
+  
+    /* Carrusel */
+    .carrusel-contenedor { height: 420px; }
+    .video-title { font-size: 2rem; }
+    .carrusel-desc { width: 80%; font-size: 14px; }
+    .carrusel-link:hover .carrusel-desc { bottom: 120px; }
+    .carrusel-btn { height: 300px; }
+  
+    /* Stats */
+    .info-stats-flex { flex-wrap: wrap; }
+    .info-stat {
+      flex: 1 1 calc(33.33% - 2px);
+      padding: 24px 12px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .info-stat-n { font-size: 2.2rem; }
+  
+    /* Quiénes somos */
+    .info-quienes-grid { grid-template-columns: 1fr; gap: 40px; }
+    .info-empresa-img  { height: 220px; }
+    .info-titulo-sec   { font-size: 2.5rem; }
+  
+    /* Servicios */
+    .info-servicios-grid { grid-template-columns: 1fr; }
+    .info-serv-card      { padding: 32px 24px; }
+  
+    /* Equipo */
+    .info-equipo-grid { grid-template-columns: repeat(2, 1fr); }
+  
+    /* Footer */
+    .footer { padding: 30px 6%; }
+    .footer-content { flex-direction: column; gap: 24px; }
+    .footer-content div,
+    .footer-content div:first-child { flex: none; min-width: unset; width: 100%; }
+  
+    /* Filtros: en tablet siguen visibles arriba normalmente */
+    .actividades-layout { flex-direction: column; }
+    .filtros-panel {
+      width: 100%;
+      position: static;
+      height: auto;
+      overflow-y: visible;
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .actividades-main { padding: 20px 16px; }
+    .actividades-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .actividades-header > div { flex-direction: column; width: 100%; }
+    .actividades-header input, .orden-select { width: 100%; }
+  
+  }
+  
+  
+  /* ── MÓVIL ESTÁNDAR (hasta 430px) ──────── */
+  @media (max-width: 430px) {
+  
+    .img-logo { height: 46px; }
+  
+    .btn-menu,
+    .btn-reservas { padding: 5px 8px; font-size: 11px; }
+  
+    /* Navbar horizontal con scroll */
+    nav ul {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: center;
+      padding: 10px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    nav ul::-webkit-scrollbar { display: none; }
+    nav li { margin: 0; flex-shrink: 0; }
+  
+    /* Carrusel */
+    .carrusel-contenedor { height: 320px; }
+    .video-title  { font-size: 1.6rem; }
+    .carrusel-desc { display: none; }
+    .carrusel-btn { font-size: 1.8rem; width: 36px; height: 220px; }
+  
+    /* Stats: 2 por fila */
+    .info-stat { flex: 1 1 calc(50% - 2px); }
+  
+    /* Secciones */
+    .info-seccion    { padding: 50px 0; }
+    .info-contenedor { padding: 0 20px; }
+    .info-titulo-sec { font-size: 2rem; }
+  
+    /* Equipo: 1 columna */
+    .info-equipo-grid { grid-template-columns: 1fr; }
+  
+    /* Tarjetas de actividades */
+    .actividades-grid { grid-template-columns: 1fr !important; }
+  
+    /* Footer */
+    .footer { padding: 24px 5%; }
+    .footer-content h3 { font-size: 15px; }
+  
+    /* Login */
+    .login-box { padding: 1.5rem; border-radius: 10px; }
+  
+    /* Perfil */
+    .perfil-campo { padding: 14px 20px; }
+    .perfil-zona-danger { flex-direction: column; align-items: flex-start; gap: 10px; }
+  
+    /* Reservas */
+    .reserva-item    { grid-template-columns: 1fr !important; gap: 12px; }
+    .reserva-foto    { width: 100% !important; height: 160px; }
+    .reserva-derecha { align-items: flex-start !important; }
+  
+    /* ── Filtros: bandeja deslizante desde abajo ── */
+    .actividades-layout { flex-direction: column; }
+  
+    .filtros-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-right: none;
+      border-top: 2px solid var(--rojo-oscuro);
+      border-radius: 16px 16px 0 0;
+      z-index: 998;
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.6);
+    }
+  
+    .filtros-panel.abierto { transform: translateY(0); }
+  
+    .filtros-panel::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+      margin: 12px auto 16px;
+    }
+  
+    .filtros-overlay.activo { display: block; }
+  
+    .btn-abrir-filtros {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--negro3);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--blanco);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  
+    .actividades-main { padding: 16px; }
+  
+    /* Header: título arriba, controles en fila */
+    .actividades-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .actividades-controles { flex-wrap: wrap; width: 100%; gap: 8px; }
+    .actividades-controles input { flex: 1; min-width: 0; width: auto; }
+    .orden-select { width: 100%; }
+  
+    /* Mostrar botón cerrar dentro del panel */
+    .btn-cerrar-filtros { display: block; }
+  
+  }
+  
