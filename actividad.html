@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportXtreme</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="stylesActividad.css">
-    
+    <link rel="stylesheet" href="stylesEventos.css">
 </head>
 <body>
 
@@ -22,13 +21,20 @@
     <!--NAVBAR-->
     <nav class="main-nav">
         <ul class="nav-list">
-            <li><a href="index.html">Inicio</a></li> <!---->
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="show.html">Shows</a></li>
             <li><a href="actividad.html">Actividades</a></li>
             <li><a href="curso.html">Cursos</a></li>
         </ul>
     </nav>
 
+    <!-- CARRUSEL DESTACADOS -->
+    <div class="destacados-contenedor" id="destacadosContenedor" style="display:none;">
+        <div class="destacados-track" id="destacadosTrack"></div>
+        <button class="destacados-btn destacados-prev" id="destacadosPrev">‹</button>
+        <button class="destacados-btn destacados-next" id="destacadosNext">›</button>
+        <div class="destacados-dots" id="destacadosDots"></div>
+    </div>
 
     <!--CONTENIDO-->
     <div class="actividades-layout">
@@ -146,6 +152,6 @@
     </footer>
     <script src="script.js"></script>
     <script src="scriptAPI_IP.js"></script>
-    <script src="scriptActividad.js"></script>
+    <script src="scriptEventos.js"></script>
 </body>
 </html>

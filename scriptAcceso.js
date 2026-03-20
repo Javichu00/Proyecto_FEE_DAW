@@ -41,6 +41,8 @@ async function login() {
             }
         } else if (response.status === 401) {
             alert('Email o contraseña incorrectos');
+        } else if (response.status === 403) {
+            alert('Tu cuenta está desactivada. Contacta con el administrador.');
         } else {
             alert('Error al iniciar sesión');
         }

@@ -9,91 +9,102 @@
 </head>
 <body>
 
-    <!--HEADER-->
     <header id="inicio">
         <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
         <div>
-            <a href="./indexAdmn.html" class="btn-menu btn-reservas">Dashboard</a>
             <a href="./acceso.html" class="btn-menu btn-acceder">Acceder</a>
         </div>
-    </header>
+    </header>   
+
+    <!--NAVBAR-->
+    <nav class="main-nav">
+        <div>
+            <ul class="nav-list">
+                <li><button class="admin-tab active" onclick="cambiarTabla('eventos')">Eventos</button></li> <!---->
+                <li><button class="admin-tab" onclick="cambiarTabla('usuarios')">Usuarios</button></li>
+                <li><button class="admin-tab" onclick="cambiarTabla('reservas')">Reservas</button></li>
+            </ul>
+        </div>
+    </nav>
 
     <main class="dashboard-container">
 
         <!-- TABS -->
-        <div class="admin-tabs">
-            <button class="admin-tab active" onclick="cambiarTabla('eventos')">Eventos</button>
-            <button class="admin-tab" onclick="cambiarTabla('usuarios')">Usuarios</button>
-            <button class="admin-tab" onclick="cambiarTabla('reservas')">Reservas</button>
-        </div>
+        
 
-        <!-- BUSCADOR -->
-        <div class="filters-bar">
-            <input type="text" id="admin-buscador" placeholder="Buscar..." class="search-input"
-                   oninput="filtrarTabla()">
-        </div>
+        <main class="dashboard-container">
+            <!-- BUSCADOR -->
+            <div class="filters-bar">
+                <input type="text" id="admin-buscador" placeholder="Buscar..." class="search-input"
+                    oninput="filtrarTabla()">
+            </div>
 
-        <!-- TABLA EVENTOS -->
-        <div id="tabla-eventos" class="admin-tabla-wrapper">
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Foto</th>
-                        <th>Tipo</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>F. Inicio</th>
-                        <th>F. Fin</th>
-                        <th>Localización</th>
-                        <th>Aforo</th>
-                        <th>Estado</th>
-                        <th>Precio</th>
-                        <th>Categoría</th>
-                        <th>Extremidad</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-eventos"></tbody>
-            </table>
-        </div>
+            <div class="admin-tablas-contenedor">
 
-        <!-- TABLA USUARIOS -->
-        <div id="tabla-usuarios" class="admin-tabla-wrapper hidden">
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre Completo</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>Enabled</th>
-                        <th>Fecha Registro</th>
-                        <th>Perfil</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-usuarios"></tbody>
-            </table>
-        </div>
-
-        <!-- TABLA RESERVAS -->
-        <div id="tabla-reservas" class="admin-tabla-wrapper hidden">
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Usuario</th>
-                        <th>Evento</th>
-                        <th>Precio Venta</th>
-                        <th>Cantidad</th>
-                        <th>Observaciones</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-reservas"></tbody>
-            </table>
-        </div>
+                <!-- TABLA EVENTOS -->
+                <div id="tabla-eventos" class="admin-tabla-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Foto</th>
+                                <th>Tipo</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>F. Inicio</th>
+                                <th>F. Fin</th>
+                                <th>Localización</th>
+                                <th>Aforo</th>
+                                <th>Estado</th>
+                                <th>Precio</th>
+                                <th>Categoría</th>
+                                <th>Extremidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-eventos"></tbody>
+                    </table>
+                </div>
+        
+                <!-- TABLA USUARIOS -->
+                <div id="tabla-usuarios" class="admin-tabla-wrapper hidden">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Enabled</th>
+                                <th>Fecha Registro</th>
+                                <th>Perfil</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-usuarios"></tbody>
+                    </table>
+                </div>
+        
+                <!-- TABLA RESERVAS -->
+                <div id="tabla-reservas" class="admin-tabla-wrapper hidden">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuario</th>
+                                <th>Evento</th>
+                                <th>Precio Venta</th>
+                                <th>Cantidad</th>
+                                <th>Observaciones</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-reservas"></tbody>
+                    </table>
+                </div>
+        
+            </div>
+        </main>
 
     </main>
 

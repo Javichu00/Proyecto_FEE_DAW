@@ -1,4 +1,3 @@
-// Lee el ID de la URL
 const params = new URLSearchParams(window.location.search);
 const idEvento = params.get('id');
 
@@ -7,7 +6,6 @@ if (!idEvento) {
     window.location.href = 'index.html';
 }
 
-// Carga el evento de la API
 async function cargarEvento() {
     try {
         const res = await fetch(`${API}/eventos/${idEvento}`);
@@ -43,6 +41,12 @@ async function cargarEvento() {
             : '—';
         document.getElementById('eventoUbicacion').textContent = e.localizacion || '—';
 
+        // Aforo
+        const resAforo = await fetch(`${API}/reservas/evento/${idEvento}/aforo`);
+        const ocupado = await resAforo.json();
+        const libre = e.aforoMaximo - ocupado;
+        document.getElementById('eventoAforo').textContent = `${libre} / ${e.aforoMaximo}`;
+
         // Precio
         const precioEvento = e.precio;
         const formatEur = n => n.toFixed(2).replace('.', ',') + '€';
@@ -51,7 +55,7 @@ async function cargarEvento() {
 
         // Control de asistentes
         let asistentes = 1;
-        const maxPersonas = e.aforoMaximo || 10;
+        const maxPersonas = Math.min(libre, 10);
 
         function actualizarResumen() {
             const total = precioEvento * asistentes;
@@ -71,6 +75,15 @@ async function cargarEvento() {
         document.getElementById('btnMas').addEventListener('click', () => {
             if (asistentes < maxPersonas) { asistentes++; actualizarResumen(); }
         });
+
+        // Si no hay plazas libres deshabilita el botón
+        if (libre <= 0) {
+            const btnConfirmar = document.getElementById('btnConfirmar');
+            btnConfirmar.disabled = true;
+            btnConfirmar.textContent = 'Sin plazas disponibles';
+            btnConfirmar.style.opacity = '0.5';
+            btnConfirmar.style.cursor = 'not-allowed';
+        }
 
         // Confirmar reserva
         document.getElementById('btnConfirmar').addEventListener('click', async () => {
@@ -97,6 +110,9 @@ async function cargarEvento() {
 
                 if (res.status === 201) {
                     alert('¡Reserva confirmada!');
+                    window.location.href = 'reservas.html';
+                } else if (res.status === 409) {
+                    alert('Ya tienes una reserva para este evento. Puedes modificarla desde Mis Reservas.');
                     window.location.href = 'reservas.html';
                 } else {
                     alert('Error al confirmar la reserva');

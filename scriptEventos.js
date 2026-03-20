@@ -1,3 +1,11 @@
+const idTipoMap = {
+    'show.html':      1,
+    'actividad.html': 2,
+    'curso.html':     3
+};
+
+const pagina = window.location.pathname.split('/').pop();
+const idTipo = idTipoMap[pagina];
 const grid = document.getElementById('actividadesGrid');
 const contador = document.getElementById('contador');
 
@@ -77,7 +85,7 @@ async function cargarActividades(filtros = {}) {
         const response = await fetch(`${API}/eventos/filtrar`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idTipo: 2, ...filtros })
+            body: JSON.stringify({ idTipo, ...filtros })
         });
 
         if (response.status === 204) {
@@ -89,7 +97,6 @@ async function cargarActividades(filtros = {}) {
         listaActual = await response.json();
         renderLista(listaActual);
 
-        // Solo actualiza los sliders en la carga inicial (sin filtros)
         if (Object.keys(filtros).length === 0) {
             actualizarSliders(listaActual);
         }
@@ -104,17 +111,14 @@ function actualizarSliders(lista) {
     const maxPrecio = Math.ceil(Math.max(...lista.map(a => a.precio)));
     const maxAforo  = Math.max(...lista.map(a => a.aforoMaximo));
 
-    // Precio
     document.getElementById('filtro-precio-min').max = maxPrecio;
     document.getElementById('filtro-precio-max').max = maxPrecio;
     document.getElementById('filtro-precio-max').value = maxPrecio;
     document.getElementById('precio-max-val').textContent = maxPrecio;
 
-    // Aforo
     document.getElementById('filtro-aforo').max = maxAforo;
     document.getElementById('aforo-val').textContent = '1';
 
-    // También actualiza el limpiar para usar estos máximos reales
     window._maxPrecio = maxPrecio;
     window._maxAforo  = maxAforo;
 }
@@ -149,7 +153,6 @@ function aplicarFiltros() {
     cargarActividades(filtros);
 }
 
-// Listeners automáticos
 document.querySelectorAll('.filtro-checks input').forEach(cb => {
     cb.addEventListener('change', aplicarFiltros);
 });
@@ -160,12 +163,10 @@ document.getElementById('filtro-fecha-max').addEventListener('change', aplicarFi
 document.getElementById('filtro-aforo').addEventListener('input', aplicarFiltros);
 document.getElementById('buscador').addEventListener('input', aplicarFiltros);
 
-// Ordenar sin rellamar a la API
 document.getElementById('orden-select').addEventListener('change', () => {
     renderLista(listaActual);
 });
 
-// Limpiar
 document.querySelector('.btn-reset').addEventListener('click', () => {
     document.querySelectorAll('.filtro-checks input').forEach(cb => cb.checked = false);
     document.getElementById('filtro-precio-min').value = 0;
@@ -179,5 +180,77 @@ document.querySelector('.btn-reset').addEventListener('click', () => {
     document.getElementById('buscador').value = '';
     cargarActividades();
 });
-// Carga inicial
+
 cargarActividades();
+
+async function cargarDestacados() {
+    try {
+        const response = await fetch(`${API}/eventos/filtrar`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idTipo, ESTADO: 'DESTACADO' })
+        });
+
+        if (response.status === 204) return;
+
+        const lista = (await response.json()).filter(a => a.estado === 'DESTACADO');
+        if (lista.length === 0) return;
+
+        const contenedor = document.getElementById('destacadosContenedor');
+        const track      = document.getElementById('destacadosTrack');
+        const dots       = document.getElementById('destacadosDots');
+
+        contenedor.style.display = 'block';
+
+        lista.forEach((a, i) => {
+            // Slide
+            track.innerHTML += `
+                <div class="destacado-slide">
+                    <img src="${a.rutaFoto}" onerror="this.style.display='none'">
+                    <div class="destacado-overlay">
+                        <span class="destacado-etiqueta">Destacado</span>
+                        <h3 class="destacado-nombre">${a.nombre}</h3>
+                        <div class="destacado-meta">
+                            <span>📍 ${a.localizacion}</span>
+                            <span>📅 ${a.fechaInicio ? new Date(a.fechaInicio).toLocaleDateString('es-ES') : ''}</span>
+                            <span>${a.precio}€</span>
+                        </div>
+                        <a href="reservarEvento.html?id=${a.idEvento}" class="destacado-btn-reservar">Reservar</a>
+                    </div>
+                </div>
+            `;
+            // Dot
+            dots.innerHTML += `<span class="destacado-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`;
+        });
+
+        // Lógica del carrusel
+        let actual = 0;
+
+        function irA(index) {
+            actual = (index + lista.length) % lista.length;
+            track.style.transform = `translateX(-${actual * 100}%)`;
+            document.querySelectorAll('.destacado-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === actual);
+            });
+        }
+
+        document.getElementById('destacadosPrev').addEventListener('click', () => irA(actual - 1));
+        document.getElementById('destacadosNext').addEventListener('click', () => irA(actual + 1));
+        document.querySelectorAll('.destacado-dot').forEach(d => {
+            d.addEventListener('click', () => irA(parseInt(d.dataset.index)));
+        });
+
+        // Autoplay
+        let autoplay = setInterval(() => irA(actual + 1), 3000);
+
+        contenedor.addEventListener('mouseenter', () => clearInterval(autoplay));
+        contenedor.addEventListener('mouseleave', () => {
+            autoplay = setInterval(() => irA(actual + 1), 3000);
+        });
+
+    } catch (error) {
+        console.error('Error cargando destacados:', error);
+    }
+}
+
+cargarDestacados();

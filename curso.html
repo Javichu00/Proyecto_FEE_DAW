@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportXtreme - Cursos</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="stylesActividad.css">
+    <link rel="stylesheet" href="stylesEventos.css">
 </head>
 <body>
 
@@ -27,6 +27,14 @@
             <li><a href="curso.html" class="active">Cursos</a></li>
         </ul>
     </nav>
+
+    <!-- CARRUSEL DESTACADOS -->
+    <div class="destacados-contenedor" id="destacadosContenedor" style="display:none;">
+        <div class="destacados-track" id="destacadosTrack"></div>
+        <button class="destacados-btn destacados-prev" id="destacadosPrev">‹</button>
+        <button class="destacados-btn destacados-next" id="destacadosNext">›</button>
+        <div class="destacados-dots" id="destacadosDots"></div>
+    </div>
 
     <!--CONTENIDO-->
     <div class="actividades-layout">
@@ -137,8 +145,9 @@
             <p>&copy; 2026 sportsXtreme. Todos los derechos reservados.</p>
         </div>
     </footer>
+
     <script src="script.js"></script>
     <script src="scriptAPI_IP.js"></script>
-    <script src="scriptCurso.js"></script>
+    <script src="scriptEventos.js"></script>
 </body>
 </html>

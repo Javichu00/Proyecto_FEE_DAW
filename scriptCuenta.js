@@ -5,6 +5,21 @@ if (!usuario) {
     window.location.href = 'acceso.html';
 }
 
+// Ocultar panel admin por defecto
+const liAdmin = document.getElementById('li-admin');
+if (liAdmin) liAdmin.style.display = 'none';
+
+// Comportamiento según perfil
+if (usuario.perfil?.idPerfil === 1) {
+    // Es ADMIN
+    document.querySelector('.main-nav').style.display = 'none';
+    const btnReservas = document.querySelector('.btn-reservas');
+    if (btnReservas) {
+        btnReservas.textContent = 'Dashboard';
+        btnReservas.href = './indexAdmn.html';
+    }
+}
+
 // Rellena los campos con los datos del usuario
 document.getElementById('nombreMostrado').textContent = usuario.nombreCompleto;
 document.getElementById('avatarInicial').textContent = usuario.nombreCompleto
@@ -19,26 +34,6 @@ if (usuario.fechaRegistro) {
     const fecha = new Date(usuario.fechaRegistro);
     document.getElementById('miembroDesde').textContent =
         'Miembro desde ' + fecha.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
-}
-
-// Mostrar panel admin solo si es admin
-const liAdmin = document.getElementById('li-admin');
-if (liAdmin) {
-    if (usuario.perfil?.idPerfil === 1) {
-        // Es admin — quita el navbar entero
-        document.querySelector('.main-nav').style.display = 'none';
-    
-        // Cambia el botón "Mis Reservas" por "Dashboard"
-        const btnReservas = document.querySelector('.btn-reservas');
-        if (btnReservas) {
-            btnReservas.textContent = 'Dashboard';
-            btnReservas.href = './indexAdmn.html';
-        }
-    
-        // Quita el enlace "Panel de administración" del nav si existe
-        const liAdmin = document.getElementById('li-admin');
-        if (liAdmin) liAdmin.style.display = 'none';
-    }
 }
 
 // Toggle edición
@@ -88,7 +83,6 @@ async function guardarCampo(campo, nuevoValor) {
 
             if (campo !== 'contrasena') {
                 valor.textContent = nuevoValor;
-                // Actualiza cabecera si cambió el nombre
                 if (campo === 'nombreCompleto') {
                     document.getElementById('nombreMostrado').textContent = nuevoValor;
                     document.getElementById('avatarInicial').textContent = nuevoValor
@@ -132,3 +126,127 @@ function cerrarSesion() {
     sessionStorage.removeItem('usuario');
     window.location.href = 'index.html';
 }
+
+// ─────────────────────────────────────────
+// POPUP
+// ─────────────────────────────────────────
+let _popupModo = null; // 'password' | 'eliminar'
+
+function abrirPopup(titulo, descripcion, modo, mostrarNuevaPass) {
+    _popupModo = modo;
+    document.getElementById('popupTitulo').textContent = titulo;
+    document.getElementById('popupDescripcion').textContent = descripcion;
+    document.getElementById('popupPassword').value = '';
+    document.getElementById('popupNuevaPass').value = '';
+    document.getElementById('popupError').style.display = 'none';
+    document.getElementById('popupNuevaPassWrapper').style.display = mostrarNuevaPass ? 'block' : 'none';
+
+    const btnConfirmar = document.getElementById('popupBtnConfirmar');
+    if (modo === 'eliminar') {
+        btnConfirmar.textContent = 'Eliminar cuenta';
+        btnConfirmar.classList.add('peligro');
+    } else {
+        btnConfirmar.textContent = 'Guardar';
+        btnConfirmar.classList.remove('peligro');
+    }
+
+    document.getElementById('popupOverlay').classList.remove('hidden');
+    setTimeout(() => document.getElementById('popupPassword').focus(), 100);
+}
+
+function cerrarPopup() {
+    document.getElementById('popupOverlay').classList.add('hidden');
+    _popupModo = null;
+}
+
+function abrirPopupPassword() {
+    abrirPopup(
+        'Cambiar contraseña',
+        'Introduce tu contraseña actual y la nueva para continuar.',
+        'password',
+        true
+    );
+}
+
+function abrirPopupEliminar() {
+    abrirPopup(
+        'Eliminar cuenta',
+        'Introduce tu contraseña para confirmar. Esta acción no se puede deshacer.',
+        'eliminar',
+        false
+    );
+}
+
+async function confirmarPopup() {
+    const passActual   = document.getElementById('popupPassword').value.trim();
+    const errorEl      = document.getElementById('popupError');
+
+    errorEl.style.display = 'none';
+
+    if (!passActual) {
+        errorEl.textContent = 'Introduce tu contraseña';
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    // Verificar contraseña actual
+    if (passActual !== usuario.password) {
+        errorEl.textContent = 'Contraseña incorrecta';
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    if (_popupModo === 'password') {
+        const nuevaPass = document.getElementById('popupNuevaPass').value.trim();
+        if (!nuevaPass) {
+            errorEl.textContent = 'Introduce la nueva contraseña';
+            errorEl.style.display = 'block';
+            return;
+        }
+        cerrarPopup();
+        await guardarCampo('contrasena', nuevaPass);
+
+    } else if (_popupModo === 'eliminar') {
+        cerrarPopup();
+        await eliminarCuenta();
+    }
+}
+
+async function eliminarCuenta() {
+    try {
+        const res = await fetch(`${API}/usuarios/${usuario.idUsuario}`, {
+            method: 'DELETE'
+        });
+        if (res.ok) {
+            sessionStorage.removeItem('usuario');
+            alert('Tu cuenta ha sido eliminada.');
+            window.location.href = 'index.html';
+        } else {
+            alert('Error al eliminar la cuenta');
+        }
+    } catch (e) {
+        console.error(e);
+        alert('No se puede conectar con el servidor');
+    }
+}
+
+// Cerrar popup al hacer clic fuera
+document.getElementById('popupOverlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('popupOverlay')) cerrarPopup();
+});
+
+// Enter en los inputs del popup
+document.getElementById('popupPassword').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const nuevaPassWrapper = document.getElementById('popupNuevaPassWrapper');
+        if (nuevaPassWrapper.style.display !== 'none') {
+            document.getElementById('popupNuevaPass').focus();
+        } else {
+            confirmarPopup();
+        }
+    }
+});
+
+document.getElementById('popupNuevaPass').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') confirmarPopup();
+});
