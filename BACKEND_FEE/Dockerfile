@@ -1,4 +1,5 @@
 FROM eclipse-temurin:25-jdk-alpine AS build
+RUN chmod +x mvnw
 WORKDIR /app
 COPY pom.xml .
 COPY .mvn .mvn
