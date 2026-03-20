@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: sportxtreme-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: AlumnoIFP
+      MYSQL_DATABASE: EVENTOS_FP_FEE
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./Backend_FEE
+    container_name: sportxtreme-backend
+    ports:
+      - "8085:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/EVENTOS_FP_FEE?serverTimezone=Europe/Madrid
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: AlumnoIFP
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build: .
+    container_name: sportxtreme-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

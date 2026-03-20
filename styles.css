@@ -496,12 +496,10 @@
   .info-m-hover {
     position: absolute;
     inset: 0;
-    background: rgba(167,1,14,0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.35s;
   }
   
   .info-miembro:hover .info-m-hover { opacity: 1; }
