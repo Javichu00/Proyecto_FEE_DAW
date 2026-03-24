@@ -437,12 +437,12 @@
     <!-- HERO DEL EVENTO -->
     <div class="reserva-hero">
         <!-- PHP: src="<?= $evento['imagen'] ?>" -->
-        <img class="reserva-hero-img" src="MEDIA/REDBULL-RAMPAGE.webp" alt="Imagen del evento">
+        <img class="reserva-hero-img" src="" alt="Imagen del evento">
         <div class="reserva-hero-overlay"></div>
         <div class="reserva-hero-texto">
             <span class="reserva-etiqueta">Reservar evento</span>
             <!-- PHP: <?= strtoupper($evento['nombre']) ?> -->
-            <h1 class="reserva-titulo-hero"><span id="heroNombre">Red Bull Rampage</span></h1>
+            <h1 class="reserva-titulo-hero"><span id="heroNombre"></span></h1>
         </div>
     </div>
 
@@ -462,21 +462,21 @@
 
                         <div class="evento-foto-wrap">
                             <!-- PHP: <img class="evento-foto" src="<?= $evento['imagen'] ?>"> -->
-                            <img class="evento-foto" src="MEDIA/REDBULL-RAMPAGE.webp" alt="Foto del evento">
+                            <img class="evento-foto" src="" alt="Foto del evento">
                         </div>
 
                         <div class="evento-info-cols">
                             <!-- PHP: <?= $evento['nombre'] ?> -->
-                            <h2 class="evento-nombre" id="eventoNombre">Red Bull Rampage</h2>
+                            <h2 class="evento-nombre" id="eventoNombre"></h2>
                             <!-- PHP: <?= $evento['descripcion'] ?> -->
                             <p class="evento-descripcion" id="eventoDesc">
-                                El evento más brutal del freeride mundial vuelve a Utah. Los mejores riders del planeta se enfrentan a la montaña más intimidante para demostrar quién lleva el descenso extremo más lejos. Un espectáculo que solo se ve una vez en la vida.
+                                
                             </p>
                             <div class="evento-badges">
                                 <!-- PHP: <span class="evento-badge rojo"><?= $evento['categoria'] ?></span> -->
-                                <span class="evento-badge rojo" id="eventoCat">Mountain Bike</span>
-                                <span class="evento-badge" id="eventoNivel">Nivel Extremo</span>
-                                <span class="evento-badge" id="eventoMod">Presencial</span>
+                                <span class="evento-badge rojo" id="eventoCat"></span>
+                                <span class="evento-badge" id="eventoNivel"></span>
+                                <span class="evento-badge" id="eventoMod"></span>
                             </div>
                         </div>
 
@@ -494,31 +494,31 @@
                     <div class="evento-detalle-item">
                         <div class="evento-detalle-label">Fecha inicio</div>
                         <!-- PHP: <?= date('d M Y', strtotime($evento['fecha_inicio'])) ?> -->
-                        <div class="evento-detalle-valor" id="fechaInicio">12 ABR 2026</div>
+                        <div class="evento-detalle-valor" id="fechaInicio"></div>
                     </div>
 
                     <div class="evento-detalle-item">
                         <div class="evento-detalle-label">Fecha fin</div>
                         <!-- PHP: <?= date('d M Y', strtotime($evento['fecha_fin'])) ?> -->
-                        <div class="evento-detalle-valor" id="fechaFin">14 ABR 2026</div>
+                        <div class="evento-detalle-valor" id="fechaFin"></div>
                     </div>
 
                     <div class="evento-detalle-item">
                         <div class="evento-detalle-label">Horario</div>
                         <!-- PHP: <?= $evento['horario'] ?> -->
-                        <div class="evento-detalle-valor" id="eventoHorario">10:00 — 18:00</div>
+                        <div class="evento-detalle-valor" id="eventoHorario"></div>
                     </div>
 
                     <div class="evento-detalle-item">
                         <div class="evento-detalle-label">Ubicación</div>
                         <!-- PHP: <?= $evento['ubicacion'] ?> -->
-                        <div class="evento-detalle-valor" id="eventoUbicacion">Virgin, Utah</div>
+                        <div class="evento-detalle-valor" id="eventoUbicacion"></div>
                     </div>
 
                     <div class="evento-detalle-item">
                         <div class="evento-detalle-label">Precio / persona</div>
                         <!-- PHP: <?= number_format($evento['precio'], 2) ?>€ -->
-                        <div class="evento-detalle-valor grande" id="eventoPrecioDisplay">89,00€</div>
+                        <div class="evento-detalle-valor grande" id="eventoPrecioDisplay"></div>
                     </div>
 
                     <div class="evento-detalle-item">
@@ -539,7 +539,7 @@
                 <div class="reserva-form-header">
                     <h3>Tu reserva</h3>
                     <!-- PHP: <?= number_format($evento['precio'], 2) ?>€ -->
-                    <div class="precio-grande" id="formPrecio">89,00€</div>
+                    <div class="precio-grande" id="formPrecio"></div>
                     <div class="precio-por">por persona</div>
                 </div>
 
@@ -549,7 +549,7 @@
                         <label>Nº de asistentes</label>
                         <div class="asistentes-control">
                             <button class="asistentes-btn" id="btnMenos">−</button>
-                            <span class="asistentes-num" id="numAsistentes">1</span>
+                            <span class="asistentes-num" id="numAsistentes"></span>
                             <button class="asistentes-btn" id="btnMas">+</button>
                         </div>
                     </div>
@@ -557,13 +557,13 @@
                     <div class="reserva-sep"></div>
 
                     <div class="resumen-linea">
-                        <span id="resumenLinea">1 persona × 89,00€</span>
-                        <span id="resumenParcial">89,00€</span>
+                        <span id="resumenLinea">1 persona × </span>
+                        <span id="resumenParcial"></span>
                     </div>
 
                     <div class="resumen-total">
                         <span>Total</span>
-                        <span class="total-precio" id="totalPrecio">89,00€</span>
+                        <span class="total-precio" id="totalPrecio"></span>
                     </div>
 
                     <button class="btn-confirmar" id="btnConfirmar">Confirmar reserva</button>
