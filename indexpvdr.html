@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsXtreme - Panel Proveedor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesProveedor.css">
+</head>
+<body class="body-proveedor">
+
+    <!--HEADER-->
+    <header id="inicio">
+        <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
+        <div>
+            <a href="./acceso.html" class="btn-menu btn-acceder">Cerrar sesión</a>
+        </div>
+    </header>
+
+    <!--NAVBAR-->
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="./indexpvdr.html" class="active">Crear Evento</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENIDO PROVEEDOR -->
+    <div class="proveedor-wrapper">
+
+        <!-- CABECERA DE BIENVENIDA -->
+        <div class="proveedor-bienvenida">
+            <div class="proveedor-bienvenida-texto">
+                <span class="proveedor-etiqueta">Panel de Proveedor</span>
+                <h1>Publica tu <span>evento</span></h1>
+                <p>Rellena el formulario y tu evento estará disponible para que miles de aventureros lo reserven.</p>
+            </div>
+            <div class="proveedor-bienvenida-deco">
+                <div class="deco-circle"></div>
+                <div class="deco-circle deco-circle--2"></div>
+            </div>
+        </div>
+
+        <!-- FORMULARIO -->
+        <div class="proveedor-form-contenedor">
+
+            <div class="form-seccion-titulo">
+                <span class="form-seccion-num">01</span>
+                <span>Información básica</span>
+            </div>
+
+            <div class="form-grid-2">
+                <!-- Nombre -->
+                <div class="form-campo">
+                    <label class="form-label" for="nombre">Nombre del evento <span class="form-req">*</span></label>
+                    <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Ej: Vuelo en parapente sobre el Pirineo" required>
+                </div>
+
+                <!-- Tipo de evento -->
+                <div class="form-campo">
+                    <label class="form-label" for="idTipo">Tipo de evento <span class="form-req">*</span></label>
+                    <div class="form-select-wrapper">
+                        <select class="form-input form-select" id="idTipo" name="idTipo" required>
+                            <option value="" disabled selected>Selecciona un tipo</option>
+                            <option value="1">Show</option>
+                            <option value="2">Actividad</option>
+                            <option value="3">Curso</option>
+                        </select>
+                        <span class="form-select-arrow">▾</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-campo">
+                <label class="form-label" for="descripcion">Descripción <span class="form-req">*</span></label>
+                <textarea class="form-input form-textarea" id="descripcion" name="descripcion" placeholder="Describe tu evento con detalle: qué se va a hacer, qué incluye, qué no incluye, nivel recomendado..." required></textarea>
+                <span class="form-hint">Cuanto más detallada, más reservas conseguirás.</span>
+            </div>
+
+            <div class="form-sep"></div>
+
+            <div class="form-seccion-titulo">
+                <span class="form-seccion-num">02</span>
+                <span>Fechas y lugar</span>
+            </div>
+
+            <div class="form-grid-2">
+                <!-- Fecha inicio -->
+                <div class="form-campo">
+                    <label class="form-label" for="fechaInicio">Fecha de inicio <span class="form-req">*</span></label>
+                    <input class="form-input form-date" type="date" id="fechaInicio" name="fechaInicio" required>
+                </div>
+
+                <!-- Fecha fin -->
+                <div class="form-campo">
+                    <label class="form-label" for="fechaFin">Fecha de fin <span class="form-req">*</span></label>
+                    <input class="form-input form-date" type="date" id="fechaFin" name="fechaFin" required>
+                </div>
+            </div>
+
+            <!-- Localización -->
+            <div class="form-campo">
+                <label class="form-label" for="localizacion">Localización <span class="form-req">*</span></label>
+                <input class="form-input" type="text" id="localizacion" name="localizacion" placeholder="Ej: Huesca, Aragón / Playa de la Barceloneta, Barcelona" required>
+            </div>
+
+            <div class="form-sep"></div>
+
+            <div class="form-seccion-titulo">
+                <span class="form-seccion-num">03</span>
+                <span>Clasificación</span>
+            </div>
+
+            <div class="form-grid-2">
+                <!-- Categoría -->
+                <div class="form-campo">
+                    <label class="form-label">Categoría <span class="form-req">*</span></label>
+                    <div class="form-chips" id="chips-categoria">
+                        <button type="button" class="form-chip" data-value="AIRE" onclick="seleccionarChip(this, 'categoria')">
+                            <span class="chip-icon">🪂</span> Aire
+                        </button>
+                        <button type="button" class="form-chip" data-value="MAR" onclick="seleccionarChip(this, 'categoria')">
+                            <span class="chip-icon">🌊</span> Mar
+                        </button>
+                        <button type="button" class="form-chip" data-value="TIERRA" onclick="seleccionarChip(this, 'categoria')">
+                            <span class="chip-icon">⛰️</span> Tierra
+                        </button>
+                    </div>
+                    <input type="hidden" id="categoria" name="categoria" required>
+                </div>
+
+                <!-- Extremidad / Dificultad -->
+                <div class="form-campo">
+                    <label class="form-label">Dificultad <span class="form-req">*</span></label>
+                    <div class="form-chips" id="chips-extremidad">
+                        <button type="button" class="form-chip chip-facil" data-value="SUAVE" onclick="seleccionarChip(this, 'extremidad')">Fácil</button>
+                        <button type="button" class="form-chip chip-media" data-value="MEDIO" onclick="seleccionarChip(this, 'extremidad')">Media</button>
+                        <button type="button" class="form-chip chip-dificil" data-value="DURO" onclick="seleccionarChip(this, 'extremidad')">Difícil</button>
+                        <button type="button" class="form-chip chip-extremo" data-value="EXTREMO" onclick="seleccionarChip(this, 'extremidad')">Extremo</button>
+                    </div>
+                    <input type="hidden" id="extremidad" name="extremidad" required>
+                </div>
+
+                <!-- Estado: asignado automáticamente como NORMAL, el admin lo modifica -->
+                <input type="hidden" id="estado" name="estado" value="NORMAL">
+            </div>
+
+            <div class="form-sep"></div>
+
+            <div class="form-seccion-titulo">
+                <span class="form-seccion-num">04</span>
+                <span>Aforo y precio</span>
+            </div>
+
+            <div class="form-grid-2">
+                <!-- Aforo máximo -->
+                <div class="form-campo">
+                    <label class="form-label" for="aforoMaximo">Aforo máximo <span class="form-req">*</span></label>
+                    <div class="form-input-icon-wrapper">
+                        <input class="form-input form-input-icon" type="number" id="aforoMaximo" name="aforoMaximo" min="1" placeholder="Ej: 20" required>
+                        <span class="form-input-suffix">personas</span>
+                    </div>
+                </div>
+
+                <!-- Precio -->
+                <div class="form-campo">
+                    <label class="form-label" for="precio">Precio por persona <span class="form-req">*</span></label>
+                    <div class="form-input-icon-wrapper">
+                        <input class="form-input form-input-icon" type="number" id="precio" name="precio" min="0" step="0.01" placeholder="Ej: 75.00" required>
+                        <span class="form-input-suffix">€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-sep"></div>
+
+            <div class="form-seccion-titulo">
+                <span class="form-seccion-num">05</span>
+                <span>Imagen del evento</span>
+            </div>
+
+            <!-- Upload de foto -->
+            <div class="form-campo">
+                <label class="form-label">Foto del evento <span class="form-req">*</span></label>
+                <div class="form-upload-area" id="uploadArea" onclick="document.getElementById('foto').click()">
+                    <div class="upload-placeholder" id="uploadPlaceholder">
+                        <div class="upload-icono">📷</div>
+                        <div class="upload-texto">Haz clic o arrastra una imagen aquí</div>
+                        <div class="upload-subtexto">JPG, PNG, WEBP · Máx. 10 MB · Recomendado: 1920×650 px</div>
+                    </div>
+                    <img class="upload-preview" id="uploadPreview" src="" alt="Preview">
+                    <button type="button" class="upload-quitar hidden" id="uploadQuitar" onclick="quitarFoto(event)">✕ Quitar foto</button>
+                </div>
+                <input type="file" id="foto" name="foto" accept="image/*" style="display:none;" onchange="previewFoto(this)" required>
+            </div>
+
+            <!-- BOTÓN ENVIAR -->
+            <div class="form-footer">
+                <div class="form-aviso">
+                    <span>*</span> Todos los campos son obligatorios. Tu evento será revisado antes de publicarse.
+                </div>
+                <button type="button" class="btn-publicar" id="btnPublicar" onclick="enviarEvento()">
+                    <span id="btnPublicarTexto">Publicar evento</span>
+                    <span class="btn-publicar-arrow">→</span>
+                </button>
+            </div>
+
+            <!-- Mensaje de resultado -->
+            <div class="form-resultado hidden" id="formResultado"></div>
+
+        </div>
+    </div>
+
+    <script src="scriptAPI_IP.js"></script>
+    <script src="script.js"></script>
+    <script src="scriptProveedor.js"></script>
+</body>
+</html>
+    

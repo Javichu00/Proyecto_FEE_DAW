@@ -33,9 +33,11 @@ async function login() {
             const usuario = await response.json();
             sessionStorage.setItem('usuario', JSON.stringify(usuario));
             
-            // Si es admin (perfil id=1) va al panel, si no al index
+            // Redirige según perfil: 1 → Admin, 2 → Proveedor, resto → Cliente
             if (usuario.perfil.idPerfil === 1) {
                 window.location.href = 'indexAdmn.html';
+            } else if (usuario.perfil.idPerfil === 2) {
+                window.location.href = 'proveedor.html';
             } else {
                 window.location.href = 'index.html';
             }

@@ -2,6 +2,21 @@
    SPORTSXTREME — stylesEventos.css
    ============================================================ */
 
+/* ── LAYOUT PRINCIPAL ───────────────────── */
+
+.actividades-layout {
+  display: flex;
+  align-items: flex-start;
+}
+
+.filtros-panel {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
 /* ── GRID DE TARJETAS ───────────────────── */
 
 .actividades-grid {
