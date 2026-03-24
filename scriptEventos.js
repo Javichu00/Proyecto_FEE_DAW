@@ -261,14 +261,14 @@ function abrirPanel() {
     if (!panel || !overlay) return;
     panel.classList.add('abierto');
     overlay.classList.add('activo');
-    document.body.style.overflow = 'hidden'; // evita scroll del fondo
+    document.body.style.overflow = 'hidden';
 }
 
 function cerrarPanel() {
     if (!panel || !overlay) return;
     panel.classList.remove('abierto');
     overlay.classList.remove('activo');
-    document.body.style.overflow = ''; // restaura scroll
+    document.body.style.overflow = '';
 }
 
 if (btnAbrir)  btnAbrir.addEventListener('click', abrirPanel);
