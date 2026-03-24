@@ -211,6 +211,7 @@ function editarFila(trId, tabla, id) {
                 td.innerHTML = `<select class="input-celda">
                     <option ${valor==='ADMIN'?'selected':''} value="1">ADMIN</option>
                     <option ${valor==='CLIENTE'?'selected':''} value="2">CLIENTE</option>
+                    <option ${valor==='PROVEEDOR'?'selected':''} value="3">PROVEEDOR</option>
                 </select>`;
             } else {
                 td.innerHTML = `<input class="input-celda" type="text" value="${valor}">`;
