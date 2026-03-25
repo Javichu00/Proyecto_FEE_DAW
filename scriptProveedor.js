@@ -9,7 +9,7 @@ const usuarioProveedor = JSON.parse(sessionStorage.getItem('usuario'));
 
 if (!usuarioProveedor) {
     window.location.href = 'acceso.html';
-} else if (usuarioProveedor.perfil?.idPerfil !== 2) {
+} else if (usuarioProveedor.perfil?.idPerfil !== 3) {
     window.location.href = usuarioProveedor.perfil?.idPerfil === 1
         ? 'indexAdmn.html'
         : 'index.html';
@@ -147,7 +147,7 @@ async function enviarEvento() {
     formData.append('foto',         document.getElementById('foto').files[0]);
 
     try {
-        const response = await fetch(`${API}/eventos`, {
+        const response = await fetch(`${API}/eventos/crearEvento`, {
             method: 'POST',
             body: formData
             // NO incluir Content-Type — el navegador lo gestiona con el boundary correcto

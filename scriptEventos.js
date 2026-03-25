@@ -253,6 +253,8 @@ async function cargarDestacados() {
         const track      = document.getElementById('destacadosTrack');
         const dots       = document.getElementById('destacadosDots');
 
+        contenedor.style.display = 'block';
+
         lista.forEach((a, i) => {
             track.innerHTML += `
                 <div class="destacado-slide">
