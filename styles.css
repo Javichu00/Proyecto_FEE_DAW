@@ -1101,22 +1101,30 @@
        width: 100%;
      }
    
-     .actividades-layout {
-       display: flex;
-       min-height: calc(100vh - 120px);
-       background: var(--negro);
-       align-items: flex-start;
-       overflow: visible;
-     }
-   
-     .filtros-panel {
-       width: 100%;
-       top: 0;
-       position: static;
-       max-height: none;
-       overflow-y: visible;
-       align-self: auto;
-       border-right: none;
+    /* ── FILTROS / LAYOUT FIX DEFINITIVO ── */
+.actividades-layout {
+  display: flex;
+  min-height: calc(100vh - 125px);
+  background: var(--negro);
+  align-items: flex-start;
+  overflow: visible; /* ✅ CLAVE */
+}
+
+.filtros-panel {
+  position: sticky;
+  top: 125px;
+
+  width: 260px;
+  flex-shrink: 0;
+  align-self: flex-start;
+
+  background: var(--negro3);
+  padding: 30px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+
+  height: fit-content; /* ✅ PRO */
+  overflow: visible;   /* ✅ PRO */
+}T
        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
      }
    

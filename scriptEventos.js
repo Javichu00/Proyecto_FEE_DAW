@@ -22,6 +22,26 @@ const catMap = {
     TIERRA: 'Tierra'
 };
 
+/* ── Skeletons ────────────────────────────────────── */
+function mostrarSkeletons(n = 6) {
+    contador.textContent = '';
+    grid.innerHTML = Array(n).fill(`
+        <div class="skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-body">
+                <div class="skeleton-line title"></div>
+                <div class="skeleton-line text"></div>
+                <div class="skeleton-line text2"></div>
+                <div class="skeleton-line meta"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid #2a2a2a;">
+                    <div class="skeleton-line price"></div>
+                    <div class="skeleton-line btn"></div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
 /* ── Ordenar ──────────────────────────────────────── */
 function ordenarLista(lista) {
     const orden = document.getElementById('orden-select').value;
@@ -84,6 +104,7 @@ let listaActual = [];
 
 /* ── Cargar actividades ───────────────────────────── */
 async function cargarActividades(filtros = {}) {
+    mostrarSkeletons();
     try {
         const response = await fetch(`${API}/eventos/filtrar`, {
             method: 'POST',
@@ -187,6 +208,21 @@ document.querySelector('.btn-reset').addEventListener('click', function() {
 
 /* ── Cargar destacados ────────────────────────────── */
 async function cargarDestacados() {
+    // Skeleton del carrusel mientras carga
+    const contenedorSkel = document.getElementById('destacadosContenedor');
+    contenedorSkel.style.display = 'block';
+    contenedorSkel.innerHTML = `
+        <div class="skeleton-destacado" style="position:relative;overflow:hidden;">
+            <div class="skeleton-destacado-img skeleton-line" style="position:absolute;right:0;top:0;"></div>
+            <div class="skeleton-destacado-content">
+                <div class="skeleton-line" style="height:11px;width:40%;margin-bottom:4px;"></div>
+                <div class="skeleton-line" style="height:32px;width:80%;"></div>
+                <div class="skeleton-line" style="height:32px;width:60%;"></div>
+                <div class="skeleton-line" style="height:13px;width:55%;margin-top:4px;"></div>
+                <div class="skeleton-line" style="height:38px;width:140px;border-radius:4px;margin-top:8px;"></div>
+            </div>
+        </div>
+    `;
     try {
         const response = await fetch(`${API}/eventos/filtrar`, {
             method: 'POST',
@@ -194,16 +230,28 @@ async function cargarDestacados() {
             body: JSON.stringify({ idTipo, ESTADO: 'DESTACADO' })
         });
 
-        if (response.status === 204) return;
+        if (response.status === 204) {
+            contenedorSkel.style.display = 'none';
+            return;
+        }
 
         const lista = (await response.json()).filter(a => a.estado === 'DESTACADO');
-        if (lista.length === 0) return;
+        if (lista.length === 0) {
+            contenedorSkel.style.display = 'none';
+            return;
+        }
+
+        // Restaurar estructura del carrusel
+        contenedorSkel.innerHTML = `
+            <div class="destacados-track" id="destacadosTrack"></div>
+            <button class="destacados-btn destacados-prev" id="destacadosPrev">‹</button>
+            <button class="destacados-btn destacados-next" id="destacadosNext">›</button>
+            <div class="destacados-dots" id="destacadosDots"></div>
+        `;
 
         const contenedor = document.getElementById('destacadosContenedor');
         const track      = document.getElementById('destacadosTrack');
         const dots       = document.getElementById('destacadosDots');
-
-        contenedor.style.display = 'block';
 
         lista.forEach((a, i) => {
             track.innerHTML += `
@@ -248,6 +296,7 @@ async function cargarDestacados() {
 
     } catch (error) {
         console.error('Error cargando destacados:', error);
+        contenedorSkel.style.display = 'none';
     }
 }
 

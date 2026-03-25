@@ -36,7 +36,7 @@ async function login() {
             // Redirige según perfil: 1 → Admin, 2 → Proveedor, resto → Cliente
             if (usuario.perfil.idPerfil === 1) {
                 window.location.href = 'indexAdmn.html';
-            } else if (usuario.perfil.idPerfil === 2) {
+            } else if (usuario.perfil.idPerfil === 3) {
                 window.location.href = 'proveedor.html';
             } else {
                 window.location.href = 'index.html';
