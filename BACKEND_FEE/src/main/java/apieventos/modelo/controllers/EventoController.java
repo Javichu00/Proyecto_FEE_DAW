@@ -1,13 +1,22 @@
 package apieventos.modelo.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import apieventos.modelo.dto.EventoFiltroDTO;
 import apieventos.modelo.entities.Evento;
+import apieventos.modelo.entities.Tipo;
+import apieventos.modelo.enums.CategoriaEvento;
+import apieventos.modelo.enums.EstadoEvento;
+import apieventos.modelo.enums.Extremidad;
 import apieventos.modelo.services.EventoService;
+import apieventos.modelo.services.ImgBBService;
 
 @RestController
 @RequestMapping("/eventos")
@@ -17,7 +26,10 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
-    // GET /eventos 
+    @Autowired
+    private ImgBBService imgBBService;
+
+    // GET /eventos
     @GetMapping
     public ResponseEntity<List<Evento>> getAll() {
         List<Evento> lista = eventoService.findAll();
@@ -26,7 +38,7 @@ public class EventoController {
         return ResponseEntity.ok(lista);
     }
 
-    // GET /eventos/1 
+    // GET /eventos/1
     @GetMapping("/{id}")
     public ResponseEntity<Evento> getOne(@PathVariable Integer id) {
         Evento evento = eventoService.findOne(id);
@@ -35,7 +47,7 @@ public class EventoController {
         return ResponseEntity.ok(evento);
     }
 
-    // POST /eventos/filtrar 
+    // POST /eventos/filtrar
     @PostMapping("/filtrar")
     public ResponseEntity<List<Evento>> filtrar(@RequestBody EventoFiltroDTO filtro) {
         List<Evento> lista = eventoService.findAll();
@@ -93,14 +105,59 @@ public class EventoController {
         return ResponseEntity.ok(lista);
     }
 
-    // POST /eventos 
+    // POST /eventos
     @PostMapping
     public ResponseEntity<Evento> create(@RequestBody Evento evento) {
         Evento nuevo = eventoService.insertOne(evento);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
-    // PUT /eventos 
+    // POST /eventos/crearEvento (Usa una foto)
+    @PostMapping(value = "/crearEvento", consumes = "multipart/form-data")
+    public ResponseEntity<Evento> crearEvento(
+            @RequestParam String nombre,
+            @RequestParam String descripcion,
+            @RequestParam String fechaInicio,
+            @RequestParam String fechaFin,
+            @RequestParam String localizacion,
+            @RequestParam Integer aforoMaximo,
+            @RequestParam Double precio,
+            @RequestParam Integer idTipo,
+            @RequestParam String estado,
+            @RequestParam String categoria,
+            @RequestParam String extremidad,
+            @RequestParam MultipartFile foto) {
+        try {
+            String rutaFoto = imgBBService.subirImagen(foto);
+
+            Evento evento = new Evento();
+            evento.setNombre(nombre);
+            evento.setDescripcion(descripcion);
+            evento.setFechaInicio(LocalDate.parse(fechaInicio));
+            evento.setFechaFin(LocalDate.parse(fechaFin));
+            evento.setLocalizacion(localizacion);
+            evento.setAforoMaximo(aforoMaximo);
+            evento.setPrecio(precio);
+            evento.setEstado(EstadoEvento.valueOf(estado));
+            evento.setCategoria(CategoriaEvento.valueOf(categoria));
+            evento.setExtremidad(Extremidad.valueOf(extremidad));
+            evento.setFechaAlta(LocalDate.now());
+            evento.setRutaFoto(rutaFoto);
+
+            Tipo tipo = new Tipo();
+            tipo.setIdTipo(idTipo);
+            evento.setTipo(tipo);
+
+            Evento nuevo = eventoService.insertOne(evento);
+            return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    // PUT /eventos
     @PutMapping
     public ResponseEntity<Evento> update(@RequestBody Evento evento) {
         Evento actualizado = eventoService.updateOne(evento);
@@ -109,7 +166,7 @@ public class EventoController {
         return ResponseEntity.ok(actualizado);
     }
 
-    // DELETE /eventos/1 
+    // DELETE /eventos/1
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         int resultado = eventoService.deleteOne(id);
