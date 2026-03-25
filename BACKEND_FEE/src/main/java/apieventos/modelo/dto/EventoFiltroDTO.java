@@ -10,14 +10,14 @@ public class EventoFiltroDTO {
 
     private String nombre;
     private Integer idTipo;
-    private List<CategoriaEvento> categorias;    // lista, no uno solo
-    private List<Extremidad> extremidades;        // lista, no uno solo
+    private List<CategoriaEvento> categorias;
+    private List<Extremidad> extremidades;    
     private Double precioMin;
     private Double precioMax;
     private EstadoEvento estado;
-    private LocalDate fechaMin;                   // nuevo
-    private LocalDate fechaMax;                   // nuevo
-    private Integer aforoMinimo;                  // nuevo
+    private LocalDate fechaMin;               
+    private LocalDate fechaMax;               
+    private Integer aforoMinimo;              
 
     public EventoFiltroDTO() {}
 

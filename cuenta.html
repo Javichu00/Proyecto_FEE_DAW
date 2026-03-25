@@ -9,16 +9,16 @@
 </head>
 <body class="body-perfil">
 
-    <!--HEADER-->
+   
     <header id="inicio">
-        <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
+        <a href="./index.html" id="IMAGEN-LOGO"><img class="img-logo" src="MEDIA/logo-recortado.png" ></a>
         <div>   
             <a href="./reservas.html" class="btn-menu btn-reservas">Mis Reservas</a>
             <a href="./acceso.html" class="btn-menu btn-acceder">Acceder</a>
         </div>
     </header>
     
-    <!--NAVBAR-->
+   
     <nav class="main-nav">
         <ul class="nav-list">
             <li id="li-admin"><a href="./indexAdmn.html">Panel de administracion</a></li>
@@ -29,11 +29,11 @@
         </ul>
     </nav>
 
-    <!-- CONTENIDO PERFIL -->
+
     <div class="perfil-wrapper">
         <div class="perfil-box">
 
-            <!-- Cabecera con avatar -->
+        
             <div class="perfil-header">
                 <div class="perfil-avatar" id="avatarInicial"></div>
                 <div class="perfil-header-info">
@@ -42,12 +42,12 @@
                 </div>
             </div>
 
-            <!-- Campos -->
+   
             <div class="perfil-body">
                 <div class="perfil-seccion-titulo">Información personal</div>
                 <div class="perfil-sep"></div>
 
-                <!-- Nombre completo -->
+             
                 <div class="perfil-campo" id="campo-nombreCompleto">
                     <div class="perfil-campo-info">
                         <div class="perfil-campo-label">Nombre completo</div>
@@ -58,7 +58,7 @@
                     <button class="btn-editar" onclick="toggleEdicion('nombreCompleto')">Editar</button>
                 </div>
 
-                <!-- Email -->
+               
                 <div class="perfil-campo" id="campo-email">
                     <div class="perfil-campo-info">
                         <div class="perfil-campo-label">Correo electrónico</div>
@@ -72,7 +72,7 @@
                 <div class="perfil-seccion-titulo" style="margin-top: 8px;">Seguridad</div>
                 <div class="perfil-sep"></div>
 
-                <!-- Contraseña -->
+                
                 <div class="perfil-campo" id="campo-contrasena">
                     <div class="perfil-campo-info">
                         <div class="perfil-campo-label">Contraseña</div>
@@ -82,7 +82,7 @@
                     <button class="btn-editar" onclick="abrirPopupPassword()">Editar</button>
                 </div>
 
-                <!-- Cerrar sesión -->
+                
                 <div style="padding: 20px 40px 0;">
                     <div class="perfil-sep"></div>
                 </div>
@@ -94,7 +94,7 @@
                     <button class="btn-danger" onclick="cerrarSesion()">Cerrar sesión</button>
                 </div>
 
-                <!-- Eliminar cuenta -->
+              
                 <div style="padding: 12px 40px 0;"></div>
                 <div class="perfil-zona-danger">
                     <div>
@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    <!-- POPUP -->
+   
     <div class="popup-overlay hidden" id="popupOverlay">
         <div class="popup-box">
             <div class="popup-header">
@@ -133,7 +133,7 @@
         </div>
     </div>
     
-    <!--FOOTER--> 
+  
     <footer class="footer">
         <div class="footer-content">
           <div>

@@ -3,9 +3,7 @@ let datosEventos = [];
 let datosUsuarios = [];
 let datosReservas = [];
 
-// ─────────────────────────────────────────
-// CARGA INICIAL
-// ─────────────────────────────────────────
+
 async function cargarDatos() {
     await Promise.all([
         cargarEventos(),
@@ -46,9 +44,7 @@ async function cargarReservas() {
     } catch (e) { console.error('Error reservas:', e); }
 }
 
-// ─────────────────────────────────────────
-// TABS
-// ─────────────────────────────────────────
+
 function cambiarTabla(tabla) {
     tablaActual = tabla;
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -58,9 +54,7 @@ function cambiarTabla(tabla) {
     document.getElementById('admin-buscador').value = '';
 }
 
-// ─────────────────────────────────────────
-// BUSCADOR
-// ─────────────────────────────────────────
+
 function filtrarTabla() {
     const q = document.getElementById('admin-buscador').value.toLowerCase();
     if (tablaActual === 'eventos') {
@@ -81,9 +75,7 @@ function filtrarTabla() {
     }
 }
 
-// ─────────────────────────────────────────
-// RENDER EVENTOS
-// ─────────────────────────────────────────
+
 function renderEventos(lista) {
     const tbody = document.getElementById('tbody-eventos');
     tbody.innerHTML = '';
@@ -114,9 +106,7 @@ function renderEventos(lista) {
     });
 }
 
-// ─────────────────────────────────────────
-// RENDER USUARIOS
-// ─────────────────────────────────────────
+
 function renderUsuarios(lista) {
     const tbody = document.getElementById('tbody-usuarios');
     tbody.innerHTML = '';
@@ -139,9 +129,7 @@ function renderUsuarios(lista) {
     });
 }
 
-// ─────────────────────────────────────────
-// RENDER RESERVAS
-// ─────────────────────────────────────────
+
 function renderReservas(lista) {
     const tbody = document.getElementById('tbody-reservas');
     tbody.innerHTML = '';
@@ -167,9 +155,7 @@ function renderReservas(lista) {
     });
 }
 
-// ─────────────────────────────────────────
-// EDITAR FILA
-// ─────────────────────────────────────────
+
 function editarFila(trId, tabla, id) {
     const tr = document.getElementById(trId);
     const btn = tr.querySelector('.btn-editar-fila');
@@ -223,9 +209,7 @@ function editarFila(trId, tabla, id) {
     }
 }
 
-// ─────────────────────────────────────────
-// GUARDAR FILA
-// ─────────────────────────────────────────
+
 async function guardarFila(trId, tabla, id) {
     const tr = document.getElementById(trId);
     const btn = tr.querySelector('.btn-editar-fila');
@@ -278,9 +262,7 @@ async function guardarFila(trId, tabla, id) {
     }
 }
 
-// ─────────────────────────────────────────
-// FILA CREAR USUARIO
-// ─────────────────────────────────────────
+
 function renderFilaCrearUsuario() {
     const tbody = document.getElementById('tbody-usuarios');
     const tr = document.createElement('tr');
@@ -297,6 +279,7 @@ function renderFilaCrearUsuario() {
             <select class="input-celda" id="new-perfil">
                 <option value="1">ADMIN</option>
                 <option value="2" selected>CLIENTE</option>
+                <option value="3" selected>PROVEEDOR</option>
             </select>
         </td>
         <td>
@@ -333,9 +316,7 @@ async function crearUsuario() {
     }
 }
 
-// ─────────────────────────────────────────
-// FILA CREAR RESERVA
-// ─────────────────────────────────────────
+
 function renderFilaCrearReserva() {
     const tbody = document.getElementById('tbody-reservas');
     const tr = document.createElement('tr');
@@ -419,7 +400,4 @@ async function crearReserva() {
     }
 }
 
-// ─────────────────────────────────────────
-// INICIO
-// ─────────────────────────────────────────
 cargarDatos();

@@ -22,7 +22,7 @@ const catMap = {
     TIERRA: 'Tierra'
 };
 
-/* ── Skeletons ────────────────────────────────────── */
+
 function mostrarSkeletons(n = 6) {
     contador.textContent = '';
     grid.innerHTML = Array(n).fill(`
@@ -42,7 +42,7 @@ function mostrarSkeletons(n = 6) {
     `).join('');
 }
 
-/* ── Ordenar ──────────────────────────────────────── */
+
 function ordenarLista(lista) {
     const orden = document.getElementById('orden-select').value;
     const copia = [...lista];
@@ -56,7 +56,7 @@ function ordenarLista(lista) {
     }
 }
 
-/* ── Render tarjetas ──────────────────────────────── */
+
 function renderLista(lista) {
     contador.textContent = `(${lista.length})`;
     grid.innerHTML = '';
@@ -86,9 +86,9 @@ function renderLista(lista) {
                     <h4>${a.nombre}</h4>
                     <p>${a.descripcion.substring(0, 100)}...</p>
                     <div class="actividad-meta">
-                        <span>📍 ${a.localizacion}</span>
-                        <span>👥 Aforo: ${a.aforoMaximo}</span>
-                        <span>📅 ${fecha}</span>
+                        <span>${a.localizacion}</span>
+                        <span>Aforo: ${a.aforoMaximo}</span>
+                        <span>${fecha}</span>
                     </div>
                     <div class="actividad-footer">
                         <span class="actividad-precio">${a.precio}€</span>
@@ -102,7 +102,7 @@ function renderLista(lista) {
 
 let listaActual = [];
 
-/* ── Cargar actividades ───────────────────────────── */
+
 async function cargarActividades(filtros = {}) {
     mostrarSkeletons();
     try {
@@ -131,7 +131,7 @@ async function cargarActividades(filtros = {}) {
     }
 }
 
-/* ── Actualizar sliders con datos reales ─────────── */
+
 function actualizarSliders(lista) {
     const maxPrecio = Math.ceil(Math.max(...lista.map(a => a.precio)));
     const maxAforo  = Math.max(...lista.map(a => a.aforoMaximo));
@@ -148,7 +148,6 @@ function actualizarSliders(lista) {
     window._maxAforo  = maxAforo;
 }
 
-/* ── Aplicar filtros ──────────────────────────────── */
 function aplicarFiltros() {
     const filtros = {};
 
@@ -177,7 +176,7 @@ function aplicarFiltros() {
     cargarActividades(filtros);
 }
 
-/* ── Limpiar filtros ──────────────────────────────── */
+
 function limpiarFiltros() {
     document.querySelectorAll('.filtro-checks input').forEach(cb => cb.checked = false);
     document.getElementById('filtro-precio-min').value = 0;
@@ -192,7 +191,7 @@ function limpiarFiltros() {
     cargarActividades();
 }
 
-/* ── Listeners de filtros ─────────────────────────── */
+
 document.querySelectorAll('.filtro-checks input').forEach(cb => cb.addEventListener('change', aplicarFiltros));
 document.getElementById('filtro-precio-min').addEventListener('input', aplicarFiltros);
 document.getElementById('filtro-precio-max').addEventListener('input', aplicarFiltros);
@@ -206,9 +205,7 @@ document.querySelector('.btn-reset').addEventListener('click', function() {
     cerrarPanel();
 });
 
-/* ── Cargar destacados ────────────────────────────── */
 async function cargarDestacados() {
-    // Skeleton del carrusel mientras carga
     const contenedorSkel = document.getElementById('destacadosContenedor');
     contenedorSkel.style.display = 'block';
     contenedorSkel.innerHTML = `
@@ -241,7 +238,7 @@ async function cargarDestacados() {
             return;
         }
 
-        // Restaurar estructura del carrusel
+        
         contenedorSkel.innerHTML = `
             <div class="destacados-track" id="destacadosTrack"></div>
             <button class="destacados-btn destacados-prev" id="destacadosPrev">‹</button>
@@ -263,8 +260,8 @@ async function cargarDestacados() {
                         <span class="destacado-etiqueta">Destacado</span>
                         <h3 class="destacado-nombre">${a.nombre}</h3>
                         <div class="destacado-meta">
-                            <span>📍 ${a.localizacion}</span>
-                            <span>📅 ${a.fechaInicio ? new Date(a.fechaInicio).toLocaleDateString('es-ES') : ''}</span>
+                            <span>${a.localizacion}</span>
+                            <span>${a.fechaInicio ? new Date(a.fechaInicio).toLocaleDateString('es-ES') : ''}</span>
                             <span>${a.precio}€</span>
                         </div>
                         <a href="reservarEvento.html?id=${a.idEvento}" class="destacado-btn-reservar">Reservar</a>
@@ -302,7 +299,7 @@ async function cargarDestacados() {
     }
 }
 
-/* ── Panel de filtros móvil ───────────────────────── */
+
 var btnAbrir   = document.getElementById('btnAbrirFiltros');
 var btnCerrar  = document.getElementById('btnCerrarFiltros');
 var overlay    = document.getElementById('filtrosOverlay');
@@ -326,6 +323,6 @@ if (btnAbrir)  btnAbrir.addEventListener('click', abrirPanel);
 if (btnCerrar) btnCerrar.addEventListener('click', cerrarPanel);
 if (overlay)   overlay.addEventListener('click', cerrarPanel);
 
-/* ── Init ─────────────────────────────────────────── */
+/*  Init  */
 cargarActividades();
 cargarDestacados();

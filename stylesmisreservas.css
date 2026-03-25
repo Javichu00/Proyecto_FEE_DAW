@@ -1,9 +1,4 @@
-/* ============================================
-   RESERVAS — SportsXtreme
-   stylesReservas.css
-   ============================================ */
-
-   :root {
+:root {
     --rojo:       #e8000d;
     --rojo-dark:  #b8000a;
     --rojo-glow:  rgba(232, 0, 13, 0.25);
@@ -38,7 +33,7 @@ body {
     min-height: 100vh;
 }
 
-/* ── HERO ─────────────────────────────────── */
+
 .reservas-wrapper {
     max-width: 1100px;
     margin: 0 auto;
@@ -122,7 +117,7 @@ body {
     margin-top: 4px;
 }
 
-/* ── TABS ─────────────────────────────────── */
+
 .reservas-tabs {
     display: flex;
     gap: 6px;
@@ -188,18 +183,18 @@ body {
 .tab-badge.pendiente { background: var(--amarillo); color: #000; }
 .tab-badge.historial  { background: var(--negro-5); color: var(--gris-light); }
 
-/* ── PANELS ───────────────────────────────── */
+
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* ── LISTA DE RESERVAS ────────────────────── */
+
 .reservas-lista {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-/* ── TARJETA ──────────────────────────────── */
+
 .reserva-card {
     background: var(--negro-2);
     border: 1px solid var(--negro-5);
@@ -222,7 +217,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Franja lateral de color según tipo */
 .reserva-card .card-stripe { grid-column: 1; }
 .reserva-card .card-stripe.actividad { background: var(--rojo); }
 .reserva-card .card-stripe.curso     { background: var(--azul); }
@@ -236,7 +230,7 @@ body {
     gap: 10px;
 }
 
-/* Cabecera tarjeta */
+
 .card-head {
     display: flex;
     align-items: flex-start;
@@ -292,7 +286,7 @@ body {
     letter-spacing: 0.02em;
 }
 
-/* Meta fila */
+
 .card-meta {
     display: flex;
     flex-wrap: wrap;
@@ -312,7 +306,7 @@ body {
     opacity: 0.7;
 }
 
-/* Precio */
+
 .card-precio-row {
     display: flex;
     align-items: center;
@@ -351,7 +345,7 @@ body {
     font-weight: 600;
 }
 
-/* Expiración pago pendiente */
+
 .card-expira {
     display: inline-flex;
     align-items: center;
@@ -365,7 +359,7 @@ body {
     font-weight: 600;
 }
 
-/* Acciones */
+
 .card-acciones {
     display: flex;
     gap: 10px;
@@ -430,7 +424,7 @@ body {
     border-color: var(--verde);
 }
 
-/* Valoración guardada */
+
 .card-valoracion {
     display: flex;
     align-items: center;
@@ -441,7 +435,7 @@ body {
 
 .card-valoracion .estrellas-val { color: #fbbf24; letter-spacing: 2px; }
 
-/* ── EMPTY STATE ──────────────────────────── */
+
 .empty-state {
     text-align: center;
     padding: 80px 20px;
@@ -484,7 +478,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* ── MODAL ────────────────────────────────── */
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -581,7 +575,7 @@ body {
     box-shadow: var(--sombra-roja);
 }
 
-/* ── MODAL VALORAR ────────────────────────── */
+
 .estrellas {
     display: flex;
     justify-content: center;
@@ -611,7 +605,7 @@ body {
 }
 #comentarioValoracion:focus { border-color: var(--rojo); }
 
-/* ── TOAST ────────────────────────────────── */
+
 .toast {
     position: fixed;
     bottom: 30px;
@@ -640,7 +634,7 @@ body {
 .toast.verde { border-left-color: var(--verde); }
 .toast.amarillo { border-left-color: var(--amarillo); }
 
-/* ── RESPONSIVE ───────────────────────────── */
+
 @media (max-width: 640px) {
     .reservas-hero { flex-direction: column; align-items: flex-start; }
 

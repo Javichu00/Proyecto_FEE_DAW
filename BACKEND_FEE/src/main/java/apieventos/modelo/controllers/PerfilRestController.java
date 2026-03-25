@@ -67,7 +67,5 @@ public class PerfilRestController {
 		default: return "";
 		}
 	}
-	/*			
-	@GetMapping("/nombre/{subcadena}")
-*/	 
+	
 }

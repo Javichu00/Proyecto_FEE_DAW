@@ -1,4 +1,4 @@
-// Tabs
+
 function showTab(tabId, btn) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -6,14 +6,14 @@ function showTab(tabId, btn) {
     btn.classList.add('active');
 }
 
-// Mostrar/ocultar contraseña
+
 function togglePass(id, btn) {
     const input = document.getElementById(id);
     input.type = input.type === 'password' ? 'text' : 'password';
     btn.textContent = input.type === 'password' ? '👁️' : '🙈';
 }
 
-// LOGIN
+
 async function login() {
     const email    = document.getElementById('login-email').value.trim();
     const password = document.getElementById('pass3').value.trim();
@@ -33,15 +33,14 @@ async function login() {
             const usuario = await response.json();
             sessionStorage.setItem('usuario', JSON.stringify(usuario));
             
-            // Redirige según perfil: 1 → Admin, 2 → Cliente, resto → Proveedor
+          
             if (usuario.perfil.idPerfil === 1) {
                 window.location.href = 'indexAdmn.html';
             } else if (usuario.perfil.idPerfil === 3) {
                 window.location.href = 'proveedor.html';
             } else {
                 window.location.href = 'index.html';
-            } 
-            
+            }
         } else if (response.status === 401) {
             alert('Email o contraseña incorrectos');
         } else if (response.status === 403) {
@@ -56,7 +55,6 @@ async function login() {
     }
 }
 
-// REGISTRO
 async function register() {
     const nombre   = document.getElementById('reg-nombre').value.trim();
     const email    = document.getElementById('reg-email').value.trim();
@@ -82,7 +80,7 @@ async function register() {
 
         if (response.status === 201) {
             alert('Cuenta creada correctamente, ya puedes iniciar sesión');
-            // Cambiamos al tab de login
+        
             document.querySelector('.tab:last-child').click();
         } else if (response.status === 409) {
             alert('Ese email ya está registrado');

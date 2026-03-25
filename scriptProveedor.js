@@ -1,10 +1,3 @@
-/* ============================================================
-   SPORTSXTREME — scriptProveedor.js
-   ============================================================ */
-
-// ── PROTECCIÓN DE RUTA ────────────────────────────────────────
-// Solo los proveedores (idPerfil === 2) pueden acceder a esta página.
-// Ajusta el idPerfil si en tu BD usas un número distinto para proveedor.
 const usuarioProveedor = JSON.parse(sessionStorage.getItem('usuario'));
 
 if (!usuarioProveedor) {
@@ -15,7 +8,6 @@ if (!usuarioProveedor) {
         : 'index.html';
 }
 
-// ── CHIPS: selección única por grupo ──────────────────────────
 function seleccionarChip(btn, grupo) {
     const contenedor = btn.closest('.form-chips');
     contenedor.querySelectorAll('.form-chip').forEach(c => c.classList.remove('activo'));
@@ -23,7 +15,6 @@ function seleccionarChip(btn, grupo) {
     document.getElementById(grupo).value = btn.dataset.value;
 }
 
-// ── PREVIEW DE FOTO ───────────────────────────────────────────
 function previewFoto(input) {
     const area      = document.getElementById('uploadArea');
     const preview   = document.getElementById('uploadPreview');
@@ -53,7 +44,6 @@ function quitarFoto(event) {
     quitarBtn.classList.add('hidden');
 }
 
-// Drag & drop
 (function initDragDrop() {
     const area = document.getElementById('uploadArea');
     if (!area) return;
@@ -81,7 +71,7 @@ function quitarFoto(event) {
     });
 })();
 
-// ── VALIDACIÓN ────────────────────────────────────────────────
+
 function validarFormulario() {
     const campos = [
         { id: 'nombre',       label: 'Nombre del evento' },
@@ -117,7 +107,7 @@ function validarFormulario() {
     return null;
 }
 
-// ── ENVÍO AL BACKEND ──────────────────────────────────────────
+
 async function enviarEvento() {
     const error = validarFormulario();
     if (error) {
@@ -141,7 +131,7 @@ async function enviarEvento() {
     formData.append('aforoMaximo',  document.getElementById('aforoMaximo').value);
     formData.append('precio',       document.getElementById('precio').value);
     formData.append('idTipo',       document.getElementById('idTipo').value);
-    formData.append('estado',       document.getElementById('estado').value); // siempre "NORMAL"
+    formData.append('estado',       document.getElementById('estado').value); 
     formData.append('categoria',    document.getElementById('categoria').value);
     formData.append('extremidad',   document.getElementById('extremidad').value);
     formData.append('foto',         document.getElementById('foto').files[0]);
@@ -150,7 +140,6 @@ async function enviarEvento() {
         const response = await fetch(`${API}/eventos/crearEvento`, {
             method: 'POST',
             body: formData
-            // NO incluir Content-Type — el navegador lo gestiona con el boundary correcto
         });
 
         if (response.status === 201 || response.ok) {
@@ -171,7 +160,7 @@ async function enviarEvento() {
     }
 }
 
-// ── HELPERS ───────────────────────────────────────────────────
+
 function mostrarResultado(texto, tipo) {
     const el = document.getElementById('formResultado');
     el.textContent = texto;

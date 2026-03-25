@@ -1,4 +1,3 @@
-/* ===== PERFIL ===== */
 .body-perfil {
     min-height: 100vh;
     display: flex;
@@ -36,7 +35,7 @@
     overflow: hidden;
 }
 
-/* Cabecera del perfil */
+
 .perfil-header {
     background: linear-gradient(135deg, #1a0505 0%, #2a0808 100%);
     border-bottom: 2px solid rgba(163, 1, 14, 0.4);
@@ -76,7 +75,7 @@
     letter-spacing: 0.3px;
 }
 
-/* Cuerpo con los campos */
+
 .perfil-body {
     padding: 10px 0 30px;
 }
@@ -90,14 +89,14 @@
     padding: 24px 40px 10px;
 }
 
-/* Separador visual */
+
 .perfil-sep {
     height: 1px;
     background: rgba(255,255,255,0.05);
     margin: 0 0 4px;
 }
 
-/* Fila de campo */
+
 .perfil-campo {
     display: flex;
     align-items: center;
@@ -134,7 +133,7 @@
     text-overflow: ellipsis;
 }
 
-/* Input de edición */
+
 .perfil-campo-input {
     display: none;
     width: 100%;
@@ -160,7 +159,7 @@
     color: rgba(255,255,255,0.3);
 }
 
-/* Input visible cuando está en modo edición */
+
 .perfil-campo.editando .perfil-campo-valor {
     display: none;
 }
@@ -175,7 +174,7 @@
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Botón editar / guardar */
+
 .btn-editar {
     flex-shrink: 0;
     background: transparent;
@@ -212,14 +211,14 @@
     transform: scale(0.96);
 }
 
-/* Campo de contraseña — puntos en modo lectura */
+
 .perfil-campo-valor.pass-dots {
     letter-spacing: 4px;
     font-size: 18px;
     color: rgba(255,255,255,0.5);
 }
 
-/* Mensaje de confirmación */
+
 .perfil-guardado-msg {
     display: none;
     font-size: 11px;
@@ -234,7 +233,7 @@
     to   { opacity: 1; }
 }
 
-/* Zona peligrosa */
+
 .perfil-zona-danger {
     margin: 10px 40px 0;
     padding: 18px 22px;
@@ -278,7 +277,7 @@
     border-color: var(--rojo);
     color: white;
 }
-/* ===== POPUP / MODAL ===== */
+
 .popup-overlay {
     position: fixed;
     inset: 0;

@@ -86,7 +86,6 @@ public class Evento implements Serializable {
         this.extremidad = extremidad;
     }
 
-    // Getters y Setters
     public Integer getIdEvento() { return idEvento; }
     public void setIdEvento(Integer idEvento) { this.idEvento = idEvento; }
 

@@ -1,4 +1,3 @@
-/* --- RESET Y BASES --- */
 :root {
     --bg-negro: #080808;
     --bg-tarjeta: #121212;
@@ -15,16 +14,15 @@ body {
     color: var(--blanco);
 }
 
-/* --- CABECERA --- */
 
-/* --- LAYOUT --- */
+
 .dashboard-container {
     padding: 30px 40px;
     max-width: 1600px;
     margin: 0 auto;
 }
 
-/* --- TARJETAS DE ESTADÍSTICAS --- */
+
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -67,7 +65,7 @@ body {
 
 
 
-/* --- SECCIÓN TABLA Y SIDEBAR --- */
+
 .main-layout {
     display: grid;
     grid-template-columns: 1fr 300px;
@@ -111,7 +109,7 @@ body {
     border-radius: 4px;
 }
 
-/* --- TABLA --- */
+
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -140,7 +138,7 @@ body {
 .status-pill.public { background: rgba(46, 204, 113, 0.15); color: var(--verde-status); }
 .status-pill.draft { background: rgba(255, 255, 255, 0.1); color: #ccc; }
 
-/* --- SIDEBAR DERECHO --- */
+
 .info-sidebar {
     display: flex;
     flex-direction: column;
@@ -164,7 +162,7 @@ body {
     display: flex;
     gap: 8px;
     margin-bottom: 20px;
-    width: fit-content;  /* los tabs no se estiran con el contenedor */
+    width: fit-content;  
 }
 
 .admin-tab {

@@ -1,7 +1,3 @@
-/* ============================================================
-   SPORTSXTREME — styles.css
-   ============================================================ */
-
    *,
    *::before,
    *::after {
@@ -26,12 +22,11 @@
    }
    
    html {
-     overflow-x: hidden;
+     overflow-x: clip;
    }
    
    body {
-     overflow-y: scroll;
-     overflow-x: hidden;
+     overflow-x: clip;
      display: flex;
      flex-direction: column;
      font-family: Arial, Helvetica, sans-serif;
@@ -49,7 +44,7 @@
    }
    
    
-   /* ── HEADER ── */
+   /*  HEADER  */
    header {
      display: flex;
      justify-content: space-between;
@@ -104,7 +99,7 @@
    }
    
    
-   /* ── NAVBAR ── */
+   /*  NAVBAR  */
    .main-nav {
      background: var(--negro3);
      position: sticky;
@@ -138,7 +133,7 @@
    }
    
    
-   /* ── CARRUSEL ── */
+   /*  CARRUSEL  */
    .carrusel-contenedor {
      position: relative;
      width: 100%;
@@ -275,7 +270,7 @@
    }
    
    
-   /* ── SECCIONES INFO ── */
+   /*  SECCIONES INFO  */
    .info-contenedor {
      max-width: 1280px;
      margin: 0 auto;
@@ -292,7 +287,7 @@
    }
    
    
-   /* ── SCROLL REVEAL ── */
+   /*  SCROLL REVEAL  */
    .reveal,
    .reveal-l,
    .reveal-r {
@@ -320,7 +315,7 @@
    }
    
    
-   /* ── TIPOGRAFÍA ── */
+   /*  TIPOGRAFÍA  */
    .info-etiqueta {
      display: block;
      font-size: 1rem;
@@ -371,7 +366,7 @@
    }
    
    
-   /* ── ESTADÍSTICAS ── */
+   /*  ESTADÍSTICAS  */
    .info-stats-bar {
      background: var(--rojo-oscuro);
    }
@@ -409,7 +404,7 @@
    }
    
    
-   /* ── QUIÉNES SOMOS ── */
+   /*  QUIÉNES SOMOS  */
    .info-quienes-grid {
      display: grid;
      grid-template-columns: 1fr 1fr;
@@ -441,7 +436,7 @@
    }
    
    
-   /* ── SERVICIOS ── */
+   /*  SERVICIOS  */
    .info-sec-header {
      margin-bottom: 48px;
    }
@@ -494,7 +489,7 @@
    }
    
    
-   /* ── EQUIPO ── */
+   /*  EQUIPO  */
    .info-equipo-grid {
      display: grid;
      grid-template-columns: repeat(4, 1fr);
@@ -562,7 +557,7 @@
    }
    
    
-   /* ── FOOTER ── */
+   /*  FOOTER  */
    .footer {
      background: var(--negro2);
      color: var(--blanco);
@@ -656,7 +651,7 @@
    }
    
    
-   /* ── ACCESO ── */
+   /*  ACCESO  */
    .body-acceso {
      min-height: 100vh;
      flex-direction: column;
@@ -794,13 +789,12 @@
    }
    
    
-   /* ── FILTROS / LAYOUT ── */
+   /*  FILTROS / LAYOUT  */
    .actividades-layout {
      display: flex;
      min-height: calc(100vh - 125px);
      background: var(--negro);
      align-items: flex-start;
-     overflow: hidden;
    }
    
    .filtros-panel {
@@ -808,12 +802,17 @@
      top: 125px;
      max-height: calc(100vh - 125px);
      overflow-y: auto;
+     scrollbar-width: none;
      width: 260px;
      flex-shrink: 0;
      align-self: flex-start;
      background: var(--negro3);
      padding: 30px 20px;
      border-right: 1px solid rgba(255, 255, 255, 0.07);
+   }
+
+   .filtros-panel::-webkit-scrollbar {
+     display: none;
    }
    
    .filtros-panel h3 {
@@ -984,362 +983,4 @@
    
    .filtros-overlay {
      display: none;
-   }
-   
-   
-   /* ============================================================
-         RESPONSIVE
-         ============================================================ */
-   
-   @media (max-width: 768px) {
-     .img-logo {
-       height: 55px;
-       padding-left: 20px;
-     }
-   
-     header div {
-       padding: 12px 16px;
-       gap: 10px;
-     }
-   
-     .btn-menu,
-     .btn-reservas {
-       padding: 6px 12px;
-       font-size: 12px;
-     }
-   
-     nav ul {
-       gap: 0;
-       padding: 10px 0;
-       flex-wrap: wrap;
-       justify-content: center;
-     }
-   
-     nav li {
-       margin: 2px 4px;
-     }
-   
-     nav a {
-       font-size: 13px;
-       padding: 7px 12px;
-     }
-   
-     .carrusel-contenedor {
-       height: 420px;
-     }
-   
-     .video-title {
-       font-size: 2rem;
-     }
-   
-     .carrusel-desc {
-       width: 80%;
-       font-size: 14px;
-     }
-   
-     .carrusel-link:hover .carrusel-desc {
-       bottom: 120px;
-     }
-   
-     .carrusel-btn {
-       height: 300px;
-     }
-   
-     .info-stats-flex {
-       flex-wrap: wrap;
-     }
-   
-     .info-stat {
-       flex: 1 1 calc(33.33% - 2px);
-       padding: 24px 12px;
-       border-right: 1px solid rgba(255, 255, 255, 0.15);
-       border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-     }
-   
-     .info-stat-n {
-       font-size: 2.2rem;
-     }
-   
-     .info-quienes-grid {
-       grid-template-columns: 1fr;
-       gap: 40px;
-     }
-   
-     .info-empresa-img {
-       height: 220px;
-     }
-   
-     .info-titulo-sec {
-       font-size: 2.5rem;
-     }
-   
-     .info-servicios-grid {
-       grid-template-columns: 1fr;
-     }
-   
-     .info-serv-card {
-       padding: 32px 24px;
-     }
-   
-     .info-equipo-grid {
-       grid-template-columns: repeat(2, 1fr);
-     }
-   
-     .footer {
-       padding: 30px 6%;
-     }
-   
-     .footer-content {
-       flex-direction: column;
-       gap: 24px;
-     }
-   
-     .footer-content div,
-     .footer-content div:first-child {
-       flex: none;
-       min-width: unset;
-       width: 100%;
-     }
-   
-    /* ── FILTROS / LAYOUT FIX DEFINITIVO ── */
-.actividades-layout {
-  display: flex;
-  min-height: calc(100vh - 125px);
-  background: var(--negro);
-  align-items: flex-start;
-  overflow: visible; /* ✅ CLAVE */
-}
-
-.filtros-panel {
-  position: sticky;
-  top: 125px;
-
-  width: 260px;
-  flex-shrink: 0;
-  align-self: flex-start;
-
-  background: var(--negro3);
-  padding: 30px 20px;
-  border-right: 1px solid rgba(255, 255, 255, 0.07);
-
-  height: fit-content; /* ✅ PRO */
-  overflow: visible;   /* ✅ PRO */
-}T
-       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-     }
-   
-     .actividades-main {
-       padding: 20px 16px;
-     }
-   
-     .actividades-header {
-       flex-direction: column;
-       align-items: flex-start;
-       gap: 12px;
-     }
-   
-     .actividades-header>div {
-       flex-direction: column;
-       width: 100%;
-     }
-   
-     .actividades-header input,
-     .orden-select {
-       width: 100%;
-     }
-   }
-   
-   @media (max-width: 430px) {
-     .img-logo {
-       height: 46px;
-     }
-   
-     .btn-menu,
-     .btn-reservas {
-       padding: 5px 8px;
-       font-size: 11px;
-     }
-   
-     nav ul {
-       flex-direction: row;
-       flex-wrap: nowrap;
-       overflow-x: auto;
-       justify-content: center;
-       padding: 10px 12px;
-       -webkit-overflow-scrolling: touch;
-       scrollbar-width: none;
-     }
-   
-     nav ul::-webkit-scrollbar {
-       display: none;
-     }
-   
-     nav li {
-       margin: 0;
-       flex-shrink: 0;
-     }
-   
-     .carrusel-contenedor {
-       height: 320px;
-     }
-   
-     .video-title {
-       font-size: 1.6rem;
-     }
-   
-     .carrusel-desc {
-       display: none;
-     }
-   
-     .carrusel-btn {
-       font-size: 1.8rem;
-       width: 36px;
-       height: 220px;
-     }
-   
-     .info-stat {
-       flex: 1 1 calc(50% - 2px);
-     }
-   
-     .info-seccion {
-       padding: 50px 0;
-     }
-   
-     .info-contenedor {
-       padding: 0 20px;
-     }
-   
-     .info-titulo-sec {
-       font-size: 2rem;
-     }
-   
-     .info-equipo-grid {
-       grid-template-columns: 1fr;
-     }
-   
-     .actividades-grid {
-       grid-template-columns: 1fr !important;
-     }
-   
-     .footer {
-       padding: 24px 5%;
-     }
-   
-     .footer-content h3 {
-       font-size: 15px;
-     }
-   
-     .login-box {
-       padding: 1.5rem;
-       border-radius: 10px;
-     }
-   
-     .perfil-campo {
-       padding: 14px 20px;
-     }
-   
-     .perfil-zona-danger {
-       flex-direction: column;
-       align-items: flex-start;
-       gap: 10px;
-     }
-   
-     .reserva-item {
-       grid-template-columns: 1fr !important;
-       gap: 12px;
-     }
-   
-     .reserva-foto {
-       width: 100% !important;
-       height: 160px;
-     }
-   
-     .reserva-derecha {
-       align-items: flex-start !important;
-     }
-   
-     .actividades-layout {
-       flex-direction: column;
-     }
-   
-     .filtros-panel {
-       position: fixed;
-       bottom: 0;
-       left: 0;
-       right: 0;
-       width: 100%;
-       height: auto;
-       max-height: 80vh;
-       overflow-y: auto;
-       align-self: auto;
-       border-right: none;
-       border-top: 2px solid var(--rojo-oscuro);
-       border-radius: 16px 16px 0 0;
-       z-index: 998;
-       transform: translateY(100%);
-       transition: transform 0.35s ease;
-       box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.6);
-     }
-   
-     .filtros-panel.abierto {
-       transform: translateY(0);
-     }
-   
-     .filtros-panel::before {
-       content: '';
-       display: block;
-       width: 40px;
-       height: 4px;
-       background: rgba(255, 255, 255, 0.2);
-       border-radius: 2px;
-       margin: 12px auto 16px;
-     }
-   
-     .filtros-overlay.activo {
-       display: block;
-     }
-   
-     .btn-abrir-filtros {
-       display: flex;
-       align-items: center;
-       gap: 6px;
-       background: var(--negro3);
-       border: 1px solid rgba(255, 255, 255, 0.15);
-       color: var(--blanco);
-       padding: 8px 16px;
-       border-radius: 6px;
-       font-size: 13px;
-       font-weight: 600;
-       cursor: pointer;
-     }
-   
-     .actividades-main {
-       padding: 16px;
-     }
-   
-     .actividades-header {
-       flex-direction: column;
-       align-items: flex-start;
-       gap: 10px;
-     }
-   
-     .actividades-controles {
-       flex-wrap: wrap;
-       width: 100%;
-       gap: 8px;
-     }
-   
-     .actividades-controles input {
-       flex: 1;
-       min-width: 0;
-       width: auto;
-     }
-   
-     .orden-select {
-       width: 100%;
-     }
-   
-     .btn-cerrar-filtros {
-       display: block;
-     }
    }

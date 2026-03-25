@@ -6,7 +6,7 @@
     <title>Mis Reservas — SportsXtreme</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* ===== MIS RESERVAS ===== */
+       
 
         .reservas-body {
             background: var(--negro);
@@ -53,7 +53,7 @@
         }
 
 
-        /* ===== LISTA DE RESERVAS ===== */
+       
 
         .reservas-lista {
             display: flex;
@@ -77,13 +77,13 @@
             border-left-color: var(--rojo-oscuro);
         }
 
-        /* Estado de la reserva cambia el color del borde */
+     
         .reserva-item.confirmada  { border-left-color: var(--rojo-oscuro); }
         .reserva-item.pendiente   { border-left-color: #b8860b; }
         .reserva-item.cancelada   { border-left-color: rgba(255,255,255,0.1); }
 
 
-        /* Foto */
+        
         .reserva-foto {
             width: 120px;
             height: 80px;
@@ -101,7 +101,7 @@
         }
 
 
-        /* Info central */
+       
         .reserva-info {
             display: flex;
             flex-direction: column;
@@ -140,7 +140,7 @@
         }
 
 
-        /* Columna derecha: estado + precio */
+       
         .reserva-derecha {
             display: flex;
             flex-direction: column;
@@ -184,10 +184,10 @@
         }
 
 
-        /* ===== ESTADO VACÍO ===== */
+        
 
         .reservas-vacio {
-            display: none; /* JS lo muestra si no hay reservas */
+            display: none;
             text-align: center;
             padding: 80px 20px;
         }
@@ -232,7 +232,6 @@
 </head>
 <body class="reservas-body">
 
-    <!-- HEADER -->
     <header id="inicio">
         <a href="./index.html"><img class="img-logo" src="MEDIA/logo-recortado.png"></a>
         <div>
@@ -241,7 +240,7 @@
         </div>
     </header>
 
-    <!-- NAVBAR -->
+ 
     <nav class="main-nav">
         <ul class="nav-list">
             <li><a href="index.html">Inicio</a></li>
@@ -251,37 +250,36 @@
         </ul>
     </nav>
 
-    <!-- CONTENIDO -->
+  
     <div class="reservas-page">
 
         <div class="reservas-page-header">
             <span class="reservas-etiqueta">Tu cuenta</span>
             <h1 class="reservas-titulo">Mis <span>Reservas</span></h1>
-            <!-- PHP: <p class="reservas-subtitulo"><?= count($reservas) ?> reserva(s) registradas</p> -->
-            <p class="reservas-subtitulo" id="contadorReservas">3 reservas registradas</p>
+            
+            <p class="reservas-subtitulo" id="contadorReservas"></p>
         </div>
 
-        <!-- LISTA -->
-        <!-- PHP: <?php foreach ($reservas as $r): ?> -->
+      
         <div class="reservas-lista" id="listaReservas">
 
-
+            
+            
 
         </div>
-        <!-- PHP: <?php endforeach; ?> -->
+        
 
-        <!-- ESTADO VACÍO — PHP: <?php if (empty($reservas)): ?> -->
+        
         <div class="reservas-vacio" id="reservasVacio">
             <div class="reservas-vacio-icono">◈</div>
             <h3>Sin reservas todavía</h3>
             <p>Aún no has reservado ningún evento, actividad o curso.</p>
             <a href="index.html">Explorar eventos →</a>
         </div>
-        <!-- PHP: <?php endif; ?> -->
+       
 
     </div>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
           <div>

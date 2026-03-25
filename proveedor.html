@@ -9,25 +9,16 @@
 </head>
 <body class="body-proveedor">
 
-    <!--HEADER-->
     <header id="inicio">
         <img class="img-logo" src="MEDIA/logo-recortado.png">
         <div>
+            <a href="./proveedor.html" class="btn-menu btn-reservas">Crear Evento</a>
             <a href="./acceso.html" class="btn-menu btn-acceder">Cerrar sesión</a>
         </div>
     </header>
 
-    <!--NAVBAR-->
-    <nav class="main-nav">
-        <ul class="nav-list">
-            <li><a href="./proveedor.html" class="active">Crear Evento</a></li>
-        </ul>
-    </nav>
-
-    <!-- CONTENIDO PROVEEDOR -->
     <div class="proveedor-wrapper">
 
-        <!-- CABECERA DE BIENVENIDA -->
         <div class="proveedor-bienvenida">
             <div class="proveedor-bienvenida-texto">
                 <span class="proveedor-etiqueta">Panel de Proveedor</span>
@@ -40,7 +31,6 @@
             </div>
         </div>
 
-        <!-- FORMULARIO -->
         <div class="proveedor-form-contenedor">
 
             <div class="form-seccion-titulo">
@@ -49,13 +39,11 @@
             </div>
 
             <div class="form-grid-2">
-                <!-- Nombre -->
                 <div class="form-campo">
                     <label class="form-label" for="nombre">Nombre del evento <span class="form-req">*</span></label>
                     <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Ej: Vuelo en parapente sobre el Pirineo" required>
                 </div>
 
-                <!-- Tipo de evento -->
                 <div class="form-campo">
                     <label class="form-label" for="idTipo">Tipo de evento <span class="form-req">*</span></label>
                     <div class="form-select-wrapper">
@@ -70,7 +58,6 @@
                 </div>
             </div>
 
-            <!-- Descripción -->
             <div class="form-campo">
                 <label class="form-label" for="descripcion">Descripción <span class="form-req">*</span></label>
                 <textarea class="form-input form-textarea" id="descripcion" name="descripcion" placeholder="Describe tu evento con detalle: qué se va a hacer, qué incluye, qué no incluye, nivel recomendado..." required></textarea>
@@ -85,20 +72,17 @@
             </div>
 
             <div class="form-grid-2">
-                <!-- Fecha inicio -->
                 <div class="form-campo">
                     <label class="form-label" for="fechaInicio">Fecha de inicio <span class="form-req">*</span></label>
                     <input class="form-input form-date" type="date" id="fechaInicio" name="fechaInicio" required>
                 </div>
 
-                <!-- Fecha fin -->
                 <div class="form-campo">
                     <label class="form-label" for="fechaFin">Fecha de fin <span class="form-req">*</span></label>
                     <input class="form-input form-date" type="date" id="fechaFin" name="fechaFin" required>
                 </div>
             </div>
 
-            <!-- Localización -->
             <div class="form-campo">
                 <label class="form-label" for="localizacion">Localización <span class="form-req">*</span></label>
                 <input class="form-input" type="text" id="localizacion" name="localizacion" placeholder="Ej: Huesca, Aragón / Playa de la Barceloneta, Barcelona" required>
@@ -112,24 +96,22 @@
             </div>
 
             <div class="form-grid-2">
-                <!-- Categoría -->
                 <div class="form-campo">
                     <label class="form-label">Categoría <span class="form-req">*</span></label>
                     <div class="form-chips" id="chips-categoria">
                         <button type="button" class="form-chip" data-value="AIRE" onclick="seleccionarChip(this, 'categoria')">
-                            <span class="chip-icon">🪂</span> Aire
+                            <span class="chip-icon"></span> Aire
                         </button>
                         <button type="button" class="form-chip" data-value="MAR" onclick="seleccionarChip(this, 'categoria')">
-                            <span class="chip-icon">🌊</span> Mar
+                            <span class="chip-icon"></span> Mar
                         </button>
                         <button type="button" class="form-chip" data-value="TIERRA" onclick="seleccionarChip(this, 'categoria')">
-                            <span class="chip-icon">⛰️</span> Tierra
+                            <span class="chip-icon"></span> Tierra
                         </button>
                     </div>
                     <input type="hidden" id="categoria" name="categoria" required>
                 </div>
 
-                <!-- Extremidad / Dificultad -->
                 <div class="form-campo">
                     
                     <label class="form-label">Dificultad <span class="form-req">*</span></label>
@@ -142,7 +124,6 @@
                     <input type="hidden" id="extremidad" name="extremidad" required>
                 </div>
 
-                <!-- Estado: asignado automáticamente como NORMAL, el admin lo modifica -->
                 <input type="hidden" id="estado" name="estado" value="NORMAL">
             </div>
 
@@ -154,7 +135,6 @@
             </div>
 
             <div class="form-grid-2">
-                <!-- Aforo máximo -->
                 <div class="form-campo">
                     <label class="form-label" for="aforoMaximo">Aforo máximo <span class="form-req">*</span></label>
                     <div class="form-input-icon-wrapper">
@@ -163,7 +143,6 @@
                     </div>
                 </div>
 
-                <!-- Precio -->
                 <div class="form-campo">
                     <label class="form-label" for="precio">Precio por persona <span class="form-req">*</span></label>
                     <div class="form-input-icon-wrapper">
@@ -180,12 +159,11 @@
                 <span>Imagen del evento</span>
             </div>
 
-            <!-- Upload de foto -->
             <div class="form-campo">
                 <label class="form-label">Foto del evento <span class="form-req">*</span></label>
                 <div class="form-upload-area" id="uploadArea" onclick="document.getElementById('foto').click()">
                     <div class="upload-placeholder" id="uploadPlaceholder">
-                        <div class="upload-icono">📷</div>
+                        <div class="upload-icono"></div>
                         <div class="upload-texto">Haz clic o arrastra una imagen aquí</div>
                         <div class="upload-subtexto">JPG, PNG, WEBP · Máx. 10 MB · Recomendado: 1920×650 px</div>
                     </div>
@@ -195,7 +173,6 @@
                 <input type="file" id="foto" name="foto" accept="image/*" style="display:none;" onchange="previewFoto(this)" required>
             </div>
 
-            <!-- BOTÓN ENVIAR -->
             <div class="form-footer">
                 <div class="form-aviso">
                     <span>*</span> Todos los campos son obligatorios. Tu evento será revisado antes de publicarse.
@@ -206,7 +183,6 @@
                 </button>
             </div>
 
-            <!-- Mensaje de resultado -->
             <div class="form-resultado hidden" id="formResultado"></div>
 
         </div>

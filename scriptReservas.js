@@ -86,7 +86,6 @@ async function cargarReservas() {
             `;
         });
 
-        // Guarda las reservas en memoria para usarlas al guardar
         window._misReservas = misReservas;
 
     } catch (e) {
@@ -115,17 +114,16 @@ async function guardarCantidad(idReserva) {
     const reserva = window._misReservas.find(r => r.idReserva === idReserva);
     if (!reserva) return;
 
-    // Comprobar aforo disponible
     const resAforo = await fetch(`${API}/reservas/evento/${reserva.evento.idEvento}/aforo`);
     const ocupado = await resAforo.json();
     const aforoMaximo = reserva.evento.aforoMaximo;
-    // El aforo ocupado incluye la reserva actual, así que restamos la cantidad actual
+
     const cantidadActual = reserva.cantidad;
     const libre = aforoMaximo - ocupado + cantidadActual;
 
     if (cant > libre) {
         alert(`Solo quedan ${libre} plaza${libre !== 1 ? 's' : ''} disponibles para este evento.`);
-        // Revierte el contador visual
+
         document.getElementById(`cant-${idReserva}`).textContent = cantidadActual;
         document.getElementById(`precio-${idReserva}`).textContent = formatEur(reserva.evento.precio * cantidadActual);
         document.getElementById(`personas-${idReserva}`).textContent = `${cantidadActual} persona${cantidadActual > 1 ? 's' : ''}`;
@@ -143,7 +141,7 @@ async function guardarCantidad(idReserva) {
         });
 
         if (res.ok) {
-            reserva.cantidad = cant; // actualiza el objeto local
+            reserva.cantidad = cant; 
             document.getElementById(`btn-guardar-${idReserva}`).style.display = 'none';
         } else {
             alert('Error al guardar');
@@ -164,7 +162,6 @@ async function anularReserva(idReserva) {
 
         if (res.ok) {
             document.getElementById(`reserva-${idReserva}`).remove();
-            // Actualiza el contador
             const lista = document.getElementById('listaReservas');
             const total = lista.querySelectorAll('.reserva-item').length;
             if (total === 0) {

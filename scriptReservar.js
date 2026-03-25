@@ -17,22 +17,18 @@ async function cargarEvento() {
 
         const e = await res.json();
 
-        // Rellena el hero
         document.getElementById('heroNombre').textContent = e.nombre;
 
-        // Rellena la ficha
         document.getElementById('eventoNombre').textContent = e.nombre;
         document.getElementById('eventoDesc').textContent = e.descripcion;
         document.getElementById('eventoCat').textContent = e.categoria;
         document.getElementById('eventoNivel').textContent = e.extremidad;
 
-        // Foto
         const foto = document.querySelector('.reserva-hero-img');
         const fotoFicha = document.querySelector('.evento-foto');
         if (foto) foto.src = e.rutaFoto;
         if (fotoFicha) fotoFicha.src = e.rutaFoto;
 
-        // Detalles
         document.getElementById('fechaInicio').textContent = e.fechaInicio
             ? new Date(e.fechaInicio).toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' }).toUpperCase()
             : '—';
@@ -41,19 +37,16 @@ async function cargarEvento() {
             : '—';
         document.getElementById('eventoUbicacion').textContent = e.localizacion || '—';
 
-        // Aforo
         const resAforo = await fetch(`${API}/reservas/evento/${idEvento}/aforo`);
         const ocupado = await resAforo.json();
         const libre = e.aforoMaximo - ocupado;
         document.getElementById('eventoAforo').textContent = `${libre} / ${e.aforoMaximo}`;
 
-        // Precio
         const precioEvento = e.precio;
         const formatEur = n => n.toFixed(2).replace('.', ',') + '€';
         document.getElementById('eventoPrecioDisplay').textContent = formatEur(precioEvento);
         document.getElementById('formPrecio').textContent = formatEur(precioEvento);
 
-        // Control de asistentes
         let asistentes = 1;
         const maxPersonas = Math.min(libre, 10);
 
@@ -76,7 +69,6 @@ async function cargarEvento() {
             if (asistentes < maxPersonas) { asistentes++; actualizarResumen(); }
         });
 
-        // Si no hay plazas libres deshabilita el botón
         if (libre <= 0) {
             const btnConfirmar = document.getElementById('btnConfirmar');
             btnConfirmar.disabled = true;
@@ -85,7 +77,6 @@ async function cargarEvento() {
             btnConfirmar.style.cursor = 'not-allowed';
         }
 
-        // Confirmar reserva
         document.getElementById('btnConfirmar').addEventListener('click', async () => {
             const usuario = JSON.parse(sessionStorage.getItem('usuario'));
             if (!usuario) {

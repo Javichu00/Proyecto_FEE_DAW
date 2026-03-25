@@ -2,11 +2,10 @@
 
    (function () {
 
-    /* ── Scroll Reveal ──────────────────────────────────────────── */
+    
     const revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          // Respeta el transition-delay inline del elemento
           var delay = parseFloat(entry.target.style.transitionDelay || '0') * 1000;
           setTimeout(function () {
             entry.target.classList.add('vis');
@@ -23,8 +22,6 @@
       revealObserver.observe(el);
     });
   
-  
-    /* ── Smooth Scroll para anclas internas ────────────────────── */
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
       anchor.addEventListener('click', function (e) {
         var target = document.querySelector(anchor.getAttribute('href'));
@@ -34,23 +31,20 @@
         }
       });
     });
-  
-  
-    /* ── Contador animado para las estadísticas ─────────────────── */
+ 
     function animateCounter(el) {
-      // Lee el texto del elemento y extrae el número
+
       var raw = el.textContent.trim().replace(/[^0-9]/g, '');
       var target = parseInt(raw, 10);
       if (isNaN(target) || target === 0) return;
   
       var suffix = el.textContent.replace(raw, '').replace(/<[^>]*>/g, '').trim();
-      var duration = 1400; // ms
+      var duration = 1400;
       var start = null;
   
       function step(timestamp) {
         if (!start) start = timestamp;
         var progress = Math.min((timestamp - start) / duration, 1);
-        // ease out
         var eased = 1 - Math.pow(1 - progress, 3);
         var current = Math.floor(eased * target);
         el.textContent = current + suffix;
@@ -61,7 +55,6 @@
       requestAnimationFrame(step);
     }
   
-    // Observa los bloques de estadísticas para disparar el contador
     var statObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -77,7 +70,7 @@
     });
   
   
-    /* ── Validación básica del formulario ───────────────────────── */
+
     var form = document.querySelector('.info-form');
     if (form) {
       form.addEventListener('submit', function (e) {
@@ -88,8 +81,7 @@
         var mensaje = form.querySelector('textarea');
         var btn     = form.querySelector('.info-btn-enviar');
         var valid   = true;
-  
-        // Limpia errores anteriores
+
         form.querySelectorAll('.info-fi-error').forEach(function (el) { el.remove(); });
         form.querySelectorAll('.info-fi input, .info-fi select, .info-fi textarea').forEach(function (el) {
           el.style.borderBottomColor = '';
@@ -115,7 +107,6 @@
           setError(mensaje, 'El mensaje es demasiado corto.');
   
         if (valid) {
-          // Simulación de envío
           var originalTxt = btn.textContent;
           btn.textContent = 'Enviando…';
           btn.disabled = true;

@@ -1,26 +1,40 @@
 const usuario = JSON.parse(sessionStorage.getItem('usuario'));
 
-// Si no hay sesión redirige al login
+
 if (!usuario) {
     window.location.href = 'acceso.html';
 }
 
-// Ocultar panel admin por defecto
+
 const liAdmin = document.getElementById('li-admin');
 if (liAdmin) liAdmin.style.display = 'none';
 
-// Comportamiento según perfil
+
 if (usuario.perfil?.idPerfil === 1) {
-    // Es ADMIN
+   
     document.querySelector('.main-nav').style.display = 'none';
     const btnReservas = document.querySelector('.btn-reservas');
+    const img = document.getElementById("IMAGEN-LOGO")
     if (btnReservas) {
+        img.href = ''
         btnReservas.textContent = 'Dashboard';
         btnReservas.href = './indexAdmn.html';
     }
 }
+else if (usuario.perfil?.idPerfil === 3) {
+    
+    document.querySelector('.main-nav').style.display = 'none';
+    const btnReservas = document.querySelector('.btn-reservas');
+    
+    const img = document.getElementById("IMAGEN-LOGO")
+    if (btnReservas) {
+        img.href = ''
+        btnReservas.textContent = 'Crear Evento';
+        btnReservas.href = './proveedor.html';
+    }
+}
 
-// Rellena los campos con los datos del usuario
+
 document.getElementById('nombreMostrado').textContent = usuario.nombreCompleto;
 document.getElementById('avatarInicial').textContent = usuario.nombreCompleto
     .split(' ').filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('');
@@ -29,14 +43,12 @@ document.getElementById('inp-nombreCompleto').value = usuario.nombreCompleto;
 document.getElementById('val-email').textContent = usuario.email;
 document.getElementById('inp-email').value = usuario.email;
 
-// Fecha de registro
 if (usuario.fechaRegistro) {
     const fecha = new Date(usuario.fechaRegistro);
     document.getElementById('miembroDesde').textContent =
         'Miembro desde ' + fecha.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
 }
 
-// Toggle edición
 function toggleEdicion(campo) {
     const fila    = document.getElementById('campo-' + campo);
     const input   = document.getElementById('inp-' + campo);
@@ -106,7 +118,7 @@ async function guardarCampo(campo, nuevoValor) {
     }
 }
 
-// Enter y Escape
+
 document.querySelectorAll('.perfil-campo-input').forEach(input => {
     input.addEventListener('keydown', (e) => {
         const campo = input.id.replace('inp-', '');
@@ -121,16 +133,14 @@ document.querySelectorAll('.perfil-campo-input').forEach(input => {
     });
 });
 
-// Cerrar sesión
+
 function cerrarSesion() {
     sessionStorage.removeItem('usuario');
     window.location.href = 'index.html';
 }
 
-// ─────────────────────────────────────────
-// POPUP
-// ─────────────────────────────────────────
-let _popupModo = null; // 'password' | 'eliminar'
+
+let _popupModo = null; 
 
 function abrirPopup(titulo, descripcion, modo, mostrarNuevaPass) {
     _popupModo = modo;
@@ -189,7 +199,7 @@ async function confirmarPopup() {
         return;
     }
 
-    // Verificar contraseña actual
+    
     if (passActual !== usuario.password) {
         errorEl.textContent = 'Contraseña incorrecta';
         errorEl.style.display = 'block';
@@ -230,12 +240,12 @@ async function eliminarCuenta() {
     }
 }
 
-// Cerrar popup al hacer clic fuera
+
 document.getElementById('popupOverlay').addEventListener('click', (e) => {
     if (e.target === document.getElementById('popupOverlay')) cerrarPopup();
 });
 
-// Enter en los inputs del popup
+
 document.getElementById('popupPassword').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         const nuevaPassWrapper = document.getElementById('popupNuevaPassWrapper');

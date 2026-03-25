@@ -17,7 +17,7 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
-    // GET /eventos → todos sin filtro
+    // GET /eventos 
     @GetMapping
     public ResponseEntity<List<Evento>> getAll() {
         List<Evento> lista = eventoService.findAll();
@@ -26,7 +26,7 @@ public class EventoController {
         return ResponseEntity.ok(lista);
     }
 
-    // GET /eventos/1 → uno por id
+    // GET /eventos/1 
     @GetMapping("/{id}")
     public ResponseEntity<Evento> getOne(@PathVariable Integer id) {
         Evento evento = eventoService.findOne(id);
@@ -35,7 +35,7 @@ public class EventoController {
         return ResponseEntity.ok(evento);
     }
 
-    // POST /eventos/filtrar → filtrar con JSON en el body
+    // POST /eventos/filtrar 
     @PostMapping("/filtrar")
     public ResponseEntity<List<Evento>> filtrar(@RequestBody EventoFiltroDTO filtro) {
         List<Evento> lista = eventoService.findAll();
@@ -93,14 +93,14 @@ public class EventoController {
         return ResponseEntity.ok(lista);
     }
 
-    // POST /eventos → crear
+    // POST /eventos 
     @PostMapping
     public ResponseEntity<Evento> create(@RequestBody Evento evento) {
         Evento nuevo = eventoService.insertOne(evento);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
-    // PUT /eventos → actualizar
+    // PUT /eventos 
     @PutMapping
     public ResponseEntity<Evento> update(@RequestBody Evento evento) {
         Evento actualizado = eventoService.updateOne(evento);
@@ -109,7 +109,7 @@ public class EventoController {
         return ResponseEntity.ok(actualizado);
     }
 
-    // DELETE /eventos/1 → eliminar
+    // DELETE /eventos/1 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         int resultado = eventoService.deleteOne(id);
